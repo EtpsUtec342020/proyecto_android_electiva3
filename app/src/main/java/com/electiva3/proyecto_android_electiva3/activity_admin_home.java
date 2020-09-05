@@ -43,7 +43,7 @@ public class activity_admin_home extends AppCompatActivity implements View.OnCli
         switch (v.getId())
         {
             case R.id.imgUsuario:
-                Intent usuarios = new Intent(getApplicationContext() ,   activity_new_usuario.class);
+                Intent usuarios = new Intent(getApplicationContext() ,   activity_lista_usuarios.class);
                 startActivity(usuarios);
                 break;
         }
