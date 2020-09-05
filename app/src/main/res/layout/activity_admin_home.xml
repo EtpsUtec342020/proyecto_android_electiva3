@@ -28,14 +28,14 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/imgUsuario"
                         android:layout_width="190dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/usuario" />
 
                     <ImageView
-                        android:id="@+id/imageView9"
+                        android:id="@+id/imgContrato"
                         android:layout_width="190dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"
@@ -71,14 +71,15 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView6"
+
+                        android:id="@+id/imgMarca"
                         android:layout_width="190dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/marca_modelo" />
 
                     <ImageView
-                        android:id="@+id/imageView5"
+                        android:id="@+id/imgVehiculo"
                         android:layout_width="190dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"
@@ -114,14 +115,14 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView7"
+                        android:id="@+id/imgServicio"
                         android:layout_width="190dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/servicios" />
 
                     <ImageView
-                        android:id="@+id/imageView8"
+                        android:id="@+id/imgPlan"
                         android:layout_width="190dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"
@@ -157,14 +158,14 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView10"
+                        android:id="@+id/imgOrdenServicio"
                         android:layout_width="190dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/orden_servicio" />
 
                     <ImageView
-                        android:id="@+id/imageView11"
+                        android:id="@+id/imgReserva"
                         android:layout_width="190dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"
