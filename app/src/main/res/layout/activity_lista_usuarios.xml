@@ -11,13 +11,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <ListView
             android:id="@+id/lvUsuarios"
             android:layout_width="match_parent"
             android:layout_height="830dp"
             android:cacheColorHint="#FD100F0F"
             tools:listitem="@layout/item_usuario" />
-
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAgregarUsuario"
@@ -29,4 +29,5 @@
             android:src="@drawable/ic_add" />
 
     </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
