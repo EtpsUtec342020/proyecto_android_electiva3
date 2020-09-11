@@ -49,7 +49,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_dui"
-                        android:hint=" placas" />
+                        android:hint=" placas"
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +66,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_dui"
-                        android:hint=" numero chasis" />
+                        android:hint=" numero chasis"
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -81,7 +83,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_calendar"
-                        android:hint=" año" />
+                        android:hint=" año"
+                        android:inputType="number"
+                        android:maxLength="4" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -97,7 +101,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_color_car"
-                        android:hint=" color" />
+                        android:hint=" color"
+                        android:inputType="textPersonName" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

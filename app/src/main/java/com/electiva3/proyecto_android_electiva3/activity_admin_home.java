@@ -49,8 +49,12 @@ public class activity_admin_home extends AppCompatActivity implements View.OnCli
                 Intent usuarios = new Intent(getApplicationContext() ,   activity_lista_usuarios.class);
                 startActivity(usuarios);
                 break;
+            case R.id.imgContrato:
+                Intent contratos = new Intent(getApplicationContext() ,   activity_actualizar_contrato.class);
+                startActivity(contratos);
+                break;
             case R.id.imgVehiculo:
-                Intent vehiculos = new Intent(getApplicationContext() ,   activity_new_vehiculo.class);
+                Intent vehiculos = new Intent(getApplicationContext() ,   activity_actualizar_vehiculo.class);
                 startActivity(vehiculos);
                 break;
         }
