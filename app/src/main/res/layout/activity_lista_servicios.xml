@@ -53,6 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
+                    android:layout_marginBottom="10dp"
                     android:text="Agregar Nuevo Servicio"
                     android:textAlignment="center"
                     android:textSize="18sp"
@@ -131,7 +132,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/btnAgregar"
+                    android:id="@+id/btnActualizar"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

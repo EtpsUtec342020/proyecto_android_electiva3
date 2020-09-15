@@ -61,6 +61,10 @@ public class activity_admin_home extends AppCompatActivity implements View.OnCli
                 Intent servicios = new Intent(getApplicationContext() ,   activity_lista_servicios.class);
                 startActivity(servicios);
                 break;
+            case R.id.imgPlan:
+                Intent planes = new Intent(getApplicationContext() ,   activity_lista_planes.class);
+                startActivity(planes);
+                break;
         }
     }
 }
