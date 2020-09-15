@@ -10,44 +10,39 @@ import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class activity_lista_usuarios extends AppCompatActivity
+public class activity_lista_contratos extends AppCompatActivity
 {
+
     private ListView lvlista;
-    private FloatingActionButton fabAgregarUsuario;
-
-
+    private FloatingActionButton fabAgregarConcontrato;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_usuarios);
+        setContentView(R.layout.activity_lista_contratos);
 
         lvlista = findViewById(R.id.lvlista);
-        fabAgregarUsuario = findViewById(R.id.fabAgregarUsuario);
+        fabAgregarConcontrato = findViewById(R.id.fabAgregarContrato);
 
         lvlista.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent( getApplicationContext() , activity_actualizar_usuario.class);
+                Intent i = new Intent( getApplicationContext() , activity_actualizar_contrato.class);
                 startActivity(i);
             }
         });
 
 
-        fabAgregarUsuario.setOnClickListener(new View.OnClickListener()
+        fabAgregarConcontrato.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent( getApplicationContext() , activity_new_usuario.class);
+                Intent i = new Intent( getApplicationContext() , activity_new_contrato.class);
                 startActivity(i);
                 finish();
             }
         });
-
-
-
-
     }
 }

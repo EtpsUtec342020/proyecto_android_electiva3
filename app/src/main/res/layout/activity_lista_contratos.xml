@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_lista_usuarios">
+    tools:context=".activity_lista_contratos">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             tools:listitem="@layout/item_lista" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAgregarUsuario"
+            android:id="@+id/fabAgregarContrato"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
@@ -29,5 +29,4 @@
             android:src="@drawable/ic_add" />
 
     </FrameLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

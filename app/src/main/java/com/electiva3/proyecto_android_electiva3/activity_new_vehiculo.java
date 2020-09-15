@@ -11,7 +11,7 @@ import android.widget.Spinner;
 public class activity_new_vehiculo extends AppCompatActivity
 {
     private  ImageView imvImagen;
-    private EditText txtPlaca, txtChasis, txtAnio, txtColor;
+    private EditText edtPlaca, edtChasis, edtAnio, edtColor;
     private Spinner spnMarca, spnModelo;
     private Button btnAgregar;
     @Override
@@ -22,12 +22,12 @@ public class activity_new_vehiculo extends AppCompatActivity
         setContentView(R.layout.activity_new_vehiculo);
 
         imvImagen = findViewById(R.id.imvImagen);
-        txtPlaca = findViewById(R.id.txtPlaca);
-        txtChasis = findViewById(R.id.txtChasis);
-        txtAnio = findViewById(R.id.txtAnio);
-        txtColor = findViewById(R.id.txtColor);
+        edtPlaca = findViewById(R.id.edtPlaca);
+        edtChasis = findViewById(R.id.edtChasis);
+        edtAnio = findViewById(R.id.edtAnio);
+        edtColor = findViewById(R.id.edtColor);
         spnMarca = findViewById(R.id.spnMarca);
         spnModelo = findViewById(R.id.spnModelo);
-        btnAgregar = findViewById(R.id.btnAgregar);
+        btnAgregar = findViewById(R.id.btnActualizar);
     }
 }

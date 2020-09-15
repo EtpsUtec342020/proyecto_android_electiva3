@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 public class activity_actualizar_contrato extends AppCompatActivity
 {
@@ -29,6 +28,6 @@ public class activity_actualizar_contrato extends AppCompatActivity
         txtNumManto = findViewById(R.id.txtNumManto);
         txtCostoT = findViewById(R.id.txtCostoT);
         spnEstado = findViewById(R.id.spnEstado);
-        btnActualizar = findViewById(R.id.btnActualizar);
+        btnActualizar = findViewById(R.id.btnAgrear);
     }
 }

@@ -45,7 +45,7 @@
                     android:layout_marginBottom="14dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtPlaca"
+                        android:id="@+id/edtPlaca"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_dui"
@@ -62,7 +62,7 @@
                     android:layout_marginBottom="14dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtChasis"
+                        android:id="@+id/edtChasis"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_dui"
@@ -79,7 +79,7 @@
                     android:layout_marginBottom="14dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtAnio"
+                        android:id="@+id/edtAnio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_calendar"
@@ -97,7 +97,7 @@
                     android:layout_marginBottom="14dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtColor"
+                        android:id="@+id/edtColor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_color_car"
@@ -110,43 +110,39 @@
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_check"
-                    android:text=" marca:"
-                    android:textSize="18sp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp"/>
+                    android:drawableLeft="@drawable/ic_check"
+                    android:text=" marca:"
+                    android:textSize="18sp" />
 
                 <Spinner
                     android:id="@+id/spnMarca"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp"/>
+                    android:layout_marginBottom="14dp" />
 
                 <TextView
                     android:id="@+id/textView13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_check"
-                    android:text=" modelo:"
-                    android:textSize="18sp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp"/>
+                    android:drawableLeft="@drawable/ic_check"
+                    android:text=" modelo:"
+                    android:textSize="18sp" />
 
                 <Spinner
                     android:id="@+id/spnModelo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp"/>
+                    android:layout_marginBottom="14dp" />
 
                 <TextView
                     android:id="@+id/textView14"
@@ -160,7 +156,7 @@
                     android:layout_marginBottom="14dp"/>
 
                 <Button
-                    android:id="@+id/btnAgregar"
+                    android:id="@+id/btnActualizar"
                     android:layout_width="323dp"
                     android:layout_height="50dp"
                     android:layout_alignParentLeft="true"

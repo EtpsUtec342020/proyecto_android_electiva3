@@ -22,12 +22,12 @@ public class activity_actualizar_vehiculo extends AppCompatActivity
         setContentView(R.layout.activity_actualizar_vehiculo);
 
         imvImagen = findViewById(R.id.imvImagen);
-        txtPlaca = findViewById(R.id.txtPlaca);
-        txtChasis = findViewById(R.id.txtChasis);
-        txtAnio = findViewById(R.id.txtAnio);
-        txtColor = findViewById(R.id.txtColor);
+        txtPlaca = findViewById(R.id.edtPlaca);
+        txtChasis = findViewById(R.id.edtChasis);
+        txtAnio = findViewById(R.id.edtAnio);
+        txtColor = findViewById(R.id.edtColor);
         spnMarca = findViewById(R.id.spnMarca);
         spnModelo = findViewById(R.id.spnModelo);
-        btnActualizar = findViewById(R.id.btnActualizar);
+        btnActualizar = findViewById(R.id.btnAgrear);
     }
 }

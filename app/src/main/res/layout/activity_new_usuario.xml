@@ -178,7 +178,7 @@
                     android:layout_margin="16dp" />
 
                 <Button
-                    android:id="@+id/btnActualizar"
+                    android:id="@+id/btnAgrear"
                     android:layout_width="323dp"
                     android:layout_height="50dp"
                     android:layout_alignParentLeft="true"

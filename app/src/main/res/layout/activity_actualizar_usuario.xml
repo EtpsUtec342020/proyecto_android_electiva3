@@ -197,8 +197,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16dp"
                     android:text="Rol usuario"
-                    android:textColor="@color/colorPrimaryDark">
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="18sp">
 
                 </TextView>
 
@@ -206,24 +209,29 @@
                     android:id="@+id/spnRol"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp" />
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="14dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Estado usuario"
-                    android:textColor="@color/colorPrimaryDark"
                     android:layout_marginLeft="16dp"
-                    />
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Estado usuario"
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <Spinner
                     android:id="@+id/spnEstado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp" />
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="14dp" />
 
                 <Button
-                    android:id="@+id/btnActualizar"
+                    android:id="@+id/btnAgrear"
                     android:layout_width="323dp"
                     android:layout_height="50dp"
                     android:layout_alignParentLeft="true"
