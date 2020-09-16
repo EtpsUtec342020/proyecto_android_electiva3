@@ -11,7 +11,7 @@ public class activity_actualizar_contrato extends AppCompatActivity
 {
     private EditText txtNombre, txtVehiculo, txtPlan, txtDuracion, txtFechaA, txtFechaV, txtNumManto, txtCostoT;
     private Spinner spnEstado;
-    private Button btnActualizar;
+    private Button btnAgregar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,6 +28,6 @@ public class activity_actualizar_contrato extends AppCompatActivity
         txtNumManto = findViewById(R.id.txtNumManto);
         txtCostoT = findViewById(R.id.txtCostoT);
         spnEstado = findViewById(R.id.spnEstado);
-        btnActualizar = findViewById(R.id.btnAgrear);
+        btnAgregar = findViewById(R.id.btnAgregar);
     }
 }

@@ -20,7 +20,128 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Modificar Contrato"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="14dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtNombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_person"
+                        android:editable="false"
+                        android:hint=" nombre cliente"
+                        android:selectAllOnFocus="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="14dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtVehiculo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_car"
+                        android:editable="false"
+                        android:hint=" vehiculo"
+                        android:selectAllOnFocus="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="14dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtPlan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_document"
+                        android:editable="false"
+                        android:hint=" Plan"
+                        android:selectAllOnFocus="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_check"
+                    android:text=" duracion contrato"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spnDuracionC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <CalendarView
+                    android:id="@+id/cvfechaActivacion"
+                    android:layout_width="288dp"
+                    android:layout_height="293dp" />
+
+                <TextView
+                    android:id="@+id/txtFechaVen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/txtNumManto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_mun"
+                    android:text=" numero mantenimientos"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txtCosto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_money"
+                    android:text=" Costo Total"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btnAgregar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="125dp"
+                    android:background="@drawable/ic_btn_launcher"
+                    android:text="Agregar"
+                    android:textColor="@color/design_default_color_background" />
+
+            </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

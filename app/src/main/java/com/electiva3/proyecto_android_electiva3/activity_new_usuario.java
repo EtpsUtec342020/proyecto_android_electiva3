@@ -28,7 +28,7 @@ public class activity_new_usuario extends AppCompatActivity
         edtTelefono = findViewById(R.id.edtTelefono);
         edtDireccion = findViewById(R.id.edtDireccion);
         spnRol =  findViewById(R.id.spnRol);
-        btnAgregar = findViewById(R.id.btnAgrear);
+        btnAgregar = findViewById(R.id.btnAgregar);
 
 
     }

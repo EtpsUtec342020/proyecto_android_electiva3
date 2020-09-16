@@ -58,7 +58,7 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
             {
                 Intent i = new Intent( getApplicationContext() , activity_actualizar_plan.class);
                 startActivity(i);
-
+                finish();
             }
         });
 
@@ -72,13 +72,14 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v)
     {
-        switch (v.getId()) {
+        switch (v.getId())
+        {
             case R.id.fabAgregarPlan:
-              //  vt2.setVisibility(View.VISIBLE);
-              //  faAgregarPlan.setVisibility(View.INVISIBLE);
-                Intent i = new Intent( getApplicationContext() , activity_actualizar_plan.class);
-                startActivity(i);
-                finish();
+                vt2.setVisibility(View.VISIBLE);
+                faAgregarPlan.setVisibility(View.INVISIBLE);
+              //  Intent i = new Intent( getApplicationContext() , activity_actualizar_plan.class);
+              //  startActivity(i);
+              //  finish();
 
                 break;
             case R.id.btnCancelar:
