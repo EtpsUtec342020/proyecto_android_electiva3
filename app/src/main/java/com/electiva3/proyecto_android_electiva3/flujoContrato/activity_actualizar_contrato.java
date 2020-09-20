@@ -1,4 +1,4 @@
-package com.electiva3.proyecto_android_electiva3;
+package com.electiva3.proyecto_android_electiva3.flujoContrato;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.electiva3.proyecto_android_electiva3.R;
 
 public class activity_actualizar_contrato extends AppCompatActivity
 {
@@ -19,7 +21,7 @@ public class activity_actualizar_contrato extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actualizar_contrato);
 
-        txtNombre = findViewById(R.id.txtNombre);
+        txtNombre = findViewById(R.id.txtCliente);
         txtVehiculo = findViewById(R.id.txtVehiculo);
         txtPlan = findViewById(R.id.txtPlan);
         txtDuracion = findViewById(R.id.txtDuracion);

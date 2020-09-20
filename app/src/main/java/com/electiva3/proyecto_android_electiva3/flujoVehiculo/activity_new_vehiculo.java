@@ -1,4 +1,4 @@
-package com.electiva3.proyecto_android_electiva3;
+package com.electiva3.proyecto_android_electiva3.flujoVehiculo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import com.electiva3.proyecto_android_electiva3.R;
 
 public class activity_new_vehiculo extends AppCompatActivity
 {

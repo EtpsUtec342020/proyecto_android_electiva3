@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity_actualizar_plan">
+    tools:context=".flujoPlan.activity_actualizar_plan">
 
     <LinearLayout
         android:layout_width="match_parent"

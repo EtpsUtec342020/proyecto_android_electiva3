@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import com.electiva3.proyecto_android_electiva3.flujoContrato.activity_lista_contratos;
+import com.electiva3.proyecto_android_electiva3.flujoPlan.activity_lista_planes;
+import com.electiva3.proyecto_android_electiva3.flujoServicio.activity_lista_servicios;
+import com.electiva3.proyecto_android_electiva3.flujoUsuario.activity_lista_usuarios;
+import com.electiva3.proyecto_android_electiva3.flujoVehiculo.activity_lista_vehiculos;
 
 public class activity_admin_home extends AppCompatActivity implements View.OnClickListener
 {
     ImageView imgUsuario, imgContrato, imgMarca, imgVehiculo, imgServicio, imgPlan, imgOrdenServicio, imgReserva;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,6 +67,10 @@ public class activity_admin_home extends AppCompatActivity implements View.OnCli
             case R.id.imgPlan:
                 Intent planes = new Intent(getApplicationContext() ,   activity_lista_planes.class);
                 startActivity(planes);
+                break;
+            case R.id.imgMarca:
+                Intent marca = new Intent(getApplicationContext() ,   activity_lista_marca_modelo.class);
+                startActivity(marca);
                 break;
         }
     }

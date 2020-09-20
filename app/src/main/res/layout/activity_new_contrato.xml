@@ -4,144 +4,247 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_new_contrato">
+    tools:context=".flujoContrato.activity_new_contrato">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp"
+            tools:visibility="invisible">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nuevo Contrato"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="14dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtCliente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_person"
+                            android:editable="false"
+                            android:hint="Nombre Completo"
+                            android:selectAllOnFocus="true" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="14dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtVehiculo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_car"
+                            android:editable="false"
+                            android:hint=" vehiculo"
+                            android:selectAllOnFocus="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="14dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtPlan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_document"
+                            android:editable="false"
+                            android:hint=" Plan"
+                            android:selectAllOnFocus="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginRight="16dp"
+                        android:drawableLeft="@drawable/ic_check"
+                        android:text=" duracion contrato"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/spnDuracionC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="14dp" />
+
+                    <TextView
+                        android:id="@+id/txtFechaA"
+                        android:layout_width="178dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="90dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginRight="16dp"
+                        android:drawableLeft="@drawable/ic_calendar"
+                        android:text=" Fecha Activacion"
+                        android:textAlignment="textStart"
+                        android:textSize="18sp" />
+
+                    <CalendarView
+                        android:id="@+id/cvfechaActivacion"
+                        android:layout_width="288dp"
+                        android:layout_height="293dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="14dp"
+                        android:visibility="visible"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/txtFechaVen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="14dp"
+                        android:drawableLeft="@drawable/ic_calendar"
+                        android:text=" fecha vencimiento"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/txtNumManto"
+                        android:layout_width="346dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/ic_mun"
+                        android:text=" numero mantenimientos"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/txtCosto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="14dp"
+                        android:drawableLeft="@drawable/ic_money"
+                        android:text=" Costo Total"
+                        android:textSize="18sp" />
+
+                    <Button
+                        android:id="@+id/btnAgregar"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginBottom="125dp"
+                        android:background="@drawable/ic_btn_launcher"
+                        android:text="Agregar"
+                        android:textColor="@color/design_default_color_background" />
+
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/vt2"
+            android:layout_width="305dp"
+            android:layout_height="502dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorWhite"
+            android:visibility="invisible"
+            tools:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/textView24"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Modificar Contrato"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Seleccionar"
                     android:textAlignment="center"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <com.google.android.material.textfield.TextInputLayout
+                <ListView
+                    android:id="@+id/lvlistar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtNombre"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_person"
-                        android:editable="false"
-                        android:hint=" nombre cliente"
-                        android:selectAllOnFocus="true" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtVehiculo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_car"
-                        android:editable="false"
-                        android:hint=" vehiculo"
-                        android:selectAllOnFocus="true" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtPlan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_document"
-                        android:editable="false"
-                        android:hint=" Plan"
-                        android:selectAllOnFocus="true" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_check"
-                    android:text=" duracion contrato"
-                    android:textSize="18sp" />
-
-                <Spinner
-                    android:id="@+id/spnDuracionC"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <CalendarView
-                    android:id="@+id/cvfechaActivacion"
-                    android:layout_width="288dp"
-                    android:layout_height="293dp" />
-
-                <TextView
-                    android:id="@+id/txtFechaVen"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/txtNumManto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_mun"
-                    android:text=" numero mantenimientos"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/txtCosto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_money"
-                    android:text=" Costo Total"
-                    android:textSize="18sp" />
+                    android:layout_height="358dp"
+                    android:layout_marginBottom="10dp" />
 
                 <Button
-                    android:id="@+id/btnAgregar"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_alignParentLeft="true"
+                    android:id="@+id/btnSeleccionar"
+                    android:layout_width="220dp"
+                    android:layout_height="33dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginBottom="125dp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/ic_btn_launcher"
-                    android:text="Agregar"
+                    android:text="Seleccionar"
                     android:textColor="@color/design_default_color_background" />
 
+                <Button
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="220dp"
+                    android:layout_height="33dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="35dp"
+                    android:background="@drawable/ic_btn_gray"
+                    android:text="cancelar"
+                    android:textColor="@color/design_default_color_background" />
             </LinearLayout>
-        </ScrollView>
-
-    </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

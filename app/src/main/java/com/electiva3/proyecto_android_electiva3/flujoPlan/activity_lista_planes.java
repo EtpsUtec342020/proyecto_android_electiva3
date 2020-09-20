@@ -1,4 +1,4 @@
-package com.electiva3.proyecto_android_electiva3;
+package com.electiva3.proyecto_android_electiva3.flujoPlan;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -10,11 +10,11 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.electiva3.proyecto_android_electiva3.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class activity_lista_planes extends AppCompatActivity implements View.OnClickListener
@@ -48,7 +48,7 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
         //variables seleccionar servicios
         vt3 = findViewById(R.id.vt3);
         lvServicios = findViewById(R.id.lvServicios);
-        btnAceptar = findViewById(R.id.btnAceptar);
+        btnAceptar = findViewById(R.id.btnSeleccionar);
         btnCancelar2 = findViewById(R.id.btnCancelar2);
 
         lvlista.setOnItemClickListener(new AdapterView.OnItemClickListener()
