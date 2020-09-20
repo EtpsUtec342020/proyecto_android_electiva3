@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_actualizar_usuario">
+    tools:context=".activity_new_vehiculo">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,198 +15,110 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputLayout
+                <ImageView
+                    android:id="@+id/imvImagen"
+                    android:layout_width="match_parent"
+                    android:layout_height="221dp"
+                    app:srcCompat="@drawable/ic_image" />
+
+                <TextView
+                    android:id="@+id/textView6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Seleccionar Imagen"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="14dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtNombre"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_person"
-                        android:editable="true"
-                        android:hint="Nombre Completo"
-                        android:inputType="textPersonName" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtDui"
+                        android:id="@+id/edtPlaca"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_dui"
-                        android:editable="false"
-                        android:hint="DUI"
-                        android:inputType="number"
-                        android:maxLength="10" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtNit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_dui"
-                        android:editable="false"
-                        android:hint="NIT"
-                        android:inputType="number"
-                        android:maxLength="10" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-
-                        android:id="@+id/edtLicencia"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_dui"
-                        android:editable="false"
-                        android:hint="Licencia"
+                        android:hint=" placas"
                         android:inputType="number" />
-
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="14dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtTelefono"
+                        android:id="@+id/edtChasis"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_phone"
-                        android:hint="Telefono"
+                        android:drawableLeft="@drawable/ic_dui"
+                        android:hint=" numero chasis"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="14dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtAnio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_calendar"
+                        android:hint=" año"
                         android:inputType="number"
-                        android:maxLength="8" />
-
+                        android:maxLength="4" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="14dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtDireccion"
+                        android:id="@+id/edtColor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_home"
-                        android:hint="Direccion"
+                        android:drawableLeft="@drawable/ic_color_car"
+                        android:hint=" color"
                         android:inputType="textPersonName" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtCorreo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_email"
-                        android:hint="Correo electrónico"
-                        android:inputType="textEmailAddress" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtContrasena"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_lock"
-                        android:hint="Contraseña"
-                        android:inputType="textPassword" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtContrasena2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_lock"
-                        android:hint="Confirmar Contraseña"
-                        android:inputType="textPassword" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginRight="16dp"
-                    android:text="Rol usuario"
-                    android:textColor="@color/cardview_dark_background"
-                    android:textSize="18sp">
-
-                </TextView>
+                    android:drawableLeft="@drawable/ic_check"
+                    android:text=" marca:"
+                    android:textSize="18sp" />
 
                 <Spinner
-                    android:id="@+id/spnRol"
+                    android:id="@+id/spnMarca"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -214,21 +126,34 @@
                     android:layout_marginBottom="14dp" />
 
                 <TextView
+                    android:id="@+id/textView13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginRight="16dp"
-                    android:text="Estado usuario"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:drawableLeft="@drawable/ic_check"
+                    android:text=" modelo:"
+                    android:textSize="18sp" />
 
                 <Spinner
-                    android:id="@+id/spnEstado"
+                    android:id="@+id/spnModelo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="14dp" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Linea:"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="14dp"/>
 
                 <Button
                     android:id="@+id/btnActualizar"
@@ -241,11 +166,10 @@
                     android:layout_marginRight="30dp"
                     android:layout_marginBottom="125dp"
                     android:background="@drawable/ic_btn_launcher"
-                    android:text="Actualizar"
+                    android:text="Agregar"
                     android:textColor="@color/design_default_color_background" />
 
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

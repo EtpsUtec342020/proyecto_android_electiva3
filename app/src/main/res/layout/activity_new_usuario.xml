@@ -61,7 +61,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_dui"
-                        android:hint="DUI"
+                        android:hint=" DUI"
                         android:inputType="number"
                         android:maxLength="10" />
 
@@ -80,7 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_dui"
-                        android:hint="NIT"
+                        android:hint=" NIT"
                         android:inputType="number"
                         android:maxLength="10" />
 
@@ -100,7 +100,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_dui"
-                        android:hint="Licencia"
+                        android:hint=" Licencia"
                         android:inputType="number" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -118,7 +118,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_phone"
-                        android:hint="Telefono"
+                        android:hint=" Telefono"
                         android:inputType="number"
                         android:maxLength="8" />
 
@@ -137,7 +137,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_home"
-                        android:hint="Direccion"
+                        android:hint=" Direccion"
                         android:inputType="textPersonName" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -155,7 +155,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_email"
-                        android:hint="Correo electrónico"
+                        android:hint=" Correo electrónico"
                         android:inputType="textEmailAddress" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -164,8 +164,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:text="Rol usuario"
-                    android:textColor="@color/colorPrimaryDark">
+                    android:drawableLeft="@drawable/ic_check"
+                    android:text=" Rol usuario"
+                    android:textColor="@color/design_default_color_on_secondary"
+                    android:textSize="18sp">
 
                 </TextView>
 

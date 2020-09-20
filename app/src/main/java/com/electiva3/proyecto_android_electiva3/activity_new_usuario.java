@@ -7,9 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.electiva3.proyecto_android_electiva3.R;
-import com.google.android.material.textfield.TextInputLayout;
-
 public class activity_new_usuario extends AppCompatActivity
 {
 

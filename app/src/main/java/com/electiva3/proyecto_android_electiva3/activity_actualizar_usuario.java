@@ -10,7 +10,7 @@ import android.widget.Spinner;
 public class activity_actualizar_usuario extends AppCompatActivity
 {
     private EditText edtNombre, edtDui, edtNit, edtLicencia, edtTelefono, edtDireccion, edtCorreo, edtContrasena, edtContrasena2;
-    private Button btnAgregar;
+    private Button btnActualizar;
     private Spinner spnRol, spnEstado;
 
     @Override
@@ -29,6 +29,6 @@ public class activity_actualizar_usuario extends AppCompatActivity
         edtContrasena2 = findViewById(R.id.edtContrasena2);
         spnEstado = findViewById(R.id.spnEstado);
         spnRol =  findViewById(R.id.spnRol);
-        btnAgregar = findViewById(R.id.btnAgregar);
+        btnActualizar = findViewById(R.id.btnActualizar);
     }
 }
