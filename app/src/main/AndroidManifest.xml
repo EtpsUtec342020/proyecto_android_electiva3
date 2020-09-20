@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity_actualizar_plan"></activity>
+        <activity android:name=".activity_agregar_servicio_orden"></activity>
+        <activity
+            android:name=".detalle_orden"
+            android:parentActivityName=".activity_ordenes" />
+        <activity android:name=".activity_actualizar_plan" />
         <activity android:name=".activity_lista_planes" />
         <activity android:name=".activity_actualizar_servicio" />
         <activity android:name=".activity_lista_servicios" />
@@ -23,6 +27,9 @@
         <activity android:name=".activity_actualizar_usuario" />
         <activity android:name=".activity_new_usuario" /> <!-- menu admin -->
         <activity android:name=".activity_admin_home" />
+        <activity
+            android:name=".activity_ordenes"
+            android:parentActivityName=".activity_admin_home" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

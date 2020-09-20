@@ -6,4 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activity_ordenes">
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvOrdenes"
+            android:layout_width="409dp"
+            android:layout_height="729dp" >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
