@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class activity_agregar_servicio_orden extends AppCompatActivity {
 
+    String title ="Agregar servicio";
     ImageView filtroServicios;
     RecyclerView rvArticulosServicios;
 
@@ -25,7 +26,9 @@ public class activity_agregar_servicio_orden extends AppCompatActivity {
         filtroServicios =  findViewById(R.id.filtroServicios);
         rvArticulosServicios =  findViewById(R.id.rvArticulosServicios);
 
-
+        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

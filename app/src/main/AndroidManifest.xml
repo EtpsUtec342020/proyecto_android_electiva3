@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity_agregar_servicio_orden"></activity>
+        <activity android:name=".activity_agregar_servicio_orden"  android:parentActivityName=".detalle_orden" ></activity>
         <activity
             android:name=".detalle_orden"
             android:parentActivityName=".activity_ordenes" />
