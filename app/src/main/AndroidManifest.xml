@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity_agregar_servicio_orden"  android:parentActivityName=".detalle_orden" ></activity>
+        <activity android:name=".actualizar_detalle_reserva"
+            android:parentActivityName=".activity_lista_reservas"></activity>
+        <activity
+            android:name=".activity_lista_reservas"
+            android:parentActivityName=".activity_admin_home" />
+        <activity
+            android:name=".activity_agregar_servicio_orden"
+            android:parentActivityName=".detalle_orden" />
         <activity
             android:name=".detalle_orden"
             android:parentActivityName=".activity_ordenes" />

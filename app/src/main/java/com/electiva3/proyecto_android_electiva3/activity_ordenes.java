@@ -52,9 +52,6 @@ public class activity_ordenes extends AppCompatActivity {
         OrdenAdapter ordenAdapter =  new OrdenAdapter(getApplicationContext() ,   ordenes );
         rvOrdenes.setAdapter(ordenAdapter);
 
-
-
-
     }
 
     @Override

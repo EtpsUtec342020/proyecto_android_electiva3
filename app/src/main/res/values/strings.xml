@@ -17,4 +17,8 @@
     <string name="label_vencimiento">Vencimiento</string>
     <string name="label_activacion">Activación</string>
     <string name="label_busqueda_servicios">Buscar articulo o servicio</string>
+    <string name="label_contrato">Contrato</string>
+    <string name="label_estado">Estado</string>
+    <string name="label_actualizar">Actualizar</string>
+    <string name="label_supervisor">Supervisor</string>
 </resources>
