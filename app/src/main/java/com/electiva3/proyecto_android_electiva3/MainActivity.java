@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().hide();
+
         btnIngresar = findViewById(R.id.btnRegistrar);
 
         btnIngresar.setOnClickListener(new View.OnClickListener() {
