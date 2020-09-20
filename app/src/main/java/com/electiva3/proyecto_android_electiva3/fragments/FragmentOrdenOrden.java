@@ -14,13 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.activity_agregar_servicio_orden;
+import com.electiva3.proyecto_android_electiva3.activity_lista_contratos;
+import com.electiva3.proyecto_android_electiva3.activity_lista_planes;
+import com.electiva3.proyecto_android_electiva3.activity_lista_reservas;
+import com.electiva3.proyecto_android_electiva3.activity_lista_servicios;
+import com.electiva3.proyecto_android_electiva3.activity_lista_usuarios;
+import com.electiva3.proyecto_android_electiva3.activity_lista_vehiculos;
+import com.electiva3.proyecto_android_electiva3.activity_ordenes;
 import com.electiva3.proyecto_android_electiva3.adapters.DetalleOrdenAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.DetalleOrden;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class FragmentOrdenOrden extends Fragment {
+public class FragmentOrdenOrden extends Fragment   {
 
     RecyclerView rvDetalleOrdenes;
     FloatingActionButton fabAgregarDetalleOrden;
@@ -72,4 +79,5 @@ public class FragmentOrdenOrden extends Fragment {
         return detallesOrdenes;
 
     }
+
 }

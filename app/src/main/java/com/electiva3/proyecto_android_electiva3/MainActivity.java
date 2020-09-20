@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), activity_admin_home.class);
+                Intent i = new Intent(getApplicationContext(), activity_principal.class);
                 startActivity(i);
                 finish();
             }

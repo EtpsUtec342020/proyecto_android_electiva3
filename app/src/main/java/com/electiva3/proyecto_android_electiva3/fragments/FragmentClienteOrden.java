@@ -17,6 +17,9 @@ public class FragmentClienteOrden extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
+
+
+
         return inflater.inflate(R.layout.fragment_cliente_orden , container , false);
     }
 }

@@ -9,8 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".actualizar_detalle_reserva"
-            android:parentActivityName=".activity_lista_reservas"></activity>
+        <activity android:name=".activity_principal"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+
+
+        </activity>
+        <activity
+            android:name=".actualizar_detalle_reserva"
+            android:parentActivityName=".activity_lista_reservas" />
         <activity
             android:name=".activity_lista_reservas"
             android:parentActivityName=".activity_admin_home" />
