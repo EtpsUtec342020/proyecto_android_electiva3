@@ -31,6 +31,6 @@ public class activity_actualizar_usuario extends AppCompatActivity
         edtContrasena2 = findViewById(R.id.edtContrasena2);
         spnEstado = findViewById(R.id.spnEstado);
         spnRol =  findViewById(R.id.spnRol);
-        btnActualizar = findViewById(R.id.btnActualizar);
+        btnActualizar = findViewById(R.id.btnCrear);
     }
 }

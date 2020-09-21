@@ -29,8 +29,8 @@ public class activity_actualizar_plan extends AppCompatActivity
 
         txtCosto = findViewById(R.id.txtCosto);
         lvServicios = findViewById(R.id.lvServicios);
-        btnActualizar = findViewById(R.id.btnActualizar);
-        btnCancelar = findViewById(R.id.btnCancelar);
+        btnActualizar = findViewById(R.id.btnCrear);
+        btnCancelar = findViewById(R.id.btnCancelar2);
         spnTipoPlan = findViewById(R.id.spnTipoPlan);
         spnDuracion = findViewById(R.id.spnDuracion);
         spnEstado = findViewById(R.id.spnEstado);

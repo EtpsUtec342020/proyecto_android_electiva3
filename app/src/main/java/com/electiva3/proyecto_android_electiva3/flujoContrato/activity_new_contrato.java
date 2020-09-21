@@ -3,7 +3,6 @@ package com.electiva3.proyecto_android_electiva3.flujoContrato;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
@@ -23,7 +22,7 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
     private CalendarView cvfechaActivacion;
     private ConstraintLayout vt2;
     private ListView lvlistar;
-    private Button btnAgregar, btnSeleccionar, btnCancelar;
+    private Button btnAgregar, btnSeleccionar, btnCancelar2;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -40,14 +39,14 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
         spnDuracionC = findViewById(R.id.spnDuracionC);
         btnAgregar = findViewById(R.id.btnAgregar);
         btnSeleccionar = findViewById(R.id.btnSeleccionar);
-        btnCancelar = findViewById(R.id.btnCancelar);
+        btnCancelar2 = findViewById(R.id.btnCancelar2);
         vt2 = findViewById(R.id.vt2);
         lvlistar = findViewById(R.id.lvlistar);
 
         txtCliente.setOnClickListener(this);
         txtVehiculo.setOnClickListener(this);
         txtPlan.setOnClickListener(this);
-        btnCancelar.setOnClickListener(this);
+        btnCancelar2.setOnClickListener(this);
     }
 
     @Override
@@ -64,7 +63,7 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
             case R.id.txtPlan:
                      Seleccionar();
                 break;
-            case R.id.btnCancelar:
+            case R.id.btnCancelar2:
                 vt2.setVisibility(View.INVISIBLE);
                 cvfechaActivacion.setVisibility(View.VISIBLE);
                 break;

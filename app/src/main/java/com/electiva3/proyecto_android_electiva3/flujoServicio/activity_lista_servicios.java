@@ -42,7 +42,7 @@ public class activity_lista_servicios extends AppCompatActivity
         edtCosto = findViewById(R.id.edtCosto);
         spnCategoria = findViewById(R.id.spnCategoria);
         btnAgregar = findViewById(R.id.btnAgregar);
-        btnCancelar = findViewById(R.id.btnCancelar);
+        btnCancelar = findViewById(R.id.btnCancelar2);
 
 
         lvlista.setOnItemClickListener(new AdapterView.OnItemClickListener()

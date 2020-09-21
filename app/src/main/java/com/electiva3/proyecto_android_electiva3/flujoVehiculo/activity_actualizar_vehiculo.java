@@ -30,6 +30,6 @@ public class activity_actualizar_vehiculo extends AppCompatActivity
         txtColor = findViewById(R.id.edtColor);
         spnMarca = findViewById(R.id.spnMarca);
         spnModelo = findViewById(R.id.spnModelo);
-        btnActualizar = findViewById(R.id.btnActualizar);
+        btnActualizar = findViewById(R.id.btnCrear);
     }
 }

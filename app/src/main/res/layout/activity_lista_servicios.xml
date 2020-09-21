@@ -132,7 +132,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/btnActualizar"
+                    android:id="@+id/btnCrear"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -143,7 +143,7 @@
                     android:textColor="@color/design_default_color_background" />
 
                 <Button
-                    android:id="@+id/btnCancelar"
+                    android:id="@+id/btnCancelar2"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
