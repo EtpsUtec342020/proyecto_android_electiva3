@@ -16,7 +16,7 @@
             android:gravity="center"
             android:orientation="vertical"
             android:padding="16dp"
-            tools:visibility="invisible">
+            tools:visibility="visible">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -55,23 +55,25 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="346dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="14dp"
                         android:layout_marginRight="16dp"
-                        android:layout_marginBottom="14dp">
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/ic_check"
+                        android:text=" Seleccionar vehiculo"
+                        android:textSize="18sp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtVehiculo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_car"
-                            android:editable="false"
-                            android:hint=" vehiculo"
-                            android:selectAllOnFocus="true" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                    <Spinner
+                        android:id="@+id/spnVehiculo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="14dp"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -170,7 +172,7 @@
                         android:textSize="18sp" />
 
                     <Button
-                        android:id="@+id/btnAgregar"
+                        android:id="@+id/btnCrear"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_alignParentLeft="true"
@@ -179,9 +181,23 @@
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="30dp"
-                        android:layout_marginBottom="125dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@drawable/ic_btn_launcher"
-                        android:text="Agregar"
+                        android:text="Crear"
+                        android:textColor="@color/design_default_color_background" />
+
+                    <Button
+                        android:id="@+id/btnCancelar"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginBottom="50dp"
+                        android:background="@drawable/ic_btn_gray"
+                        android:text="Cancelar"
                         android:textColor="@color/design_default_color_background" />
 
                 </LinearLayout>

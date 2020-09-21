@@ -25,7 +25,7 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
     private ConstraintLayout vt2, vt3;
     private Spinner spnTipoPlan,  spnDuracion;
     private TextView txtCosto;
-    private Button btnAgregar, btnCancelar, btnServicios, btnAceptar, btnCancelar2;
+    private Button btnCrear, btnCancelar, btnServicios, btnSeleccionar, btnCancelar2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,7 +38,7 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
 
         //variables de crear plan
         vt2 = findViewById(R.id.vt2);
-        btnAgregar = findViewById(R.id.btnAgregar);
+        btnCrear = findViewById(R.id.btnCrear);
         btnCancelar = findViewById(R.id.btnCancelar);
         btnServicios = findViewById(R.id.btnServicios);
         spnTipoPlan = findViewById(R.id.spnTipoPlan);
@@ -48,7 +48,7 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
         //variables seleccionar servicios
         vt3 = findViewById(R.id.vt3);
         lvServicios = findViewById(R.id.lvServicios);
-        btnAceptar = findViewById(R.id.btnSeleccionar);
+        btnSeleccionar = findViewById(R.id.btnSeleccionar);
         btnCancelar2 = findViewById(R.id.btnCancelar2);
 
         lvlista.setOnItemClickListener(new AdapterView.OnItemClickListener()

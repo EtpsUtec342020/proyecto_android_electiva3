@@ -29,8 +29,8 @@ public class activity_actualizar_servicio extends AppCompatActivity
         txtDescripcion = findViewById(R.id.edtDescripcion);
         txtCosto = findViewById(R.id.edtCosto);
         spnCategoria = findViewById(R.id.spnCategoria);
-        btnActualizar = findViewById(R.id.btnCrear);
-        btnCancelar = findViewById(R.id.btnCancelar2);
+        btnActualizar = findViewById(R.id.btnActualizar);
+        btnCancelar = findViewById(R.id.btnCancelar);
 
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {

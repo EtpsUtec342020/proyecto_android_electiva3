@@ -23,7 +23,7 @@ public class activity_lista_servicios extends AppCompatActivity
     private ConstraintLayout Vt2;
     private EditText edtTitulo, edtDescripcion, edtCosto;
     private Spinner spnCategoria;
-    private Button btnAgregar, btnCancelar;
+    private Button btnCrear, btnCancelar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,8 +41,8 @@ public class activity_lista_servicios extends AppCompatActivity
         edtDescripcion = findViewById(R.id.edtDescripcion);
         edtCosto = findViewById(R.id.edtCosto);
         spnCategoria = findViewById(R.id.spnCategoria);
-        btnAgregar = findViewById(R.id.btnAgregar);
-        btnCancelar = findViewById(R.id.btnCancelar2);
+        btnCrear = findViewById(R.id.btnCrear);
+        btnCancelar = findViewById(R.id.btnCancelar);
 
 
         lvlista.setOnItemClickListener(new AdapterView.OnItemClickListener()

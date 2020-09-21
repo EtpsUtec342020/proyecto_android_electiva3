@@ -3,6 +3,7 @@ package com.electiva3.proyecto_android_electiva3.flujoContrato;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
@@ -17,12 +18,12 @@ import com.electiva3.proyecto_android_electiva3.R;
 
 public class activity_new_contrato extends AppCompatActivity implements View.OnClickListener
 {
-    private TextView txtCliente, txtVehiculo, txtPlan, txtFechaVen, txtNumManto, txtCosto;
-    private Spinner spnDuracionC;
+    private TextView txtCliente, txtPlan, txtFechaVen, txtNumManto, txtCosto;
+    private Spinner spnVehiculo, spnDuracionC;
     private CalendarView cvfechaActivacion;
     private ConstraintLayout vt2;
     private ListView lvlistar;
-    private Button btnAgregar, btnSeleccionar, btnCancelar2;
+    private Button btnCrear, btnSeleccionar, btnCancelar, btnCancelar2;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -30,22 +31,23 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_new_contrato);
 
         txtCliente = findViewById(R.id.txtCliente);
-        txtVehiculo = findViewById(R.id.txtVehiculo);
         txtPlan = findViewById(R.id.txtPlan);
         cvfechaActivacion = findViewById(R.id.cvfechaActivacion);
         txtFechaVen = findViewById(R.id.txtFechaVen);
         txtNumManto = findViewById(R.id.txtNumManto);
         txtCosto = findViewById(R.id.txtCosto);
+        spnVehiculo = findViewById(R.id.spnVehiculo);
         spnDuracionC = findViewById(R.id.spnDuracionC);
-        btnAgregar = findViewById(R.id.btnAgregar);
+        btnCrear = findViewById(R.id.btnCrear);
+        btnCancelar = findViewById(R.id.btnCancelar);
         btnSeleccionar = findViewById(R.id.btnSeleccionar);
         btnCancelar2 = findViewById(R.id.btnCancelar2);
         vt2 = findViewById(R.id.vt2);
         lvlistar = findViewById(R.id.lvlistar);
 
         txtCliente.setOnClickListener(this);
-        txtVehiculo.setOnClickListener(this);
         txtPlan.setOnClickListener(this);
+        btnCancelar.setOnClickListener(this);
         btnCancelar2.setOnClickListener(this);
     }
 
@@ -57,11 +59,13 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
             case R.id.txtCliente:
                     Seleccionar();
                 break;
-            case R.id.txtVehiculo:
-                    Seleccionar();
-                break;
             case R.id.txtPlan:
                      Seleccionar();
+                break;
+            case R.id.btnCancelar:
+                Intent contratos = new Intent(getApplicationContext() ,   activity_lista_contratos.class);
+                startActivity(contratos);
+                finish();
                 break;
             case R.id.btnCancelar2:
                 vt2.setVisibility(View.INVISIBLE);

@@ -2,7 +2,9 @@ package com.electiva3.proyecto_android_electiva3.flujoUsuario;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -13,7 +15,7 @@ public class activity_new_usuario extends AppCompatActivity
 {
 
     private EditText edtNombre, edtDui, edtNit, edtLicencia, edtTelefono, edtDireccion, edtCorreo;
-    private Button btnAgregar;
+    private Button btnCrear, btnCancelar;
     private Spinner spnRol;
 
     @Override
@@ -30,8 +32,17 @@ public class activity_new_usuario extends AppCompatActivity
         edtTelefono = findViewById(R.id.edtTelefono);
         edtDireccion = findViewById(R.id.edtDireccion);
         spnRol =  findViewById(R.id.spnRol);
-        btnAgregar = findViewById(R.id.btnAgregar);
+        btnCrear = findViewById(R.id.btnAgregar);
+        btnCancelar = findViewById(R.id.btnCancelar);
 
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent usuarios = new Intent(getApplicationContext() ,   activity_lista_usuarios.class);
+                startActivity(usuarios);
+                finish();
+            }
+        });
 
     }
 }

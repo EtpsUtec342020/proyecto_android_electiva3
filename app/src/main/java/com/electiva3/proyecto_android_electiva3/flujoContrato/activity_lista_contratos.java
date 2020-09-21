@@ -32,6 +32,7 @@ public class activity_lista_contratos extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent( getApplicationContext() , activity_actualizar_contrato.class);
                 startActivity(i);
+                finish();
             }
         });
 

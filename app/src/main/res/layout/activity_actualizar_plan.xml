@@ -129,7 +129,7 @@
             android:textColor="@color/design_default_color_background" />
 
         <Button
-            android:id="@+id/btnCancelar2"
+            android:id="@+id/btnCancelar"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
