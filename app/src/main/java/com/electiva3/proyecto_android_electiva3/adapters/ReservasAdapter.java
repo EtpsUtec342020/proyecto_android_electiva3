@@ -49,6 +49,7 @@ public class ReservasAdapter  extends RecyclerView.Adapter<ReservasAdapter.MyVie
             @Override
             public void onClick(View v) {
                 Intent intent  =  new Intent( context ,   actualizar_detalle_reserva.class   );
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });

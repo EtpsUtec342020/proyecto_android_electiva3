@@ -52,6 +52,7 @@ public class OrdenAdapter extends RecyclerView.Adapter<OrdenAdapter.MyViewHolder
             @Override
             public void onClick(View v) {
                 Intent detalleOrden  =  new Intent(context  , detalle_orden.class );
+                detalleOrden.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(detalleOrden);
             }
         });
