@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_actualizar_servicio">
+    tools:context=".flujoServicio.activity_actualizar_servicio">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:layout_marginBottom="14dp"
+            android:layout_marginBottom="16dp"
             android:visibility="visible"
             tools:visibility="visible" />
 
@@ -139,7 +139,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ic_btn_launcher"
+            android:background="@drawable/ic_btn_gray"
             android:text="Cancelar"
             android:textColor="@color/design_default_color_background" />
 

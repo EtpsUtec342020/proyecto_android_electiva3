@@ -1,4 +1,4 @@
-package com.electiva3.proyecto_android_electiva3;
+package com.electiva3.proyecto_android_electiva3.flujoServicio;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.electiva3.proyecto_android_electiva3.R;
 
 public class activity_actualizar_servicio extends AppCompatActivity
 {
