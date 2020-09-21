@@ -36,6 +36,20 @@ dependencies {
     implementation 'com.android.support:design:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
+
+    //Firebase Analitics
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+
+    //Firebase Auth
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
+
+    //Firebase Database
+    implementation 'com.google.firebase:firebase-database:19.3.1'
+
+
+    //Google services
+    apply plugin: 'com.google.gms.google-services'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     testImplementation 'junit:junit:4.12'
@@ -64,3 +78,5 @@ dependencies {
 
 
 }
+
+apply plugin: 'com.android.application'
