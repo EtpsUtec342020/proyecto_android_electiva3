@@ -1,16 +1,20 @@
-package com.electiva3.proyecto_android_electiva3;
+package com.electiva3.proyecto_android_electiva3.flujoUsuario;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.electiva3.proyecto_android_electiva3.R;
+
 public class activity_actualizar_usuario extends AppCompatActivity
 {
     private EditText edtNombre, edtDui, edtNit, edtLicencia, edtTelefono, edtDireccion, edtCorreo, edtContrasena, edtContrasena2;
-    private Button btnActualizar;
+    private Button btnActualizar, btnCancelar;
     private Spinner spnRol, spnEstado;
 
     @Override
@@ -30,5 +34,16 @@ public class activity_actualizar_usuario extends AppCompatActivity
         spnEstado = findViewById(R.id.spnEstado);
         spnRol =  findViewById(R.id.spnRol);
         btnActualizar = findViewById(R.id.btnActualizar);
+        btnCancelar = findViewById(R.id.btnCancelar);
+
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent usuarios = new Intent(getApplicationContext() ,   activity_lista_usuarios.class);
+                startActivity(usuarios);
+                finish();
+            }
+        });
     }
 }

@@ -1,4 +1,4 @@
-package com.electiva3.proyecto_android_electiva3;
+package com.electiva3.proyecto_android_electiva3.flujoPlan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.electiva3.proyecto_android_electiva3.R;
 
 public class activity_actualizar_plan extends AppCompatActivity
 {
@@ -27,7 +29,7 @@ public class activity_actualizar_plan extends AppCompatActivity
 
         txtCosto = findViewById(R.id.txtCosto);
         lvServicios = findViewById(R.id.lvServicios);
-        btnActualizar = findViewById(R.id.btnActualizar);
+        btnActualizar = findViewById(R.id.btnCrear);
         btnCancelar = findViewById(R.id.btnCancelar);
         spnTipoPlan = findViewById(R.id.spnTipoPlan);
         spnDuracion = findViewById(R.id.spnDuracion);

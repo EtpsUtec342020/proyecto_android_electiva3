@@ -1,4 +1,4 @@
-package com.electiva3.proyecto_android_electiva3;
+package com.electiva3.proyecto_android_electiva3.flujoUsuario;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,41 +8,47 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.electiva3.proyecto_android_electiva3.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class activity_lista_contratos extends AppCompatActivity
+public class activity_lista_usuarios extends AppCompatActivity
 {
-
     private ListView lvlista;
-    private FloatingActionButton fabAgregarConcontrato;
+    private FloatingActionButton fabAgregarUsuario;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_contratos);
+        setContentView(R.layout.activity_lista_usuarios);
 
         lvlista = findViewById(R.id.lvlista);
-        fabAgregarConcontrato = findViewById(R.id.fabAgregarContrato);
+        fabAgregarUsuario = findViewById(R.id.fabAgregarUsuario);
 
         lvlista.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent( getApplicationContext() , activity_actualizar_contrato.class);
+                Intent i = new Intent( getApplicationContext() , activity_actualizar_usuario.class);
                 startActivity(i);
             }
         });
 
 
-        fabAgregarConcontrato.setOnClickListener(new View.OnClickListener()
+        fabAgregarUsuario.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent( getApplicationContext() , activity_new_contrato.class);
+                Intent i = new Intent( getApplicationContext() , activity_new_usuario.class);
                 startActivity(i);
                 finish();
             }
         });
+
+
+
+
     }
 }

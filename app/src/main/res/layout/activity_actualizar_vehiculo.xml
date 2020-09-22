@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_actualizar_vehiculo">
+    tools:context=".flujoVehiculo.activity_actualizar_vehiculo">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,6 +35,23 @@
                     android:text="Seleccionar Imagen"
                     android:textAlignment="center"
                     android:textSize="18sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtCliente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="14dp"
+                        android:drawableLeft="@drawable/ic_person"
+                        android:editable="false"
+                        android:hint="cliente" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -144,17 +161,6 @@
                     android:layout_marginBottom="14dp" />
 
                 <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Linea:"
-                    android:textSize="18sp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp"/>
-
-                <TextView
                     android:id="@+id/txtEstado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -182,9 +188,23 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginBottom="125dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/ic_btn_launcher"
-                    android:text="Actualizar"
+                    android:text="Aztualizar"
+                    android:textColor="@color/design_default_color_background" />
+
+                <Button
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/ic_btn_gray"
+                    android:text="Cancelar"
                     android:textColor="@color/design_default_color_background" />
 
             </LinearLayout>

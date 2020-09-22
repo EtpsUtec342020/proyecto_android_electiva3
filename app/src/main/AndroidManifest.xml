@@ -14,8 +14,6 @@
         <activity android:name=".activity_principal"
             android:theme="@style/AppTheme.NoActionBar"
             >
-
-
         </activity>
         <activity
             android:name=".actualizar_detalle_reserva"
@@ -29,21 +27,36 @@
         <activity
             android:name=".detalle_orden"
             android:parentActivityName=".activity_ordenes" />
-        <activity android:name=".activity_actualizar_plan" />
-        <activity android:name=".activity_lista_planes" />
-        <activity android:name=".activity_actualizar_servicio" />
-        <activity android:name=".activity_lista_servicios" />
-        <activity android:name=".activity_lista_contratos" />
-        <activity android:name=".activity_new_contrato" />
-        <activity android:name=".activity_actualizar_contrato" /> <!-- flujo vehiculos -->
-        <activity android:name=".activity_lista_vehiculos" />
-        <activity android:name=".activity_actualizar_vehiculo" />
-        <activity android:name=".activity_new_vehiculo" /> <!-- flujo usuarios -->
-        <activity android:name=".activity_lista_usuarios" />
-        <activity android:name=".activity_lista_usuarios" />
-        <activity android:name=".activity_admin_home" />
-        <activity android:name=".activity_actualizar_usuario" />
-        <activity android:name=".activity_new_usuario" /> <!-- menu admin -->
+
+        <!--flujo planes -->
+        <activity android:name=".flujoPlan.activity_lista_planes"
+            android:parentActivityName=".activity_admin_home" />
+        <activity android:name=".flujoPlan.activity_actualizar_plan" />
+
+        <!--flujo servicios -->
+        <activity android:name=".flujoServicio.activity_lista_servicios"
+            android:parentActivityName=".activity_admin_home" />
+        <activity android:name=".flujoServicio.activity_actualizar_servicio" />
+
+        <!--flujo contrato -->
+        <activity android:name=".flujoContrato.activity_lista_contratos"
+            android:parentActivityName=".activity_admin_home" />
+        <activity android:name=".flujoContrato.activity_new_contrato" />
+        <activity android:name=".flujoContrato.activity_actualizar_contrato" />
+
+        <!-- flujo vehiculos -->
+        <activity android:name=".flujoVehiculo.activity_lista_vehiculos"
+            android:parentActivityName=".activity_admin_home" />
+        <activity android:name=".flujoVehiculo.activity_actualizar_vehiculo" />
+        <activity android:name=".flujoVehiculo.activity_new_vehiculo" />
+
+        <!-- flujo usuarios -->
+        <activity android:name=".flujoUsuario.activity_lista_usuarios"
+            android:parentActivityName=".activity_admin_home" />
+        <activity android:name=".flujoUsuario.activity_actualizar_usuario" />
+        <activity android:name=".flujoUsuario.activity_new_usuario" />
+
+        <!-- menu admin -->
         <activity android:name=".activity_admin_home" />
         <activity
             android:name=".activity_ordenes"
