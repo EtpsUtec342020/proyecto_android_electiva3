@@ -73,9 +73,9 @@ public class activity_admin_home extends AppCompatActivity implements View.OnCli
                 break;
 
             case R.id.imgOrdenServicio:
-                    Intent ordenes  =  new Intent( getApplicationContext() , activity_ordenes.class);
-                    startActivity(ordenes);
-                    break;
+                Intent ordenes  =  new Intent( getApplicationContext() , activity_ordenes.class);
+                startActivity(ordenes);
+                break;
         }
     }
 }
