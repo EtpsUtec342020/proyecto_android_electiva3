@@ -30,8 +30,8 @@ public class activity_ordenes extends AppCompatActivity {
         setContentView(R.layout.activity_ordenes);
 
         getSupportActionBar().setTitle(title);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
         rvOrdenes  =  findViewById(R.id.rvOrdenes);
 
 
@@ -56,9 +56,8 @@ public class activity_ordenes extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent= new Intent(getApplicationContext() , activity_admin_home.class);
+        Intent intent= new Intent(getApplicationContext() , activity_principal.class);
         startActivity(intent);
         finish();
-
     }
 }

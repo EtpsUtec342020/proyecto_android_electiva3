@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if(task.isSuccessful()){
-
                         Intent i = new Intent(getApplicationContext(), activity_principal.class);
                         startActivity(i);
                         finish();

@@ -45,7 +45,7 @@
                     android:id="@+id/edtCorreo"
                     android:layout_width="366dp"
                     android:layout_height="wrap_content"
-                    android:hint="correo electrónico" />
+                    android:hint="Correo electrónico" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

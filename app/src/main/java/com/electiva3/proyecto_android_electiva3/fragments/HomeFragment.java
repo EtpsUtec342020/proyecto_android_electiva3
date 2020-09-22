@@ -87,14 +87,15 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
                 break;
 
             case R.id.imgReserva:
-
                 Intent reservas =  new Intent(getActivity() , activity_lista_reservas.class);
                 startActivity(reservas);
+                getActivity().finish();
                 break;
 
             case R.id.imgOrdenServicio:
                 Intent ordenes  =  new Intent( getActivity() , activity_ordenes.class);
                 startActivity(ordenes);
+                getActivity().finish();
                 break;
         }
     }
