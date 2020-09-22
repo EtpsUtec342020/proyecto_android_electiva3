@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity
         String password =  edtContrasena.getText().toString();
 
         if(email.isEmpty()){
-            edtCorreo.setError("Compo requerido");
+            edtCorreo.setError("Campo requerido");
         }else  if(password.isEmpty()){
-            edtContrasena.setError("Compo requerido");
+            edtContrasena.setError("Campo requerido");
         }else{
             //Toast.makeText(getApplicationContext(), "Login is successfull", Toast.LENGTH_SHORT).show();
             auth.signInWithEmailAndPassword(email , password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
