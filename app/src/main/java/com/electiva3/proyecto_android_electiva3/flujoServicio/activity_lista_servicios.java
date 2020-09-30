@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -74,6 +75,26 @@ public class activity_lista_servicios extends AppCompatActivity
                 Vt2.setVisibility(View.INVISIBLE);
                 faAgregarServicio.setVisibility(View.VISIBLE);
 
+            }
+        });
+
+        btnCrear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String tittulo = edtTitulo.getText().toString();
+                String descrpcion = edtDescripcion.getText().toString();
+                String costo = edtCosto.getText().toString();
+
+                if(TextUtils.isEmpty(tittulo)){
+                    edtTitulo.setText("Campo Requerido");
+                }
+                else if(TextUtils.isEmpty(descrpcion)){
+                    edtDescripcion.setText("Campo Requerido");
+                }
+                else if(TextUtils.isEmpty(costo)){
+                    edtCosto.setText("Campo Requerido");
+                }
             }
         });
     }

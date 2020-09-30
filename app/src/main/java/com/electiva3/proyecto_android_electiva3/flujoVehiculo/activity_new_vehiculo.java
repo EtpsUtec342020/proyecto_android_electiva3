@@ -1,12 +1,15 @@
 package com.electiva3.proyecto_android_electiva3.flujoVehiculo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +27,7 @@ public class activity_new_vehiculo extends AppCompatActivity implements View.OnC
     private ConstraintLayout vt2;
     private ListView lvlistar;
     private Button btnCrear, btnCancelar, btnCancelar2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
 
@@ -45,9 +49,39 @@ public class activity_new_vehiculo extends AppCompatActivity implements View.OnC
         vt2 = findViewById(R.id.vt2);
         lvlistar = findViewById(R.id.lvlistar);
 
+
         btnCancelar.setOnClickListener(this);
         edtCliente.setOnClickListener(this);
         btnCancelar2.setOnClickListener(this);
+
+        btnCrear.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                String cliente = edtCliente.getText().toString();
+                String placa = edtPlaca.getText().toString();
+                String chasis = edtChasis.getText().toString();
+                String anio = edtAnio.getText().toString();
+                String color = edtColor.getText().toString();
+
+                if(TextUtils.isEmpty(cliente)) {
+                    edtCliente.setError("Campo Requerido");
+                }
+                else if(TextUtils.isEmpty(placa)) {
+                    edtPlaca.setError("Campo Requerido");
+                }
+                else if(TextUtils.isEmpty(chasis)) {
+                    edtChasis.setError("Campo Requerido");
+                }
+                else if(TextUtils.isEmpty(anio)) {
+                    edtAnio.setError("Campo Requerido");
+                }
+                else if(TextUtils.isEmpty(color)) {
+                    edtColor.setError("Campo Requerido");
+                }
+            }
+        });
+
     }
 
     @Override
@@ -57,8 +91,19 @@ public class activity_new_vehiculo extends AppCompatActivity implements View.OnC
             case R.id.edtCliente:
                 vt2.setVisibility(View.VISIBLE);
                 String[] Arreglo = {"dato 1", "dato 2", "dato 3", "dato 4", "dato 5"};
-                lvlistar.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-                lvlistar.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, Arreglo));
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, Arreglo);
+                lvlistar.setAdapter(adapter);
+
+                lvlistar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        edtCliente.setText(lvlistar.getItemAtPosition(position).toString());
+
+                        vt2.setVisibility(View.INVISIBLE);
+                    }
+                });
+
                 break;
             case R.id.btnCancelar:
                 Intent vehiculos = new Intent(getApplicationContext() ,   activity_lista_vehiculos.class);
@@ -70,4 +115,45 @@ public class activity_new_vehiculo extends AppCompatActivity implements View.OnC
                 break;
         }
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

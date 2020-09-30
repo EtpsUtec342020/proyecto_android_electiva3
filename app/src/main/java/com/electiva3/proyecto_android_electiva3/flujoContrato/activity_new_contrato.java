@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -49,6 +50,16 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
         txtPlan.setOnClickListener(this);
         btnCancelar.setOnClickListener(this);
         btnCancelar2.setOnClickListener(this);
+
+        btnCrear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cliente = txtCliente.getText().toString();
+                String plan = txtPlan.getText().toString();
+                String fechaVencimiento = txtFechaVen.getText().toString();
+
+            }
+        });
     }
 
     @Override
@@ -57,12 +68,32 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
         switch (v.getId())
         {
             case R.id.txtCliente:
-                    Seleccionar();
+                Seleccionar();
+
+                lvlistar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        txtCliente.setText(lvlistar.getItemAtPosition(position).toString());
+
+                        vt2.setVisibility(View.INVISIBLE);
+                    }
+                });
                 break;
             case R.id.txtPlan:
-                     Seleccionar();
+
+                Seleccionar();
+
+                lvlistar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        txtPlan.setText(lvlistar.getItemAtPosition(position).toString());
+
+                        vt2.setVisibility(View.INVISIBLE);
+                    }
+                });
                 break;
             case R.id.btnCancelar:
+
                 Intent contratos = new Intent(getApplicationContext() ,   activity_lista_contratos.class);
                 startActivity(contratos);
                 finish();
@@ -79,10 +110,9 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
         vt2.setVisibility(View.VISIBLE);
         cvfechaActivacion.setVisibility(View.INVISIBLE);
 
-
         String[] Arreglo = {"dato 1", "dato 2", "dato 3", "dato 4", "dato 5"};
-        lvlistar.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-        lvlistar.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, Arreglo));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, Arreglo);
+        lvlistar.setAdapter(adapter);
 
     }
 }
