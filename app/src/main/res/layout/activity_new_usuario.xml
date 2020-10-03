@@ -81,7 +81,7 @@
                         android:drawableLeft="@drawable/ic_dui"
                         android:hint=" NIT"
                         android:inputType="number"
-                        android:maxLength="10" />
+                        android:maxLength="17" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,7 +100,8 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_dui"
                         android:hint=" Licencia"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:maxLength="17" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

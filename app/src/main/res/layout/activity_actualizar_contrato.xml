@@ -42,9 +42,9 @@
                         android:id="@+id/txtCliente"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_car"
+                        android:drawableLeft="@drawable/ic_person"
                         android:editable="false"
-                        android:hint=" vehiculo"
+                        android:hint="Cliente"
                         android:selectAllOnFocus="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -195,7 +195,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/btnAgregar"
+                    android:id="@+id/btnActualizar"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_alignParentLeft="true"
@@ -203,9 +203,22 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginBottom="125dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/ic_btn_launcher"
                     android:text="Actualizar"
+                    android:textColor="@color/design_default_color_background" />
+
+                <Button
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/ic_btn_gray"
+                    android:text="Cancelar"
                     android:textColor="@color/design_default_color_background" />
 
             </LinearLayout>

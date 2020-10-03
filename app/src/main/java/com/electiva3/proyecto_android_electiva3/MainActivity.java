@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -19,14 +20,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity<CollectionReference> extends AppCompatActivity
 {
     private EditText edtCorreo, edtContrasena;
     private Button btnIngresar;
 
-
     FirebaseAuth auth;
     DatabaseReference database;
+
+    Conexion conexion = new Conexion();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,6 +45,9 @@ public class MainActivity extends AppCompatActivity
 
         auth = FirebaseAuth.getInstance();
         database  = FirebaseDatabase.getInstance().getReference();
+
+        conexion.inicializarFirabase(this);
+
 
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override

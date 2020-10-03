@@ -207,8 +207,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/vt2"
-            android:layout_width="305dp"
-            android:layout_height="502dp"
+            android:layout_width="296dp"
+            android:layout_height="444dp"
             android:layout_marginStart="50dp"
             android:layout_marginTop="40dp"
             android:background="@color/colorWhite"
@@ -234,20 +234,8 @@
                 <ListView
                     android:id="@+id/lvlistar"
                     android:layout_width="match_parent"
-                    android:layout_height="358dp"
-                    android:layout_marginBottom="10dp" />
-
-                <Button
-                    android:id="@+id/btnSeleccionar"
-                    android:layout_width="220dp"
-                    android:layout_height="33dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/ic_btn_launcher"
-                    android:text="Seleccionar"
-                    android:textColor="@color/design_default_color_background" />
+                    android:layout_height="346dp"
+                    android:layout_marginBottom="10dp"  />
 
                 <Button
                     android:id="@+id/btnCancelar2"
