@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:id="@+id/list_item">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="93dp">
+
+            <LinearLayout
+                android:layout_width="315dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNoReserva"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="#0000035"
+                    android:textColor="#0E0E0E"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvFecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:layout_weight="1"
+                    android:text="Fecha" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgIcon"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="3dp"
+                app:srcCompat="@drawable/modificar"/>
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

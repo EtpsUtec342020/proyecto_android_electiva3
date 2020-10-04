@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_lista_usuarios">
+    tools:context=".activity_lista_user_reservas">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -13,14 +13,14 @@
 
 
         <ListView
-            android:id="@+id/lvUsuarios"
+            android:id="@+id/lvlista"
             android:layout_width="match_parent"
             android:layout_height="830dp"
             android:cacheColorHint="#FD100F0F"
-            tools:listitem="@layout/item_usuario" />
+            tools:listitem="@layout/item_reserva_lista" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAgregarUsuario"
+            android:id="@+id/fabAgregarContrato"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
@@ -29,5 +29,4 @@
             android:src="@drawable/ic_add" />
 
     </FrameLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

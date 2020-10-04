@@ -9,11 +9,18 @@
         android:roundIcon="@mipmap/ic_snauto_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity_lista_usuarios" />
-        <activity android:name=".activity_admin_home" />
-        <activity android:name=".activity_actualizar_usuario" />
-        <activity android:name=".activity_new_usuario" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity_actualizar_user_reserva" />
+        <activity android:name=".activity_lista_user_reservas" />
+        <activity android:name=".activity_nuevo_user_reserva" />
+        <activity
+            android:name=".user_detalle_orden"
+            android:parentActivityName=".activity_user_ordenes" />
+        <activity
+            android:name=".activity_user_ordenes" />
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".activity_principal"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
