@@ -68,7 +68,8 @@ public class activity_lista_usuarios extends AppCompatActivity
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
+                if (snapshot.exists())
+                {
                     usuList.clear();
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         String correo = ds.child("correo").getValue().toString();

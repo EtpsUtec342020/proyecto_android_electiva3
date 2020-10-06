@@ -22,13 +22,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Agregar Nuevo Usuario"
-                    android:textStyle="bold" />
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_dui"
                         android:hint=" DUI"
-                        android:inputType="number"
+                        android:inputType="number|textCapCharacters"
                         android:maxLength="10" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -80,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_dui"
                         android:hint=" NIT"
-                        android:inputType="number"
+                        android:inputType="number|textCapCharacters"
                         android:maxLength="17" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -100,7 +93,7 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_dui"
                         android:hint=" Licencia"
-                        android:inputType="number"
+                        android:inputType="number|textCapCharacters"
                         android:maxLength="17" />
 
                 </com.google.android.material.textfield.TextInputLayout>

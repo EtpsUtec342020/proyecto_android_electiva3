@@ -1,10 +1,9 @@
 package com.electiva3.proyecto_android_electiva3.entities;
 
-import com.google.firebase.database.Exclude;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class Usuario
 {
@@ -16,10 +15,11 @@ public class Usuario
     private String correo;
     private String telefono;
     private String direccion;
+    private String password;
     private String rol;
     private String estado;
     private String fechaRegistro;
-   private Map<String, Object> usuario = new HashMap<>();
+    Map<String, Object> usuarioMap = new HashMap<>();
 
     public Usuario() {
     }
@@ -45,13 +45,12 @@ public class Usuario
         this.fechaRegistro = fechaRegistro;
     }
 
-    public Map<String, Object> getUsuario() {
-        return usuario;
+    public Map<String, Object> getUsuarioMap() {
+        return usuarioMap;
     }
 
-    public void setUsuario(Map<String, Object> usuario)
-    {
-        this.usuario = usuario;
+    public void setUsuarioMap(Map<String, Object> usuarioMap) {
+        this.usuarioMap = usuarioMap;
     }
 
     public String getKey()
@@ -104,6 +103,10 @@ public class Usuario
         this.correo = correo;
     }
 
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) { this.password = password; }
+
     public String getTelefono() {
         return telefono;
     }
@@ -141,4 +144,30 @@ public class Usuario
     public void setFechaRegistro(String fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
+
+
+    public void Comparar(String nom, String du, String ni, String li, String co, String pa, String tel, String dire, String rl, String es)
+    {
+        if(nom.equals(nombre) && du.equals(dui) && ni.equals(nit) && li.equals(licencia) && co.equals(correo)
+                && pa.equals(password) && tel.equals(telefono) && dire.equals(direccion) && rl.equals(rol) && es.equals(estado))
+        {
+            usuarioMap.clear();
+        }
+        else
+        {
+            usuarioMap.put("nombre", nom);
+            usuarioMap.put("dui", du);
+            usuarioMap.put("nit", ni);
+            usuarioMap.put("licencia", li);
+            usuarioMap.put("correo", co);
+            usuarioMap.put("password", pa);
+            usuarioMap.put("direccion", dire);
+            usuarioMap.put("telefono", tel);
+            usuarioMap.put("rol" , rl);
+            usuarioMap.put("estado", es);
+        }
+    }
+
+
 }
+

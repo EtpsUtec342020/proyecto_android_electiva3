@@ -1,5 +1,6 @@
 package com.electiva3.proyecto_android_electiva3.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
 import com.electiva3.proyecto_android_electiva3.flujoUsuario.activity_actualizar_usuario;
+import com.electiva3.proyecto_android_electiva3.flujoUsuario.activity_lista_usuarios;
 
 import java.util.ArrayList;
 
@@ -56,8 +57,8 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
                 Intent intent  =  new Intent( context ,   activity_actualizar_usuario.class  );
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("id", idUsuario);
-                Toast.makeText(context, "id enviado"+ idUsuario, Toast.LENGTH_LONG).show();
                 context.startActivity(intent);
+
             }
         });
     }
@@ -84,4 +85,5 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
             tvEstado =  itemView.findViewById(R.id.tvEstado);
         }
     }
+
 }
