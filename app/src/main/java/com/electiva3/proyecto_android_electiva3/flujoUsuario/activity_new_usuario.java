@@ -102,20 +102,20 @@ public class activity_new_usuario extends AppCompatActivity
                 }
                 else
                 {
-                    usuario.setKeyUsuario(UUID.randomUUID().toString());
+                    String key = (UUID.randomUUID().toString());
                     usuario.setNombre(nombre);
-                    usuario.setDui(Integer.parseInt(dui));
-                    usuario.setNit(Integer.parseInt(nit));
-                    usuario.setLicencia(Integer.parseInt(licencia));
+                    usuario.setDui(dui);
+                    usuario.setNit(nit);
+                    usuario.setLicencia(licencia);
                     usuario.setCorreo(correo);
-                    usuario.setTelefono(Integer.parseInt(telefono));
+                    usuario.setTelefono(telefono);
                     usuario.setDireccion(direccion);
                     usuario.setRol("administrador");
-                    usuario.setEstadoUsuario("Activo");
+                    usuario.setEstado("Activo");
 
-                    conexion.getDatabaseReference().child("usuarios").child(usuario.getKeyUsuario()).setValue(usuario);
+                    conexion.getDatabaseReference().child("usuarios").child(key).setValue(usuario);
 
-                   Toast.makeText(getApplicationContext(), "Agredado", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Usuario Creado", Toast.LENGTH_SHORT).show();
 
                     Intent usuarios = new Intent(getApplicationContext() ,   activity_lista_usuarios.class);
                     startActivity(usuarios);

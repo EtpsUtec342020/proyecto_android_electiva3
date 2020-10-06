@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,8 +44,10 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
         holder.imgIcon.setImageResource(R.drawable.ic_person);
         holder.tvTitulo.setText(  usuarios.get(position).getNombre());
         holder.tvDetalle.setText( usuarios.get(position).getCorreo() );
-        holder.tvEstado.setText(  usuarios.get(position).getEstadoUsuario());
+        holder.tvEstado.setText(  usuarios.get(position).getEstado());
 
+        //debe definirse como final para que tome todos los id que se pasan
+        final String idUsuario = usuarios.get(position).getKey();
 
         holder.itemView.setOnClickListener(new View.OnClickListener()
         {
@@ -52,6 +55,8 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
             public void onClick(View v) {
                 Intent intent  =  new Intent( context ,   activity_actualizar_usuario.class  );
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("id", idUsuario);
+                Toast.makeText(context, "id enviado"+ idUsuario, Toast.LENGTH_LONG).show();
                 context.startActivity(intent);
             }
         });
@@ -73,7 +78,6 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
         public MyViewHolder(View itemView)
         {
             super(itemView);
-            //serial_number = (TextView)itemView.findViewById(R.id.serialNo_CL);
             imgIcon = itemView.findViewById(R.id.imgIcon);
             tvTitulo = itemView.findViewById(R.id.tvTitulo);
             tvDetalle =  itemView.findViewById(R.id.tvDetalle);
