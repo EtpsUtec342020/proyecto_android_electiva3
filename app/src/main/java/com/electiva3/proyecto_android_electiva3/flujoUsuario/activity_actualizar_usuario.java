@@ -3,25 +3,32 @@ package com.electiva3.proyecto_android_electiva3.flujoUsuario;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.electiva3.proyecto_android_electiva3.R;
+import com.electiva3.proyecto_android_electiva3.adapters.EstadoAdapter;
+import com.electiva3.proyecto_android_electiva3.adapters.RolUsuarioAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.EventListener;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class activity_actualizar_usuario extends AppCompatActivity
 {
@@ -29,6 +36,8 @@ public class activity_actualizar_usuario extends AppCompatActivity
     private Button btnActualizar, btnCancelar;
     private Spinner spnRol, spnEstado;
 
+    private ArrayList<String> roleslist = new ArrayList<>();
+    private ArrayList<String> estadoslist = new ArrayList<>();
     private String id;
     Conexion conexion = new Conexion();
     Usuario usuario = new Usuario();
@@ -60,7 +69,6 @@ public class activity_actualizar_usuario extends AppCompatActivity
         //realizar consulta y mostrar los datos a partir del id recibido
         MostrarDatos();
 
-
         btnActualizar.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -75,8 +83,8 @@ public class activity_actualizar_usuario extends AppCompatActivity
                 String direccion = edtDireccion.getText().toString();
                 String password = edtContrasena.getText().toString();
                 String password2 = edtContrasena2.getText().toString();
-                String estado = "Activo";
-                String rol = "administrador";
+                String estado = spnEstado.getSelectedItem().toString();
+                String rol = spnRol.getSelectedItem().toString();
 
                 if(password.equals(password2))
                 {
@@ -90,9 +98,27 @@ public class activity_actualizar_usuario extends AppCompatActivity
                     }
                     else
                     {
+                        if(!password.equals(usuario.getPassword()))
+                        {
+                           UpdatePassword(password);
+                        }
+                        else if(!correo.equals(usuario.getCorreo()))
+                        {
+                            UpdateCorreo(correo);
+                        }
+                        else if(!estado.equals(usuario.getEstado()))
+                        {
+                            if(estado.equals("Inactivo"))
+                            {
+                                DarBajaUsuario();
+                            }
+                            else if(estado.equals("Activo") && usuario.getEstado().equals("Inactivo") )
+                            {
+                                ActivarUsuario(correo, password);
+                            }
+                        }
                         conexion.getDatabaseReference().child("usuarios").child(id).updateChildren(usuario.getUsuarioMap());
-                        Toast.makeText(getApplicationContext(), "Usuario Actualizado", Toast.LENGTH_LONG).show();
-
+                    //    Toast.makeText(getApplicationContext(), "Usuario Actualizado", Toast.LENGTH_LONG).show();
                     }
                     Intent usuarios = new Intent(getApplicationContext() ,   activity_lista_usuarios.class);
                     startActivity(usuarios);
@@ -102,7 +128,6 @@ public class activity_actualizar_usuario extends AppCompatActivity
                 {
                     Toast.makeText(getApplicationContext(), "Las Contraseñas no son Iguales", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 
@@ -150,14 +175,169 @@ public class activity_actualizar_usuario extends AppCompatActivity
                     edtDireccion.setText(usuario.getDireccion());
                     edtContrasena.setText(usuario.getPassword());
                     edtContrasena2.setText(usuario.getPassword());
+                    Roles();
+                    Estados();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
+    }
+
+    public void Roles()
+    {
+        conexion.getDatabaseReference().child("roles").addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists())
+                {
+                    roleslist.clear();
+
+                    for (DataSnapshot ds : snapshot.getChildren())
+                    {
+                        String rol = Objects.requireNonNull(ds.child("rol").getValue()).toString();
+
+                        roleslist.add(rol);
+                    }
+                    RolUsuarioAdapter rolAdapter = new RolUsuarioAdapter(getApplicationContext() , R.layout.custom_simple_spinner_item, roleslist);
+                    spnRol.setAdapter(rolAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    public void Estados()
+    {
+        conexion.getDatabaseReference().child("estados").addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists())
+                {
+                    estadoslist.clear();
+
+                    for (DataSnapshot ds : snapshot.getChildren())
+                    {
+                        String estado = Objects.requireNonNull(ds.child("estado").getValue()).toString();
+
+                        if(estado.equals("Activo") || estado.equals("Inactivo"))
+                        {
+                            estadoslist.add(estado);
+                        }
+                    }
+                    EstadoAdapter estadoAdapter = new EstadoAdapter(getApplicationContext() , R.layout.custom_simple_spinner_item, estadoslist);
+                    spnEstado.setAdapter(estadoAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    public void UpdatePassword(final String nuevopass)
+    {
+        //primero logueamos el usuario
+        conexion.getAuth().signInWithEmailAndPassword(usuario.getCorreo() , usuario.getPassword()).addOnCompleteListener(
+                new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            //despues obtenemos el user logueado para hacer el update
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            if (user != null) {
+                                //pasamos el parametro nuevopass por el metodo update
+                                user.updatePassword(nuevopass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(getApplicationContext(), "Password Actualizado", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(getApplicationContext(), "user is null", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "no se logueo", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
+    public void UpdateCorreo(final String nuevocorreo)
+    {
+        //primero logueamos el usuario
+        conexion.getAuth().signInWithEmailAndPassword(usuario.getCorreo() , usuario.getPassword()).addOnCompleteListener(
+                new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            if (user != null) {
+                                user.updateEmail(nuevocorreo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(getApplicationContext(), "Correo Actualizado", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(getApplicationContext(), "user is null", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "no se logueo", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
+    public void DarBajaUsuario()
+    {
+        //primero logueamos el usuario
+        conexion.getAuth().signInWithEmailAndPassword(usuario.getCorreo() , usuario.getPassword()).addOnCompleteListener(
+                new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            if (user != null) {
+                                user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(getApplicationContext(), "Usuario Inactivo", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(getApplicationContext(), "user is null", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "no se logueo", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
+    public void ActivarUsuario(final String cor, final String pas)
+    {
+        conexion.getAuth().createUserWithEmailAndPassword(cor, pas)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Toast.makeText(getApplicationContext(), "Usuario Activo", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     @Override
@@ -165,6 +345,5 @@ public class activity_actualizar_usuario extends AppCompatActivity
         Intent intent= new Intent(getApplicationContext() , activity_lista_usuarios.class);
         startActivity(intent);
         finish();
-
     }
 }

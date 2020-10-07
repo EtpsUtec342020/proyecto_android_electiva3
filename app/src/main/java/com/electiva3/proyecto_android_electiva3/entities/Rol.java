@@ -5,27 +5,32 @@ public class Rol
     private String key;
     private String rol;
 
-    public Rol(){
+    public Rol() {
     }
+
     public Rol(String key, String rol)
     {
         this.key = key;
         this.rol = rol;
     }
 
-    public String getKey() {
+    public String getKey()
+    {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(String key)
+    {
         this.key = key;
     }
 
-    public String getRol() {
+    public String getRol()
+    {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(String rol)
+    {
         this.rol = rol;
     }
 }

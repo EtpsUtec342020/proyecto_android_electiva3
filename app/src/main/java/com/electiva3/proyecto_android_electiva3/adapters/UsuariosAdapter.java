@@ -25,6 +25,8 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
     private Context context;
     private ArrayList<Usuario> usuarios;
 
+    activity_lista_usuarios activity = new activity_lista_usuarios();
+
     public UsuariosAdapter(Context context , ArrayList<Usuario> usuarios ){
         inflater =  LayoutInflater.from(context);
         this.context= context;
@@ -58,7 +60,6 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("id", idUsuario);
                 context.startActivity(intent);
-
             }
         });
     }
@@ -85,5 +86,6 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
             tvEstado =  itemView.findViewById(R.id.tvEstado);
         }
     }
+
 
 }

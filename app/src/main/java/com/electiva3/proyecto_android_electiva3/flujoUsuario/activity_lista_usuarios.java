@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,12 +33,12 @@ public class activity_lista_usuarios extends AppCompatActivity
     Conexion conexion = new Conexion();
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_usuarios);
+
 
        rvUsuarios = findViewById(R.id.rvUsuarios);
        fabAgregarUsuario = findViewById(R.id.fabAgregarUsuario);
@@ -99,4 +100,6 @@ public class activity_lista_usuarios extends AppCompatActivity
         startActivity(intent);
         finish();
     }
+
+
 }

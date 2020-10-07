@@ -11,17 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.electiva3.proyecto_android_electiva3.R;
-import com.electiva3.proyecto_android_electiva3.entities.Rol;
 
 import java.util.List;
 
-public class RolAdapter extends ArrayAdapter<Rol>
+public class RolUsuarioAdapter extends ArrayAdapter<String>
 {
-
     private Context context;
-    private List<Rol> rolesUsuarios;
+    private List<String> rolesUsuarios;
 
-    public RolAdapter(@NonNull Context context, int resource, @NonNull List<Rol> objects) {
+
+
+    public RolUsuarioAdapter(@NonNull Context context, int resource, @NonNull List<String> objects) {
         super(context, resource, objects);
         this.context = context;
         rolesUsuarios = objects;
@@ -34,12 +34,11 @@ public class RolAdapter extends ArrayAdapter<Rol>
 
 
         if(view == null){
-            view = LayoutInflater.from(this.context).inflate(R.layout.custom_simple_spinner_item , null);
+            view = LayoutInflater.from(this.context).inflate(R.layout.custom_simple_spinner_item, null);
         }
 
         TextView texto = view.findViewById(R.id.customSpinnerItem);
-        Rol rolUsuario =  rolesUsuarios.get(position);
-        texto.setText(  rolUsuario.getRol()     );
+        texto.setText(rolesUsuarios.get(position) );
 
         return view;
     }

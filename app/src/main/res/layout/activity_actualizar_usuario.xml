@@ -208,10 +208,11 @@
                 <Spinner
                     android:id="@+id/spnRol"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp" />
+                    android:layout_marginBottom="14dp"
+                    tools:listitem="@layout/custom_simple_spinner_item" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -220,15 +221,17 @@
                     android:layout_marginTop="14dp"
                     android:layout_marginRight="16dp"
                     android:text="Estado usuario"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/mr_cast_progressbar_background_dark"
+                    android:textSize="18sp" />
 
                 <Spinner
                     android:id="@+id/spnEstado"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp" />
+                    android:layout_marginBottom="14dp"
+                    tools:listitem="@layout/custom_simple_spinner_item" />
 
                 <Button
                     android:id="@+id/btnActualizar"

@@ -1,6 +1,7 @@
 package com.electiva3.proyecto_android_electiva3.entities;
 
-public class GeneradorPassword {
+public class GeneradorPassword
+{
 
     private String NUMEROS = "0123456789";
 
