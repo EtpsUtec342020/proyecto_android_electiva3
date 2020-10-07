@@ -12,14 +12,10 @@
         android:orientation="vertical">
 
 
-        <ListView
-            android:id="@+id/lvlista"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvServicio"
             android:layout_width="match_parent"
-            android:layout_height="830dp"
-            android:cacheColorHint="#FD100F0F"
-            tools:listitem="@layout/item_lista" >
-
-        </ListView>
+            android:layout_height="match_parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAgregarServicio"
@@ -31,22 +27,21 @@
             android:src="@drawable/ic_add" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/Vt2"
-            android:layout_width="329dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/vt2"
+            android:layout_width="330dp"
+            android:layout_height="480dp"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginTop="30dp"
             android:background="@color/colorWhite"
-            android:foregroundGravity="center_vertical"
             android:visibility="invisible"
             tools:visibility="visible">
 
             <LinearLayout
-                android:layout_width="327dp"
-                android:layout_height="464dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                tools:layout_editor_absoluteX="6dp">
+                tools:layout_editor_absoluteX="-5dp"
+                tools:layout_editor_absoluteY="1dp">
 
                 <TextView
                     android:id="@+id/textView15"
@@ -61,7 +56,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginRight="12dp"
@@ -109,10 +104,11 @@
                 <Spinner
                     android:id="@+id/spnCategoria"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="28dp"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="12dp"
-                    android:layout_marginBottom="14dp" />
+                    android:layout_marginBottom="14dp"
+                    tools:listitem="@layout/custom_simple_spinner_item" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"

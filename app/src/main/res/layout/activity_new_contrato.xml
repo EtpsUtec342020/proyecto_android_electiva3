@@ -160,7 +160,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/txtCosto"
+                        android:id="@+id/tvCosto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"

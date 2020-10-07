@@ -63,7 +63,7 @@
             android:layout_marginBottom="14dp" />
 
         <TextView
-            android:id="@+id/txtCosto"
+            android:id="@+id/tvCosto"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"

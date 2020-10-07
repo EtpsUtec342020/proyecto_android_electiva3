@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 public class activity_lista_usuarios extends AppCompatActivity
 {
-
     private FloatingActionButton fabAgregarUsuario;
     private RecyclerView rvUsuarios;
     private String title="Lista Usuarios";
@@ -48,7 +47,6 @@ public class activity_lista_usuarios extends AppCompatActivity
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager( getApplicationContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvUsuarios.setLayoutManager(linearLayoutManager);
-
        conexion.inicializarFirabase(this);
        ListarUsuarios();
 

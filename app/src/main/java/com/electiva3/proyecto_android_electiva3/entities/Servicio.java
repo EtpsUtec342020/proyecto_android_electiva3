@@ -2,19 +2,35 @@ package com.electiva3.proyecto_android_electiva3.entities;
 
 public class Servicio
 {
+    private String key;
     private String titulo;
-    private String descrpcion;
+    private String descripcion;
     private String categoria;
     private String costo;
     private String estado;
 
-    public Servicio(String titulo, String descrpcion, String categoria, String costo, String estado) {
+    public Servicio() {
+    }
+
+    public Servicio(String key, String titulo, String descripcion, String categoria, String costo, String estado) {
+        this.key = key;
         this.titulo = titulo;
-        this.descrpcion = descrpcion;
+        this.descripcion = descripcion;
         this.categoria = categoria;
         this.costo = costo;
         this.estado = estado;
     }
+
+    public Servicio(String key, String titulo, String descripcion, String costo){
+        this.key = key;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.costo = costo;
+    }
+
+    public String getKey() { return key; }
+
+    public void setKey(String key) { this.key = key; }
 
     public String getTitulo() {
         return titulo;
@@ -24,12 +40,12 @@ public class Servicio
         this.titulo = titulo;
     }
 
-    public String getDescrpcion() {
-        return descrpcion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescrpcion(String descrpcion) {
-        this.descrpcion = descrpcion;
+    public void setDescripcion(String descrpcion) {
+        this.descripcion = descrpcion;
     }
 
     public String getCategoria() {

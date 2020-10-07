@@ -8,54 +8,53 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
-import com.electiva3.proyecto_android_electiva3.entities.Usuario;
-import com.electiva3.proyecto_android_electiva3.flujoUsuario.activity_actualizar_usuario;
-import com.electiva3.proyecto_android_electiva3.flujoUsuario.activity_lista_usuarios;
+import com.electiva3.proyecto_android_electiva3.entities.Servicio;
 
 import java.util.ArrayList;
 
-
-public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyViewHolder>
+public class ServiciosAdapter extends RecyclerView.Adapter<ServiciosAdapter.MyViewHolder>
 {
     private LayoutInflater inflater;
     private Context context;
-    private ArrayList<Usuario> usuarios;
+    private ArrayList<Servicio> servicios;
 
-    public UsuariosAdapter(Context context , ArrayList<Usuario> usuarios ){
+    public ServiciosAdapter(Context context, ArrayList<Servicio> servicios)
+    {
         inflater =  LayoutInflater.from(context);
-        this.context= context;
-        this.usuarios = usuarios;
+        this.context = context;
+        this.servicios = servicios;
     }
 
+    @NonNull
     @Override
-    public UsuariosAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = inflater.inflate(R.layout.item_lista, parent, false);
-        UsuariosAdapter.MyViewHolder holder = new UsuariosAdapter.MyViewHolder(view);
+        ServiciosAdapter.MyViewHolder holder = new ServiciosAdapter.MyViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(UsuariosAdapter.MyViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.imgIcon.setImageResource(R.drawable.ic_person);
-        holder.tvTitulo.setText(  usuarios.get(position).getNombre());
-        holder.tvDetalle.setText( usuarios.get(position).getCorreo() );
-        holder.tvEstado.setText(  usuarios.get(position).getEstado());
+        holder.tvTitulo.setText(  servicios.get(position).getTitulo());
+        holder.tvDetalle.setText( servicios.get(position).getDescripcion());
+        holder.tvEstado.setText(  servicios.get(position).getCosto());
 
         //debe definirse como final para que tome todos los id que se pasan
-        final String idUsuario = usuarios.get(position).getKey();
+        final String idServicio = servicios.get(position).getKey();
 
         holder.itemView.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                Intent intent  =  new Intent( context ,   activity_actualizar_usuario.class  );
+                Intent intent  =  new Intent( context ,  UpdateServicioAdapter.class  );
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("id", idUsuario);
+                intent.putExtra("id", idServicio);
                 context.startActivity(intent);
             }
         });
@@ -63,7 +62,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
 
     @Override
     public int getItemCount() {
-        return usuarios.size();
+        return servicios.size();
     }
 
 
@@ -83,6 +82,4 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
             tvEstado =  itemView.findViewById(R.id.tvEstado);
         }
     }
-
-
 }

@@ -52,8 +52,11 @@ public class MainActivity<CollectionReference> extends AppCompatActivity
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               login();
-
+               //login();
+                //borrar el intent y habilitar login()
+                Intent i = new Intent(getApplicationContext(), activity_principal.class);
+                startActivity(i);
+                finish();
             }
         });
     }
