@@ -14,29 +14,32 @@ import com.electiva3.proyecto_android_electiva3.R;
 
 import java.util.List;
 
-public class EstadoAdapter extends ArrayAdapter<String>
-{
-    private Context context;
-    private List<String> estados;
 
-    public EstadoAdapter(@NonNull Context context, int resource, @NonNull List<String> objects) {
+public class EstadoAdapter extends ArrayAdapter<String> {
+    private Context context;
+    private List<String> estadosList;
+
+    public EstadoAdapter(@NonNull Context context, int resource, @NonNull List<String> objects)
+    {
         super(context, resource, objects);
         this.context = context;
-        estados = objects;
+        this.estadosList = objects;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
+    {
         View view = convertView;
-
 
         if(view == null){
             view = LayoutInflater.from(this.context).inflate(R.layout.custom_simple_spinner_item, null);
         }
 
+
         TextView texto = view.findViewById(R.id.customSpinnerItem);
-        texto.setText(estados.get(position) );
+
+        texto.setText(  estadosList.get(position) );
 
         return view;
     }

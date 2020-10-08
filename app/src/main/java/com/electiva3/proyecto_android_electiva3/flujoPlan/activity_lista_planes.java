@@ -52,7 +52,7 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
         btnServicios = findViewById(R.id.btnServicios);
         spnTipoPlan = findViewById(R.id.spnTipoPlan);
         spnDuracion = findViewById(R.id.spnDuracion);
-        txtCosto = findViewById(R.id.txtCosto);
+        txtCosto = findViewById(R.id.tvCosto);
 
         //variables seleccionar servicios
         vt3 = findViewById(R.id.vt3);

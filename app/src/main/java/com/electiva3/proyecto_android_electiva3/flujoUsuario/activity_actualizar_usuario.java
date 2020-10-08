@@ -16,6 +16,7 @@ import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.adapters.EstadoAdapter;
 import com.electiva3.proyecto_android_electiva3.adapters.RolUsuarioAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
+import com.electiva3.proyecto_android_electiva3.entities.Estado;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,10 +38,11 @@ public class activity_actualizar_usuario extends AppCompatActivity
     private Spinner spnRol, spnEstado;
 
     private ArrayList<String> roleslist = new ArrayList<>();
-    private ArrayList<String> estadoslist = new ArrayList<>();
+    private ArrayList<String> estadoUsuariosList = new ArrayList<>();
     private String id;
     Conexion conexion = new Conexion();
     Usuario usuario = new Usuario();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,14 +85,14 @@ public class activity_actualizar_usuario extends AppCompatActivity
                 String direccion = edtDireccion.getText().toString();
                 String password = edtContrasena.getText().toString();
                 String password2 = edtContrasena2.getText().toString();
-                String estado = spnEstado.getSelectedItem().toString();
+                String estadonuevo = spnEstado.getSelectedItem().toString();
                 String rol = spnRol.getSelectedItem().toString();
 
                 if(password.equals(password2))
                 {
                     //metodo para comparar los valores que tiene el objeto de fire con los editText
                     //si se encontro un cambio el metodo llena el HaspMap sino lo deja null y se hace la validacion con el if
-                    usuario.Comparar(nombre, dui, nit, licencia, correo, password, telefono, direccion, rol, estado);
+                    usuario.Comparar(nombre, dui, nit, licencia, correo, password, telefono, direccion, rol, estadonuevo);
 
                     if (usuario.getUsuarioMap().isEmpty())
                     {
@@ -106,13 +108,13 @@ public class activity_actualizar_usuario extends AppCompatActivity
                         {
                             UpdateCorreo(correo);
                         }
-                        else if(!estado.equals(usuario.getEstado()))
+                        else if(!estadonuevo.equals(usuario.getEstado()))
                         {
-                            if(estado.equals("Inactivo"))
+                            if(estadonuevo.equals("Inactivo"))
                             {
                                 DarBajaUsuario();
                             }
-                            else if(estado.equals("Activo") && usuario.getEstado().equals("Inactivo") )
+                            else if(estadonuevo.equals("Activo") && usuario.getEstado().equals("Inactivo") )
                             {
                                 ActivarUsuario(correo, password);
                             }
@@ -177,6 +179,13 @@ public class activity_actualizar_usuario extends AppCompatActivity
                     edtContrasena2.setText(usuario.getPassword());
                     Roles();
                     Estados();
+
+
+             /*        estadoObjeto.EstadoList(conexion);
+                     estadoslist = estadoObjeto.getEstadoslist();
+                    Toast.makeText(getApplicationContext(), "tiene el list"+estadoObjeto.getEstado(), Toast.LENGTH_LONG).show();
+                    EstadoAdapter estadoAdapter = new EstadoAdapter(getApplicationContext() , R.layout.custom_simple_spinner_item, estadoslist);
+                    spnEstado.setAdapter(estadoAdapter);*/
                 }
             }
 
@@ -223,18 +232,20 @@ public class activity_actualizar_usuario extends AppCompatActivity
 
                 if (snapshot.exists())
                 {
-                    estadoslist.clear();
+                    estadoUsuariosList.clear();
 
                     for (DataSnapshot ds : snapshot.getChildren())
                     {
+
                         String estado = Objects.requireNonNull(ds.child("estado").getValue()).toString();
 
                         if(estado.equals("Activo") || estado.equals("Inactivo"))
                         {
-                            estadoslist.add(estado);
+                            estadoUsuariosList.add(estado);
                         }
                     }
-                    EstadoAdapter estadoAdapter = new EstadoAdapter(getApplicationContext() , R.layout.custom_simple_spinner_item, estadoslist);
+
+                    EstadoAdapter estadoAdapter = new EstadoAdapter(getApplicationContext() , R.layout.custom_simple_spinner_item, estadoUsuariosList);
                     spnEstado.setAdapter(estadoAdapter);
                 }
             }

@@ -13,7 +13,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="330dp"
-            android:layout_height="480dp"
+            android:layout_height="500dp"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="30dp"
             android:background="@color/colorWhite"
@@ -31,7 +31,6 @@
                     android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:text="Actualizar Servicio"
                     android:textAlignment="center"
                     android:textSize="18sp"
@@ -52,6 +51,7 @@
                         android:layout_weight="1"
                         android:drawableLeft="@drawable/ic_title"
                         android:text=" Titulo"
+                        android:textColor="@color/design_default_color_on_secondary"
                         android:textSize="18sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -71,6 +71,7 @@
                         android:layout_weight="1"
                         android:drawableLeft="@drawable/ic_document"
                         android:text=" Descripcion"
+                        android:textColor="@color/design_default_color_on_secondary"
                         android:textSize="18sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -84,6 +85,7 @@
                     android:layout_marginRight="12dp"
                     android:drawableLeft="@drawable/ic_check"
                     android:text=" Categoria"
+                    android:textColor="@color/design_default_color_on_secondary"
                     android:textSize="18sp" />
 
                 <Spinner
@@ -111,6 +113,7 @@
                         android:layout_weight="1"
                         android:drawableLeft="@drawable/ic_money"
                         android:text=" Costo"
+                        android:textColor="@color/design_default_color_on_secondary"
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,6 +126,7 @@
                     android:layout_marginRight="12dp"
                     android:drawableLeft="@drawable/ic_check"
                     android:text=" Estado"
+                    android:textColor="@color/design_default_color_on_secondary"
                     android:textSize="18sp"
                     android:visibility="visible"
                     tools:visibility="visible" />
@@ -130,11 +134,12 @@
                 <Spinner
                     android:id="@+id/spnEstado"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="26dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_marginBottom="16dp"
                     android:visibility="visible"
+                    tools:listitem="@layout/custom_simple_spinner_item"
                     tools:visibility="visible" />
 
                 <Button

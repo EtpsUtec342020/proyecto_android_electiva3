@@ -27,7 +27,7 @@ public class activity_actualizar_plan extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actualizar_plan);
 
-        txtCosto = findViewById(R.id.txtCosto);
+        txtCosto = findViewById(R.id.tvCosto);
         lvServicios = findViewById(R.id.lvServicios);
         btnActualizar = findViewById(R.id.btnCrear);
         btnCancelar = findViewById(R.id.btnCancelar);

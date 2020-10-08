@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.entities.Servicio;
+import com.electiva3.proyecto_android_electiva3.flujoServicio.activity_actualizar_servicio;
 
 import java.util.ArrayList;
 
@@ -40,10 +41,11 @@ public class ServiciosAdapter extends RecyclerView.Adapter<ServiciosAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         holder.imgIcon.setImageResource(R.drawable.ic_person);
         holder.tvTitulo.setText(  servicios.get(position).getTitulo());
         holder.tvDetalle.setText( servicios.get(position).getDescripcion());
-        holder.tvEstado.setText(  servicios.get(position).getCosto());
+        holder.tvEstado.setText(  servicios.get(position).getEstado());
 
         //debe definirse como final para que tome todos los id que se pasan
         final String idServicio = servicios.get(position).getKey();
@@ -52,7 +54,7 @@ public class ServiciosAdapter extends RecyclerView.Adapter<ServiciosAdapter.MyVi
         {
             @Override
             public void onClick(View v) {
-                Intent intent  =  new Intent( context ,  UpdateServicioAdapter.class  );
+                Intent intent  =  new Intent( context ,  activity_actualizar_servicio.class  );
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("id", idServicio);
                 context.startActivity(intent);

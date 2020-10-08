@@ -39,9 +39,9 @@ public class activity_lista_servicios extends AppCompatActivity
     private RecyclerView rvServicio;
     private String title="Lista Servicios";
     //para listar servicios
-    private ArrayList<Servicio> serList = new ArrayList<>();
+    private ArrayList<Servicio> serviciosList = new ArrayList<>();
     //para llenar spinner
-    private ArrayList<String> servicioslist = new ArrayList<>();
+    private ArrayList<String> categoriaList = new ArrayList<>();
 
     private ConstraintLayout Vt2;
     private EditText edtTitulo, edtDescripcion, edtCosto;
@@ -151,17 +151,17 @@ public class activity_lista_servicios extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists())
                 {
-                    serList.clear();
+                    serviciosList.clear();
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         String titulo = ds.child("titulo").getValue().toString();
-                        String descripcion = ds.child("descripcion").getValue().toString();
-                        String costo = ds.child("costo").getValue().toString();
+                        String descripcion = ds.child("descripcion").getValue().toString()+"  "+ds.child("costo").getValue().toString();
+                        String estado = ds.child("estado").getValue().toString();
                         String key = ds.getKey();
 
-                        serList.add(new Servicio(key, titulo, descripcion, costo));
+                        serviciosList.add(new Servicio(key, titulo, descripcion, estado));
                     }
 
-                    ServiciosAdapter servicioAdapter = new ServiciosAdapter(getApplicationContext(), serList);
+                    ServiciosAdapter servicioAdapter = new ServiciosAdapter(getApplicationContext(), serviciosList);
                     rvServicio.setAdapter(servicioAdapter);
                 }
             }
@@ -183,15 +183,15 @@ public class activity_lista_servicios extends AppCompatActivity
 
                 if (snapshot.exists())
                 {
-                    servicioslist.clear();
+                    categoriaList.clear();
 
                     for (DataSnapshot ds : snapshot.getChildren())
                     {
 
                         String categoria = Objects.requireNonNull(ds.child("categoria").getValue()).toString();
-                        servicioslist.add(categoria);
+                        categoriaList.add(categoria);
                     }
-                    CategoriaAdapter categoriaAdapter = new CategoriaAdapter(getApplicationContext() , R.layout.custom_simple_spinner_item, servicioslist);
+                    CategoriaAdapter categoriaAdapter = new CategoriaAdapter(getApplicationContext() , R.layout.custom_simple_spinner_item, categoriaList);
                     spnCategoria.setAdapter(categoriaAdapter);
                 }
             }

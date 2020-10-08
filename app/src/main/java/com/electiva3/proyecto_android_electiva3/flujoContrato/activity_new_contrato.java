@@ -36,7 +36,7 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
         cvfechaActivacion = findViewById(R.id.cvfechaActivacion);
         txtFechaVen = findViewById(R.id.txtFechaVen);
         txtNumManto = findViewById(R.id.txtNumManto);
-        txtCosto = findViewById(R.id.txtCosto);
+        txtCosto = findViewById(R.id.tvCosto);
         spnVehiculo = findViewById(R.id.spnVehiculo);
         spnDuracionC = findViewById(R.id.spnDuracionC);
         btnCrear = findViewById(R.id.btnCrear);
