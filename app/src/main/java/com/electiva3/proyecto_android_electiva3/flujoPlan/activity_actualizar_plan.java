@@ -32,10 +32,12 @@ public class activity_actualizar_plan extends AppCompatActivity
     private ListView lvServicios;
 
     private ArrayList<String> serviciosList = new ArrayList<>();
+    private ArrayList<String> serviciosList2 = new ArrayList<>();
     private ArrayList<String> estadosList = new ArrayList<>();
     private ArrayList<String> tiposList = new ArrayList<>();
     private ArrayList<String> tiemposList = new ArrayList<>();
     private String id;
+    private String title = "Ver Plan";
 
     Conexion conexion = new Conexion();
     Plan plan = new Plan();
@@ -55,6 +57,7 @@ public class activity_actualizar_plan extends AppCompatActivity
         spnDuracion = findViewById(R.id.spnDuracion);
         spnEstado = findViewById(R.id.spnEstado);
 
+        getSupportActionBar().setTitle(title);
         //establecer la conexion
         conexion.inicializarFirabase(this);
         //recuperar el id del objeto
@@ -66,6 +69,10 @@ public class activity_actualizar_plan extends AppCompatActivity
         {
             @Override
             public void onClick(View v) {
+                serviciosList.clear();
+                plan.ClearServicios();
+                plan.setEstado("");
+                lvServicios.clearChoices();
                 Intent i = new Intent( getApplicationContext() , activity_lista_planes.class);
                 startActivity(i);
                 finish();
@@ -98,7 +105,7 @@ public class activity_actualizar_plan extends AppCompatActivity
 
         spnTipoPlan.setEnabled(false);
         spnDuracion.setEnabled(false);
-
+        serviciosList.clear();
         conexion.getDatabaseReference().child("planes").child(id).addValueEventListener(new ValueEventListener() {
             DataSnapshot ds;
             @Override
@@ -144,17 +151,17 @@ public class activity_actualizar_plan extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    serviciosList.clear();
-
+                        serviciosList2.clear();
                     for (DataSnapshot ds : snapshot.getChildren())
                     {
                         String key = ds.getKey();
-                        boolean i =  plan.Comprobar(key);
-                        if(i = true){
+                        boolean i = plan.Validar(key);
+                        if(i != false){
                             String servicio = ds.child("descripcion").getValue().toString()+"  $"+ds.child("costo").getValue().toString();
-                            serviciosList.add(servicio);
+                            serviciosList2.add(servicio);
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1, serviciosList);
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1, serviciosList2);
                         lvServicios.setAdapter(adapter);
                     }
                 }
@@ -202,8 +209,7 @@ public class activity_actualizar_plan extends AppCompatActivity
                     for(DataSnapshot ds: snapshot.getChildren()) {
 
                         String tipoPlan = ds.child("tipo").getValue().toString();
-                        if(tipoPlan.equals(plan.getTipoPlan()))
-                        {
+                        if(tipoPlan.equals(plan.getTipoPlan())) {
                             tiposList.add(tipoPlan);
                         }
 

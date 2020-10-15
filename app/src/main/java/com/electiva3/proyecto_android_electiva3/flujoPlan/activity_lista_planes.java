@@ -110,13 +110,11 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
                     lvServicios.getChildAt(position).setBackgroundColor(Color.TRANSPARENT);
                     costoTotal = costoTotal - Double.parseDouble(costoServicio);
                     serSelecList.remove(idServicio);
-                    Toast.makeText(getApplicationContext(), "Servicio Eliminado" , Toast.LENGTH_LONG).show();
                 }
                 else {
                     lvServicios.getChildAt(position).setBackgroundColor(Color.BLUE);
                     costoTotal = costoTotal + Double.parseDouble(costoServicio);
                     serSelecList.add(idServicio);
-                    Toast.makeText(getApplicationContext(), "Servicio Agregado" , Toast.LENGTH_LONG).show();
                 }
                 tvcostoSeleccionado.setText(String.valueOf(costoTotal));
             }
@@ -172,6 +170,13 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
             case R.id.fabAgregarPlan:
                 vt2.setVisibility(View.VISIBLE);
                 faAgregarPlan.setVisibility(View.INVISIBLE);
+                tiposList.clear();
+                tiemposList.clear();
+                serviciosList.clear();
+                costoTotal = 0.0;
+                tvcostoSeleccionado.setText("");
+                txtCosto.setText("");
+                lvServicios.clearChoices();
                 tipoPlanes();
                 tiemposSelecionar();
                 break;
@@ -184,10 +189,19 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
 
                 vt2.setVisibility(View.INVISIBLE);
                 faAgregarPlan.setVisibility(View.VISIBLE);
+                txtCosto.setText("");
+                costoTotal = 0.0;
+                serSelecList.clear();
+                lvServicios.clearChoices();
+                tvcostoSeleccionado.setText("");
                 break;
 
             case R.id.btnCancelar2:
                 vt3.setVisibility(View.INVISIBLE);
+                lvServicios.clearChoices();
+                tvcostoSeleccionado.setText("");
+                serSelecList.clear();
+                costoTotal = 0.00;
                 break;
 
             case R.id.btnSeleccionar:
@@ -208,7 +222,7 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
                     planList.clear();
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         String key = ds.getKey();
-                        String tipo = ds.child("tipoPlan").getValue().toString();
+                        String tipo = ds.child("tipoPlan").getValue().toString()+"  "+ds.child("duracion").getValue().toString();
                         Double costo = Double.parseDouble(ds.child("costo").getValue().toString());
                         String estado = ds.child("estado").getValue().toString();
                         planList.add(new Plan(key, tipo, costo, estado));
@@ -218,7 +232,7 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
                     planAdapter.SetOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            serviciosList.clear();
                             String idPlan =  planList.get(rvPlanes.getChildAdapterPosition(v)).getKey();
                             Intent intent  =  new Intent(getApplicationContext(),   activity_actualizar_plan.class  );
                             intent.putExtra("id", idPlan);

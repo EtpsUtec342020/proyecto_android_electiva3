@@ -88,19 +88,6 @@ public class Plan
         PlanMap = planMap;
     }
 
-    public boolean Comprobar(String valor){
-
-        boolean i;
-        if(servicios.contains(valor))
-        {
-            i = true;
-        }
-        else {
-            i = false;
-        }
-        return i;
-    }
-
     public void UpdatePlan()
     {
         PlanMap.put("costo", costo);
@@ -108,5 +95,17 @@ public class Plan
         PlanMap.put("estado", estado);
         PlanMap.put("servicios", servicios);
         PlanMap.put("tipoPlan", tipoPlan);
+    }
+
+    public void ClearServicios(){
+        servicios.clear();
+    }
+
+    public boolean Validar(String valor){
+        boolean i = false;
+        if (servicios.contains(valor)) {
+             i = true;
+        }
+        return i;
     }
 }
