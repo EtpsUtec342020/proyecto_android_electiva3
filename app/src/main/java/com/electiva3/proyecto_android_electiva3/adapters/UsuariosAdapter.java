@@ -1,7 +1,6 @@
 package com.electiva3.proyecto_android_electiva3.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
-import com.electiva3.proyecto_android_electiva3.flujoUsuario.activity_actualizar_usuario;
-import com.electiva3.proyecto_android_electiva3.flujoUsuario.activity_lista_usuarios;
 
 import java.util.ArrayList;
 
 
-public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyViewHolder>
+public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyViewHolder> implements View.OnClickListener
 {
     private LayoutInflater inflater;
     private Context context;
     private ArrayList<Usuario> usuarios;
+    private View.OnClickListener listener;
 
     public UsuariosAdapter(Context context , ArrayList<Usuario> usuarios ){
         inflater =  LayoutInflater.from(context);
@@ -35,7 +33,9 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
     {
         View view = inflater.inflate(R.layout.item_lista, parent, false);
         UsuariosAdapter.MyViewHolder holder = new UsuariosAdapter.MyViewHolder(view);
+        view.setOnClickListener(this);
         return holder;
+
     }
 
     @Override
@@ -45,25 +45,25 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
         holder.tvTitulo.setText(  usuarios.get(position).getNombre());
         holder.tvDetalle.setText( usuarios.get(position).getCorreo() );
         holder.tvEstado.setText(  usuarios.get(position).getEstado());
-
-        //debe definirse como final para que tome todos los id que se pasan
-        final String idUsuario = usuarios.get(position).getKey();
-
-        holder.itemView.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Intent intent  =  new Intent( context ,   activity_actualizar_usuario.class  );
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("id", idUsuario);
-                context.startActivity(intent);
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
         return usuarios.size();
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        if(listener!=null)
+        {
+            listener.onClick(v);
+        }
+    }
+
+    public void SetOnClickListener(View.OnClickListener Listener)
+    {
+        this.listener = Listener;
     }
 
 
@@ -83,6 +83,5 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
             tvEstado =  itemView.findViewById(R.id.tvEstado);
         }
     }
-
 
 }

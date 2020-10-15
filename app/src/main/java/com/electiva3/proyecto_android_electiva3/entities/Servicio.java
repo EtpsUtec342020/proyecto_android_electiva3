@@ -1,7 +1,6 @@
 package com.electiva3.proyecto_android_electiva3.entities;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Servicio
 {
@@ -9,14 +8,18 @@ public class Servicio
     private String titulo;
     private String descripcion;
     private String categoria;
-    private String costo;
+    private Double costo;
     private String estado;
     private HashMap<String, Object> servicioMap = new HashMap<>();
 
     public Servicio() {
     }
 
-    public Servicio(String key, String titulo, String descripcion, String categoria, String costo, String estado) {
+    public Servicio(String key) {
+        this.key = key;
+    }
+
+    public Servicio(String key, String titulo, String descripcion, String categoria, Double costo, String estado) {
         this.key = key;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -30,6 +33,12 @@ public class Servicio
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.estado = estado;
+    }
+
+    public Servicio(String key, String descripcion, Double costo){
+        this.key = key;
+        this.descripcion = descripcion;
+        this.costo = costo;
     }
 
     public String getKey() { return key; }
@@ -60,11 +69,11 @@ public class Servicio
         this.categoria = categoria;
     }
 
-    public String getCosto() {
+    public Double getCosto() {
         return costo;
     }
 
-    public void setCosto(String costo) {
+    public void setCosto(double costo) {
         this.costo = costo;
     }
 
@@ -92,4 +101,5 @@ public class Servicio
         servicioMap.put("descripcion", descripcion);
         servicioMap.put("costo", costo);
     }
+
 }

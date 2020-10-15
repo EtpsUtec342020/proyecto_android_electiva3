@@ -36,7 +36,6 @@
         <!--flujo servicios -->
         <activity android:name=".flujoServicio.activity_lista_servicios"
             android:parentActivityName=".activity_admin_home" />
-        <activity android:name=".flujoServicio.activity_actualizar_servicio" />
 
         <!--flujo contrato -->
         <activity android:name=".flujoContrato.activity_lista_contratos"

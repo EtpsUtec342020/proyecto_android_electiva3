@@ -12,13 +12,10 @@
         android:orientation="vertical">
 
 
-        <ListView
-            android:id="@+id/lvlista"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPlanes"
             android:layout_width="match_parent"
-            android:layout_height="830dp"
-            android:cacheColorHint="#FD100F0F"
-            tools:listitem="@layout/item_lista"
-            tools:visibility="visible" />
+            android:layout_height="match_parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAgregarPlan"
@@ -37,7 +34,7 @@
             android:layout_marginTop="40dp"
             android:background="@color/colorWhite"
             android:visibility="invisible"
-            tools:visibility="visible">
+            tools:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -154,7 +151,7 @@
             android:layout_marginTop="30dp"
             android:background="@color/colorWhite"
             android:visibility="invisible"
-            tools:visibility="invisible">
+            tools:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -172,9 +169,20 @@
                 <ListView
                     android:id="@+id/lvServicios"
                     android:layout_width="match_parent"
-                    android:layout_height="387dp">
+                    android:layout_height="305dp"
+                    android:layout_marginBottom="10dp" >
 
                 </ListView>
+
+                <TextView
+                    android:id="@+id/tvCostoSeleccionado"
+                    android:layout_width="326dp"
+                    android:layout_height="30dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"/>
 
                 <Button
                     android:id="@+id/btnSeleccionar"
