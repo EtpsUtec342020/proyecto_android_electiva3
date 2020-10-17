@@ -24,6 +24,12 @@ public class Plan
         this.estado = estado;
     }
 
+    public Plan(String key, String tipoPlan, Double costo) {
+        this.key = key;
+        this.tipoPlan = tipoPlan;
+        this.costo = costo;
+    }
+
     public String getKey() {
         return key;
     }

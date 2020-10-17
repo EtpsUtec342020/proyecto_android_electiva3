@@ -66,8 +66,7 @@ public class activity_lista_usuarios extends AppCompatActivity
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists())
-                {
+                if (snapshot.exists()) {
                     usuList.clear();
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         String correo = ds.child("correo").getValue().toString();
@@ -93,16 +92,12 @@ public class activity_lista_usuarios extends AppCompatActivity
                     });
 
                     rvUsuarios.setAdapter(usuarioAdapter);
-
-
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
-
         });
     }
 
@@ -112,6 +107,4 @@ public class activity_lista_usuarios extends AppCompatActivity
         startActivity(intent);
         finish();
     }
-
-
 }

@@ -2,6 +2,7 @@ package com.electiva3.proyecto_android_electiva3.entities;
 
 public class Vehiculo
 {
+    private String key;
     private String cliente;
     private String placa;
     private String chasis;
@@ -20,6 +21,21 @@ public class Vehiculo
         this.marca = marca;
         this.modelo = modelo;
         this.estado = estado;
+    }
+
+    public Vehiculo(String key, String placa,  String marca)
+    {
+        this.key = key;
+        this.placa = placa;
+        this.marca = marca;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getCliente() {

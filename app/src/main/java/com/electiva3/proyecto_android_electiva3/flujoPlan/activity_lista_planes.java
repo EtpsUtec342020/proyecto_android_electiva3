@@ -236,6 +236,7 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
                             String idPlan =  planList.get(rvPlanes.getChildAdapterPosition(v)).getKey();
                             Intent intent  =  new Intent(getApplicationContext(),   activity_actualizar_plan.class  );
                             intent.putExtra("id", idPlan);
+                            intent.putExtra("llamado", "plan");
                             startActivity(intent);
                             finish();
                         }
@@ -318,6 +319,7 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
                             serviciosList.add(new Servicio(key, descripcion, costo));
                         }
                     }
+
                     ServicioListAdapter servicioAdapter = new ServicioListAdapter(getApplicationContext() ,R.layout.item_servicio, serviciosList );
                     lvServicios.setAdapter(servicioAdapter);
                 }

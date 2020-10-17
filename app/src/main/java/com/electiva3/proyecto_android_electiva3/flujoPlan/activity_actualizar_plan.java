@@ -37,6 +37,7 @@ public class activity_actualizar_plan extends AppCompatActivity
     private ArrayList<String> tiposList = new ArrayList<>();
     private ArrayList<String> tiemposList = new ArrayList<>();
     private String id;
+    private String llamado;
     private String title = "Ver Plan";
 
     Conexion conexion = new Conexion();
@@ -62,8 +63,25 @@ public class activity_actualizar_plan extends AppCompatActivity
         conexion.inicializarFirabase(this);
         //recuperar el id del objeto
         id = getIntent().getStringExtra("id");
+        llamado = getIntent().getStringExtra("llamado");
 
         MostrarDatos();
+
+     /*   if(llamado.equals("contrato"))
+        {
+            btnActualizar.setVisibility(View.INVISIBLE);
+            btnCancelar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent( getApplicationContext() , activity_new_contrato.class);
+                    startActivity(i);
+                    finish();
+                }
+            });
+        }else
+        {
+
+        }*/
 
         btnCancelar.setOnClickListener(new View.OnClickListener()
         {

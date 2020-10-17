@@ -1,6 +1,8 @@
 package com.electiva3.proyecto_android_electiva3.entities;
 
 
+import android.widget.ListAdapter;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +31,11 @@ public class Usuario
         this.nombre = nombre;
         this.correo = correo;
         this.estado = estado;
+    }
+
+    public Usuario(String key, String nombre) {
+        this.key = key;
+        this.nombre = nombre;
     }
 
     public Usuario(String nombre, String dui, String nit, String licencia, String correo, String telefono, String direccion, String rol, String estado, String fechaRegistro)

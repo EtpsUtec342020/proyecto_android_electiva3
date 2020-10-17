@@ -15,7 +15,7 @@ import com.electiva3.proyecto_android_electiva3.R;
 import java.util.List;
 
 
-public class EstadoAdapter extends ArrayAdapter<String> {
+public class EstadoAdapter extends ArrayAdapter<String>{
     private Context context;
     private List<String> estadosList;
 
