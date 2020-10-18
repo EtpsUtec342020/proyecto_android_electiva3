@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.adapters.MarcasAdapter;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 
 public class activity_lista_marcas extends AppCompatActivity {
 
-    private FloatingActionButton fbAgregarMarca;
+    private FloatingActionButton fabAgregarMarca;
     private DatabaseReference databaseReference;
     private RecyclerView rvMarcas;
     private ArrayList<Marca> marcas;
@@ -38,6 +40,7 @@ public class activity_lista_marcas extends AppCompatActivity {
         conexion =  new Conexion();
         marcas =  new ArrayList<>();
         databaseReference =  FirebaseDatabase.getInstance().getReference().child("marcas");
+        fabAgregarMarca = findViewById(R.id.fabAgregarMarca);
 
         LinearLayoutManager layoutManager =  new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -68,6 +71,12 @@ public class activity_lista_marcas extends AppCompatActivity {
         });
 
 
-
+        fabAgregarMarca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {                 
+                Intent intent  =  new Intent(getApplicationContext() , crear_marca.class  );
+                startActivity(intent);
+            }
+        });
     }
 }

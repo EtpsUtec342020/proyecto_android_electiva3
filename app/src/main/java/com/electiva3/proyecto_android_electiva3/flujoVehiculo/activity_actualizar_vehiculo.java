@@ -25,6 +25,8 @@ public class activity_actualizar_vehiculo extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actualizar_vehiculo);
 
+
+
         imvImagen = findViewById(R.id.imvImagen);
         edtCliente = findViewById(R.id.edtCliente);
         edtPlaca = findViewById(R.id.edtPlaca);

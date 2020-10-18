@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_snauto_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".flujoMarcas.crear_marca"></activity>
+        <activity android:name=".flujoModelos.actualizar_modelo"></activity>
+        <activity android:name=".flujoModelos.crear_modelo" />
+        <activity android:name=".flujoMarcas.crear_marca" />
         <activity android:name=".flujoMarcas.actualizar_marca" />
         <activity android:name=".flujoMarcas.activity_lista_marcas" />
         <activity
@@ -35,10 +37,9 @@
         <activity android:name=".flujoPlan.activity_actualizar_plan" /> <!-- flujo servicios -->
         <activity
             android:name=".flujoServicio.activity_lista_servicios"
-            android:parentActivityName=".activity_admin_home" />
-
-        <!--flujo contrato -->
-        <activity android:name=".flujoContrato.activity_lista_contratos"
+            android:parentActivityName=".activity_admin_home" /> <!-- flujo contrato -->
+        <activity
+            android:name=".flujoContrato.activity_lista_contratos"
             android:parentActivityName=".activity_admin_home" />
         <activity android:name=".flujoContrato.activity_new_contrato" />
         <activity android:name=".flujoContrato.activity_actualizar_contrato" /> <!-- flujo vehiculos -->

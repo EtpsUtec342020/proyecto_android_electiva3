@@ -170,7 +170,6 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
                       
                         txtVehiculo.setText(vehiculoList.get(position).getPlaca());
 
-                        listVehiculos.add(vehiculoList.get(position).getKey());
                         listVehiculos.add(vehiculoList.get(position).getPlaca());
                         contrato.setVehiculo(listVehiculos);
                         vt2.setVisibility(View.INVISIBLE);
@@ -256,8 +255,9 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
                         String key = ds.getKey();
                         String placa = ds.child("placa").getValue().toString();
                         String marca = ds.child("marca").getValue().toString()+" "+ds.child("modelo").getValue().toString();
+                        String anio = ds.child("anio").getValue().toString();
 
-                        vehiculoList.add(new Vehiculo(key, placa, marca));
+                        vehiculoList.add(new Vehiculo(key, placa, marca , anio));
                     }
                     VehiculoListAdapter vehiculoAdapter = new VehiculoListAdapter(getApplicationContext() ,R.layout.item_servicio, vehiculoList );
                     lvlistar.setAdapter(vehiculoAdapter);

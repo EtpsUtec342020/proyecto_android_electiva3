@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.entities.Modelo;
 import com.electiva3.proyecto_android_electiva3.flujoMarcas.actualizar_marca;
+import com.electiva3.proyecto_android_electiva3.flujoModelos.actualizar_modelo;
 
 import java.util.ArrayList;
 
@@ -47,12 +48,10 @@ public class ModelosAdapter extends RecyclerView.Adapter< ModelosAdapter.MyViewH
 
             @Override
             public void onClick(View v) {
-                /*
-                String key =  modelos.get(position).getKey();
-                Intent actualizarMarca =  new Intent( context   , actualizar_marca.class     );
-                actualizarMarca.putExtra("keyModelo" , key   );
-                context.startActivity(actualizarMarca);
-                */
+            String key  =  modelos.get(position).getKey();
+            Intent intent = new Intent(   context ,  actualizar_modelo.class   );
+            intent.putExtra("keyModelo" , key   );
+            context.startActivity(intent);
             }
         });
     }

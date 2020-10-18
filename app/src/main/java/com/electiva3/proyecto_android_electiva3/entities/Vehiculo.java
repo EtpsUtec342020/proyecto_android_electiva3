@@ -5,6 +5,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Vehiculo
 {
+    private String key;
     private String anio;
     private String color;
     private String fechaRegistro;
@@ -15,13 +16,11 @@ public class Vehiculo
     private String estado;
 
 
-    public Vehiculo( String marca , String modelo , String placa ,  String numChasis ,  String anio  ){
+    public Vehiculo( String key , String placa , String  marca ,String anio  ){
+        this.key = key;
         this.marca =  marca ;
-        this.modelo =  modelo;
         this.placa =   placa;
-        this.numChasis =  numChasis;
         this.anio =  anio;
-
     }
 
     public String getAnio() {

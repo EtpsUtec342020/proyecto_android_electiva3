@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -52,7 +53,6 @@ public class activity_lista_vehiculos extends AppCompatActivity
         conexion.inicializarFirabase(this);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("vehiculos");
 
-
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         lvlista.setLayoutManager(linearLayoutManager);
@@ -67,6 +67,7 @@ public class activity_lista_vehiculos extends AppCompatActivity
 
                     for(DataSnapshot ds: snapshot.getChildren()){
 
+                        String key = ds.getKey();
                         String marca = ds.child("marca").getValue().toString();
                         String modelo = ds.child("modelo").getValue().toString();
                         String placa =  ds.child("placa").getValue().toString();
@@ -74,7 +75,7 @@ public class activity_lista_vehiculos extends AppCompatActivity
                         String anio =  ds.child("anio").getValue().toString();
 
 
-                        vehiculos.add(  new Vehiculo(marca , modelo , placa , numChasis , anio )   );
+                        vehiculos.add(  new Vehiculo(key  ,  placa , marca , anio )   );
                     }
                     VehiculosAdapter vehiculosAdapter =  new VehiculosAdapter(getApplicationContext() ,   vehiculos );
                     lvlista.setAdapter(vehiculosAdapter);
@@ -99,8 +100,7 @@ public class activity_lista_vehiculos extends AppCompatActivity
             }
         });
 
-
-
-
     }
+
+
 }

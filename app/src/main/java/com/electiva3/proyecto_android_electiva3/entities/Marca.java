@@ -1,11 +1,15 @@
 package com.electiva3.proyecto_android_electiva3.entities;
 
+import java.util.HashMap;
+
 public class Marca {
 
     private String key;
     private String marca;
     private String estado;
-
+    private String fechaCreacion;
+    private String descripcion;
+    private HashMap<String , Object> marcaMap  =  new HashMap<>();
 
     public Marca(){
 
@@ -42,5 +46,32 @@ public class Marca {
         return estado;
     }
 
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setDescripcion(String descripcion){
+        this.descripcion =  descripcion;
+    }
+
+    public String getDescripcion(){
+        return descripcion;
+    }
+
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public HashMap<String, Object> getMarcaMap(){
+        return marcaMap;
+    }
+
+    public void UpdateMarca(){
+        marcaMap.put("marca" , marca );
+        marcaMap.put("estado" , estado);
+        marcaMap.put("fechaCreacion" , fechaCreacion);
+        marcaMap.put("descripcion" , descripcion);
+
+    }
 
 }
