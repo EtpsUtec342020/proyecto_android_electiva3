@@ -1,65 +1,27 @@
 package com.electiva3.proyecto_android_electiva3.entities;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
+@IgnoreExtraProperties
 public class Vehiculo
 {
-    private String key;
-    private String cliente;
-    private String placa;
-    private String chasis;
     private String anio;
     private String color;
+    private String fechaRegistro;
     private String marca;
     private String modelo;
+    private String numChasis;
+    private String placa;
     private String estado;
 
-    public Vehiculo(String cliente, String placa, String chasis, String anio, String color, String marca, String modelo, String estado) {
-        this.cliente = cliente;
-        this.placa = placa;
-        this.chasis = chasis;
-        this.anio = anio;
-        this.color = color;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.estado = estado;
-    }
 
-    public Vehiculo(String key, String placa,  String marca)
-    {
-        this.key = key;
-        this.placa = placa;
-        this.marca = marca;
-    }
+    public Vehiculo( String marca , String modelo , String placa ,  String numChasis ,  String anio  ){
+        this.marca =  marca ;
+        this.modelo =  modelo;
+        this.placa =   placa;
+        this.numChasis =  numChasis;
+        this.anio =  anio;
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
-
-    public String getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(String placa) {
-        this.placa = placa;
-    }
-
-    public String getChasis() {
-        return chasis;
-    }
-
-    public void setChasis(String chasis) {
-        this.chasis = chasis;
     }
 
     public String getAnio() {
@@ -78,6 +40,14 @@ public class Vehiculo
         this.color = color;
     }
 
+    public String getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(String fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
     public String getMarca() {
         return marca;
     }
@@ -92,6 +62,22 @@ public class Vehiculo
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
+    }
+
+    public String getNumChasis() {
+        return numChasis;
+    }
+
+    public void setNumChasis(String numChasis) {
+        this.numChasis = numChasis;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
 
     public String getEstado() {

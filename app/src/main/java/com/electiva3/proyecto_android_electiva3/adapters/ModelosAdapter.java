@@ -7,61 +7,61 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
-import com.electiva3.proyecto_android_electiva3.detalle_orden;
-import com.electiva3.proyecto_android_electiva3.entities.DetalleOrden;
-import com.electiva3.proyecto_android_electiva3.entities.Orden;
+import com.electiva3.proyecto_android_electiva3.entities.Modelo;
+import com.electiva3.proyecto_android_electiva3.flujoMarcas.actualizar_marca;
 
 import java.util.ArrayList;
 
-public class OrdenAdapter extends RecyclerView.Adapter<OrdenAdapter.MyViewHolder>   {
-
+public class ModelosAdapter extends RecyclerView.Adapter< ModelosAdapter.MyViewHolder    >   {
 
     private LayoutInflater inflater;
     private Context context;
-    private ArrayList<Orden>  ordenes;
+    private ArrayList<Modelo> modelos;
 
-    public OrdenAdapter(Context context,ArrayList<Orden> ordenes) {
-        inflater = LayoutInflater.from(context);
+
+    public ModelosAdapter( Context context ,  ArrayList<Modelo>  modelos ){
+        this.inflater  =  LayoutInflater.from(context);
         this.context = context;
-        this.ordenes  =  ordenes;
+        this.modelos  = modelos;
     }
 
     @Override
-    public OrdenAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ModelosAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_lista, parent, false);
-        OrdenAdapter.MyViewHolder holder = new OrdenAdapter.MyViewHolder(view);
+        ModelosAdapter.MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
 
-
     @Override
-    public void onBindViewHolder(OrdenAdapter.MyViewHolder holder, int position) {
-        holder.imgIcon.setImageResource(R.drawable.order);
-        holder.tvTitulo.setText(  ordenes.get(position).getNumeroOrden()   );
-        holder.tvDetalle.setText(  ordenes.get(position).getCliente()  );
-        holder.tvEstado.setText(  ordenes.get(position).getFecha()+"\n"+ordenes.get(position).getEstado() );
+    public void onBindViewHolder(ModelosAdapter.MyViewHolder holder, final int position) {
+        holder.imgIcon.setImageResource(R.drawable.ic_check);
+        holder.tvTitulo.setText(  modelos.get(position).getModelo());
+        holder.tvDetalle.setText(  "" );
+        holder.tvEstado.setText(  modelos.get(position).getEstado()  );
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View v) {
-                Intent detalleOrden  =  new Intent(context  , detalle_orden.class );
-                detalleOrden.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(detalleOrden);
+                /*
+                String key =  modelos.get(position).getKey();
+                Intent actualizarMarca =  new Intent( context   , actualizar_marca.class     );
+                actualizarMarca.putExtra("keyModelo" , key   );
+                context.startActivity(actualizarMarca);
+                */
             }
         });
     }
 
+
     @Override
     public int getItemCount() {
-        return ordenes.size();
+        return modelos.size();
     }
-
-
 
 
     class MyViewHolder extends RecyclerView.ViewHolder
@@ -81,4 +81,5 @@ public class OrdenAdapter extends RecyclerView.Adapter<OrdenAdapter.MyViewHolder
             tvEstado =  itemView.findViewById(R.id.tvEstado);
         }
     }
+
 }

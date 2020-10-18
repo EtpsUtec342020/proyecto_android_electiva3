@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.electiva3.proyecto_android_electiva3">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,10 +11,12 @@
         android:roundIcon="@mipmap/ic_snauto_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity_principal"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
-        </activity>
+        <activity android:name=".flujoMarcas.crear_marca"></activity>
+        <activity android:name=".flujoMarcas.actualizar_marca" />
+        <activity android:name=".flujoMarcas.activity_lista_marcas" />
+        <activity
+            android:name=".activity_principal"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".actualizar_detalle_reserva"
             android:parentActivityName=".activity_lista_reservas" />
@@ -26,36 +28,30 @@
             android:parentActivityName=".detalle_orden" />
         <activity
             android:name=".detalle_orden"
-            android:parentActivityName=".activity_ordenes" />
-
-        <!--flujo planes -->
-        <activity android:name=".flujoPlan.activity_lista_planes"
+            android:parentActivityName=".activity_ordenes" /> <!-- flujo planes -->
+        <activity
+            android:name=".flujoPlan.activity_lista_planes"
             android:parentActivityName=".activity_admin_home" />
-        <activity android:name=".flujoPlan.activity_actualizar_plan" />
-
-        <!--flujo servicios -->
-        <activity android:name=".flujoServicio.activity_lista_servicios"
+        <activity android:name=".flujoPlan.activity_actualizar_plan" /> <!-- flujo servicios -->
+        <activity
+            android:name=".flujoServicio.activity_lista_servicios"
             android:parentActivityName=".activity_admin_home" />
 
         <!--flujo contrato -->
         <activity android:name=".flujoContrato.activity_lista_contratos"
             android:parentActivityName=".activity_admin_home" />
         <activity android:name=".flujoContrato.activity_new_contrato" />
-        <activity android:name=".flujoContrato.activity_actualizar_contrato" />
-
-        <!-- flujo vehiculos -->
-        <activity android:name=".flujoVehiculo.activity_lista_vehiculos"
+        <activity android:name=".flujoContrato.activity_actualizar_contrato" /> <!-- flujo vehiculos -->
+        <activity
+            android:name=".flujoVehiculo.activity_lista_vehiculos"
             android:parentActivityName=".activity_admin_home" />
         <activity android:name=".flujoVehiculo.activity_actualizar_vehiculo" />
-        <activity android:name=".flujoVehiculo.activity_new_vehiculo" />
-
-        <!-- flujo usuarios -->
-        <activity android:name=".flujoUsuario.activity_lista_usuarios"
+        <activity android:name=".flujoVehiculo.activity_new_vehiculo" /> <!-- flujo usuarios -->
+        <activity
+            android:name=".flujoUsuario.activity_lista_usuarios"
             android:parentActivityName=".activity_admin_home" />
         <activity android:name=".flujoUsuario.activity_actualizar_usuario" />
-        <activity android:name=".flujoUsuario.activity_new_usuario" />
-
-        <!-- menu admin -->
+        <activity android:name=".flujoUsuario.activity_new_usuario" /> <!-- menu admin -->
         <activity android:name=".activity_admin_home" />
         <activity
             android:name=".activity_ordenes"

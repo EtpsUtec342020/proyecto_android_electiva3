@@ -11,12 +11,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/lvlista"
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="830dp"
-            android:cacheColorHint="#FD100F0F"
-            tools:listitem="@layout/item_lista"/>
+            android:layout_height="match_parent"
+            android:id="@+id/lvlista"
+            >
+        </androidx.recyclerview.widget.RecyclerView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAgregarVehiculo"
