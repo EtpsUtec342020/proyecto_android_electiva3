@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.electiva3.proyecto_android_electiva3.R;
+import com.electiva3.proyecto_android_electiva3.activity_lista_marca_modelo;
 import com.electiva3.proyecto_android_electiva3.flujoContrato.activity_lista_contratos;
+import com.electiva3.proyecto_android_electiva3.flujoMarcas.activity_lista_marcas;
 import com.electiva3.proyecto_android_electiva3.flujoPlan.activity_lista_planes;
 import com.electiva3.proyecto_android_electiva3.activity_lista_reservas;
 import com.electiva3.proyecto_android_electiva3.flujoServicio.activity_lista_servicios;
@@ -65,6 +67,11 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
     public void onClick(View v) {
         switch (v.getId())
         {
+
+            case R.id.imgMarca:
+                Intent marcaModelo  = new Intent( getActivity() , activity_lista_marcas.class);
+                startActivity(marcaModelo);
+                break;
             case R.id.imgUsuario:
                 Intent usuarios = new Intent(getActivity() ,   activity_lista_usuarios.class);
                 startActivity(usuarios);
