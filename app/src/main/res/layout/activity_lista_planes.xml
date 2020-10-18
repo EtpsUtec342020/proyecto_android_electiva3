@@ -12,13 +12,10 @@
         android:orientation="vertical">
 
 
-        <ListView
-            android:id="@+id/lvlista"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPlanes"
             android:layout_width="match_parent"
-            android:layout_height="830dp"
-            android:cacheColorHint="#FD100F0F"
-            tools:listitem="@layout/item_lista"
-            tools:visibility="visible" />
+            android:layout_height="match_parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAgregarPlan"
@@ -65,6 +62,7 @@
                     android:layout_marginRight="14dp"
                     android:drawableLeft="@drawable/ic_check"
                     android:text=" Tipo de plan"
+                    android:textColor="@color/design_default_color_on_secondary"
                     android:textSize="18sp" />
 
                 <Spinner
@@ -73,7 +71,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
-                    android:layout_marginBottom="14dp" />
+                    android:layout_marginBottom="14dp"
+                    android:backgroundTint="@color/design_default_color_on_secondary"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/textView20"
@@ -84,6 +84,7 @@
                     android:layout_marginRight="14dp"
                     android:drawableLeft="@drawable/ic_check"
                     android:text=" Duración"
+                    android:textColor="@color/design_default_color_on_secondary"
                     android:textSize="18sp" />
 
                 <Spinner
@@ -92,7 +93,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
-                    android:layout_marginBottom="14dp" />
+                    android:layout_marginBottom="14dp"
+                    android:backgroundTint="@color/design_default_color_on_secondary"
+                    android:textAlignment="center" />
 
                 <Button
                     android:id="@+id/btnServicios"
@@ -117,6 +120,7 @@
                     android:layout_marginBottom="14dp"
                     android:drawableLeft="@drawable/ic_money"
                     android:text=" Costo"
+                    android:textColor="@color/design_default_color_on_secondary"
                     android:textSize="18sp" />
 
                 <Button
@@ -172,9 +176,20 @@
                 <ListView
                     android:id="@+id/lvServicios"
                     android:layout_width="match_parent"
-                    android:layout_height="387dp">
+                    android:layout_height="305dp"
+                    android:layout_marginBottom="10dp">
 
                 </ListView>
+
+                <TextView
+                    android:id="@+id/tvCostoSeleccionado"
+                    android:layout_width="326dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/btnSeleccionar"

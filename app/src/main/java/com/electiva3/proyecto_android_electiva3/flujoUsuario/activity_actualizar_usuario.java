@@ -16,7 +16,6 @@ import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.adapters.EstadoAdapter;
 import com.electiva3.proyecto_android_electiva3.adapters.RolUsuarioAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
-import com.electiva3.proyecto_android_electiva3.entities.Estado;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -133,7 +132,7 @@ public class activity_actualizar_usuario extends AppCompatActivity
             }
         });
 
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
+                btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent usuarios = new Intent(getApplicationContext() ,   activity_lista_usuarios.class);
@@ -202,15 +201,42 @@ public class activity_actualizar_usuario extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.exists())
-                {
+                if (snapshot.exists()) {
                     roleslist.clear();
 
                     for (DataSnapshot ds : snapshot.getChildren())
                     {
                         String rol = Objects.requireNonNull(ds.child("rol").getValue()).toString();
+                        if(rol.equals(usuario.getRol()))
+                        {
+                            roleslist.add(rol);
+                        }
+                    }
+                    CompararRoles();
+                }
+            }
 
-                        roleslist.add(rol);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    public void CompararRoles()
+    {
+        conexion.getDatabaseReference().child("roles").addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot ds : snapshot.getChildren())
+                    {
+                        String rol = Objects.requireNonNull(ds.child("rol").getValue()).toString();
+                        if(!roleslist.contains(rol)) {
+                            roleslist.add(rol);
+                        }
                     }
                     RolUsuarioAdapter rolAdapter = new RolUsuarioAdapter(getApplicationContext() , R.layout.custom_simple_spinner_item, roleslist);
                     spnRol.setAdapter(rolAdapter);
@@ -229,23 +255,46 @@ public class activity_actualizar_usuario extends AppCompatActivity
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                if (snapshot.exists())
-                {
+                if (snapshot.exists()) {
                     estadoUsuariosList.clear();
 
-                    for (DataSnapshot ds : snapshot.getChildren())
-                    {
-
+                    for (DataSnapshot ds : snapshot.getChildren()) {
                         String estado = Objects.requireNonNull(ds.child("estado").getValue()).toString();
 
-                        if(estado.equals("Activo") || estado.equals("Inactivo"))
-                        {
+                        if(estado.equals(usuario.getEstado())) {
                             estadoUsuariosList.add(estado);
                         }
                     }
+                    CompararEstados();
+                }
+            }
 
-                    EstadoAdapter estadoAdapter = new EstadoAdapter(getApplicationContext() , R.layout.custom_simple_spinner_item, estadoUsuariosList);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    public void CompararEstados()
+    {
+        conexion.getDatabaseReference().child("estados").addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists())
+                {
+                    for (DataSnapshot ds : snapshot.getChildren())
+                    {
+                        String estado = Objects.requireNonNull(ds.child("estado").getValue()).toString();
+
+                        if(estado.equals("Activo") || estado.equals("Inactivo")) {
+                            if (!estadoUsuariosList.contains(estado)) {
+                                estadoUsuariosList.add(estado);
+                            }
+                        }
+                    }
+                    EstadoAdapter estadoAdapter = new EstadoAdapter(getApplicationContext() , R.layout.custom_simple_spinner_item,estadoUsuariosList);
                     spnEstado.setAdapter(estadoAdapter);
                 }
             }

@@ -29,7 +29,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/vt2"
             android:layout_width="330dp"
-            android:layout_height="480dp"
+            android:layout_height="580dp"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="30dp"
             android:background="@color/colorWhite"
@@ -44,12 +44,11 @@
                 tools:layout_editor_absoluteY="1dp">
 
                 <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvTitulo"
+                    android:layout_width="207dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Agregar Nuevo Servicio"
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -58,9 +57,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="12dp"
-                    android:layout_marginBottom="14dp"
+                    android:layout_marginBottom="10dp"
                     android:hint=" Titulo">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -76,9 +75,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="12dp"
-                    android:layout_marginBottom="14dp">
+                    android:layout_marginBottom="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtDescripcion"
@@ -95,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="12dp"
                     android:drawableLeft="@drawable/ic_check"
                     android:text=" Categoria"
@@ -107,16 +106,18 @@
                     android:layout_height="28dp"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="12dp"
-                    android:layout_marginBottom="14dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="false"
+                    android:clipChildren="false"
                     tools:listitem="@layout/custom_simple_spinner_item" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="12dp"
-                    android:layout_marginBottom="14dp">
+                    android:layout_marginBottom="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtCosto"
@@ -127,15 +128,39 @@
                         android:inputType="numberDecimal" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/txtEstado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="12dp"
+                    android:drawableLeft="@drawable/ic_check"
+                    android:text=" Estado"
+                    android:textColor="@color/design_default_color_on_secondary"
+                    android:textSize="18sp"
+                    android:visibility="visible"
+                    tools:visibility="visible" />
+
+                <Spinner
+                    android:id="@+id/spnEstado"
+                    android:layout_width="match_parent"
+                    android:layout_height="26dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="14dp"
+                    android:visibility="visible"
+                    tools:listitem="@layout/custom_simple_spinner_item"
+                    tools:visibility="visible" />
+
                 <Button
-                    android:id="@+id/btnCrear"
+                    android:id="@+id/btnAccion"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="25dp"
                     android:background="@drawable/ic_btn_launcher"
-                    android:text="Crear"
                     android:textColor="@color/design_default_color_background" />
 
                 <Button

@@ -205,7 +205,7 @@
             android:layout_marginTop="40dp"
             android:background="@color/colorWhite"
             android:visibility="invisible"
-            tools:visibility="visible">
+            tools:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="match_parent"

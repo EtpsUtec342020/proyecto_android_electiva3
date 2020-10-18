@@ -20,7 +20,6 @@ public class RolUsuarioAdapter extends ArrayAdapter<String>
     private List<String> rolesUsuarios;
 
 
-
     public RolUsuarioAdapter(@NonNull Context context, int resource, @NonNull List<String> objects) {
         super(context, resource, objects);
         this.context = context;

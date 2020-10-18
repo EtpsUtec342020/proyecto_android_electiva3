@@ -11,50 +11,51 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
-import com.electiva3.proyecto_android_electiva3.entities.Servicio;
+import com.electiva3.proyecto_android_electiva3.entities.Contrato;
 
 import java.util.ArrayList;
 
-public class ServiciosAdapter extends RecyclerView.Adapter<ServiciosAdapter.MyViewHolder> implements View.OnClickListener
+public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.MyViewHolder> implements View.OnClickListener
 {
     private LayoutInflater inflater;
     private Context context;
-    private ArrayList<Servicio> servicios;
+    private ArrayList<Contrato> contratos;
     private View.OnClickListener listener;
 
-    public ServiciosAdapter(Context context, ArrayList<Servicio> servicios)
-    {
+    public ContratoAdapter(Context context, ArrayList<Contrato> contratos) {
         inflater =  LayoutInflater.from(context);
         this.context = context;
-        this.servicios = servicios;
+        this.contratos = contratos;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = inflater.inflate(R.layout.item_lista, parent, false);
-        ServiciosAdapter.MyViewHolder holder = new ServiciosAdapter.MyViewHolder(view);
+        ContratoAdapter.MyViewHolder holder = new ContratoAdapter.MyViewHolder(view);
         view.setOnClickListener(this);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
-        holder.imgIcon.setImageResource(R.drawable.ic_person);
-        holder.tvTitulo.setText(  servicios.get(position).getTitulo());
-        holder.tvDetalle.setText( servicios.get(position).getDescripcion());
-        holder.tvEstado.setText(  servicios.get(position).getEstado());
+    public void onBindViewHolder(ContratoAdapter.MyViewHolder holder, int position)
+    {
+        String p = String.valueOf(contratos.get(position).getNumeroContrato());
+        String c = String.valueOf(contratos.get(position).getCostoTotal());
+        holder.imgIcon.setImageResource(R.drawable.ic_document);
+        holder.tvTitulo.setText("Contrato #"+p);
+        holder.tvDetalle.setText( contratos.get(position).getTipoPlan()+"    $"+c);
+        holder.tvEstado.setText(  contratos.get(position).getEstado());
     }
 
     @Override
     public int getItemCount() {
-        return servicios.size();
+        return contratos.size();
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         if(listener!=null)
         {
             listener.onClick(v);

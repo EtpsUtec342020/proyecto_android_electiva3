@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -67,8 +66,7 @@ public class activity_lista_usuarios extends AppCompatActivity
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists())
-                {
+                if (snapshot.exists()) {
                     usuList.clear();
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         String correo = ds.child("correo").getValue().toString();
@@ -79,16 +77,27 @@ public class activity_lista_usuarios extends AppCompatActivity
                         usuList.add(new Usuario(key, nombre, correo, estado));
                     }
 
-                    UsuariosAdapter usuarioAdapter = new UsuariosAdapter(getApplicationContext(), usuList);
+                    final UsuariosAdapter usuarioAdapter = new UsuariosAdapter(getApplicationContext(), usuList);
+
+                    usuarioAdapter.SetOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                          String idUsuario =  usuList.get(rvUsuarios.getChildAdapterPosition(v)).getKey();
+                            Intent intent  =  new Intent(getApplicationContext(),   activity_actualizar_usuario.class  );
+                            intent.putExtra("id", idUsuario);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+
                     rvUsuarios.setAdapter(usuarioAdapter);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
-
         });
     }
 
@@ -98,6 +107,4 @@ public class activity_lista_usuarios extends AppCompatActivity
         startActivity(intent);
         finish();
     }
-
-
 }

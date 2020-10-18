@@ -1,29 +1,49 @@
 package com.electiva3.proyecto_android_electiva3.entities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Plan
 {
-    private String tipo;
+    private String key;
+    private String tipoPlan;
     private String duracion;
-    private String costo;
+    private Double costo;
     private String estado;
+    private String fechaRegistro;
     private ArrayList<String> servicios;
+    private HashMap<String, Object> PlanMap = new HashMap<>();
 
-    public Plan(String tipo, String duracion, String costo, String estado, ArrayList<String> servicios) {
-        this.tipo = tipo;
-        this.duracion = duracion;
+    public Plan(){
+    }
+
+    public Plan(String key, String tipoPlan, Double costo, String estado) {
+        this.key = key;
+        this.tipoPlan = tipoPlan;
         this.costo = costo;
         this.estado = estado;
-        this.servicios = servicios;
     }
 
-    public String getTipo() {
-        return tipo;
+    public Plan(String key, String tipoPlan, Double costo) {
+        this.key = key;
+        this.tipoPlan = tipoPlan;
+        this.costo = costo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getTipoPlan() {
+        return tipoPlan;
+    }
+
+    public void setTipoPlan(String tipoPlan) {
+        this.tipoPlan = tipoPlan;
     }
 
     public String getDuracion() {
@@ -34,11 +54,11 @@ public class Plan
         this.duracion = duracion;
     }
 
-    public String getCosto() {
+    public Double getCosto() {
         return costo;
     }
 
-    public void setCosto(String costo) {
+    public void setCosto(Double costo) {
         this.costo = costo;
     }
 
@@ -50,11 +70,48 @@ public class Plan
         this.estado = estado;
     }
 
+    public String getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(String fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
     public ArrayList<String> getServicios() {
         return servicios;
     }
 
     public void setServicios(ArrayList<String> servicios) {
         this.servicios = servicios;
+    }
+
+    public HashMap<String, Object> getPlanMap() {
+        return PlanMap;
+    }
+
+    public void setPlanMap(HashMap<String, Object> planMap) {
+        PlanMap = planMap;
+    }
+
+    public void UpdatePlan()
+    {
+        PlanMap.put("costo", costo);
+        PlanMap.put("duracion", duracion);
+        PlanMap.put("estado", estado);
+        PlanMap.put("servicios", servicios);
+        PlanMap.put("tipoPlan", tipoPlan);
+    }
+
+    public void ClearServicios(){
+        servicios.clear();
+    }
+
+    public boolean Validar(String valor){
+        boolean i = false;
+        if (servicios.contains(valor)) {
+             i = true;
+        }
+        return i;
     }
 }
