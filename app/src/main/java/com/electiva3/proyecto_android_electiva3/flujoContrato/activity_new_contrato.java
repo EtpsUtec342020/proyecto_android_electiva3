@@ -30,15 +30,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.UUID;
 
 public class activity_new_contrato extends AppCompatActivity implements View.OnClickListener
 {
-    private TextView txtCliente, txtVehiculo, txtPlan, txtFechaVen, txtNumManto, txtCosto;
+    private TextView txtCliente, txtVehiculo, txtPlan, txtFechaVen, txtNumManto, txtCosto, txtFechaA;
     private Spinner spnDuracionC;
     private CalendarView cvfechaActivacion;
-    private ConstraintLayout vt2;
+    private ConstraintLayout vt2, vt3;
     private ListView lvlistar;
     private Button btnCrear, btnSeleccionar, btnCancelar, btnCancelar2;
 
@@ -46,11 +48,14 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
     private ArrayList<Vehiculo> vehiculoList = new ArrayList<>();
     private ArrayList<Plan> planList = new ArrayList<>();
     private ArrayList<String> tiemposList = new ArrayList<>();
+
     private double costoPlan = 0.00;
     private double costo;
     private int numero;
     private int i;
     private int conteo;
+    private String fecha;
+
     Conexion conexion = new Conexion();
     Contrato contrato = new Contrato();
 
@@ -62,6 +67,7 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
 
         txtCliente = findViewById(R.id.txtCliente);
         txtPlan = findViewById(R.id.txtPlan);
+        txtFechaA = findViewById(R.id.txtFechaA);
         cvfechaActivacion = findViewById(R.id.cvfechaActivacion);
         txtFechaVen = findViewById(R.id.txtFechaVen);
         txtNumManto = findViewById(R.id.txtNumManto);
@@ -73,6 +79,7 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
         btnSeleccionar = findViewById(R.id.btnSeleccionar);
         btnCancelar2 = findViewById(R.id.btnCancelar2);
         vt2 = findViewById(R.id.vt2);
+        vt3 = findViewById(R.id.vt3);
         lvlistar = findViewById(R.id.lvlistar);
 
         //trae el numero de contratos listados
@@ -84,6 +91,7 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
         txtCliente.setOnClickListener(this);
         txtVehiculo.setOnClickListener(this);
         txtPlan.setOnClickListener(this);
+        txtFechaA.setOnClickListener(this);
         btnCancelar.setOnClickListener(this);
         btnCancelar2.setOnClickListener(this);
         tiemposSelecionar();
@@ -98,7 +106,6 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
                 String vehiculo = txtVehiculo.getText().toString();
                 String plan = txtPlan.getText().toString();
                 String duracion = spnDuracionC.getSelectedItem().toString();
-                String fechaA = "";
                 String fechaV = txtFechaVen.getText().toString();
                 String numMantos = txtNumManto.getText().toString();
                 String dato = txtCosto.getText().toString();
@@ -125,8 +132,8 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
                 {
                     String key = (UUID.randomUUID().toString());
                     contrato.setNumeroContrato(conteo+1);
-                    contrato.setFechaActivacion("");
                     contrato.setFechaVencimiento("");
+                    contrato.setFechaCreacion(conexion.ObtenerHora());
                     contrato.setEstado("Activo");
                     conexion.getDatabaseReference().child("Contratos").child(key).setValue(contrato);
 
@@ -201,6 +208,41 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
                         contrato.setCostoTotal(costo);
                     }
                 });
+                break;
+            case R.id.txtFechaA:
+                    vt3.setVisibility(View.VISIBLE);
+
+                    cvfechaActivacion.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+                        @Override
+                        public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                            Calendar calendar =  Calendar.getInstance();
+                            Calendar calendar1  = Calendar.getInstance();
+
+                            calendar.set(Calendar.YEAR ,  year);
+                            calendar.set(Calendar.MONTH , month);
+                            calendar.set(Calendar.DAY_OF_MONTH , dayOfMonth);
+
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                            fecha  = simpleDateFormat.format(calendar.getTime());  //Utilizara como fecha
+
+                            long hoy = calendar1.getTimeInMillis();
+                            long seleccion  = calendar.getTimeInMillis();
+
+                            if(seleccion< hoy){
+                                Toast.makeText(getApplicationContext(), "La fecha seleccionada no puede ser menor a la actual", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                txtFechaA.setText(fecha);
+                                vt3.setVisibility(View.INVISIBLE);
+                                contrato.setFechaActivacion(fecha);
+
+                                
+
+                            }
+                        }
+                    });
                 break;
             case R.id.btnCancelar:
 
@@ -367,4 +409,12 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
         vt2.setVisibility(View.VISIBLE);
         cvfechaActivacion.setVisibility(View.INVISIBLE);
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent  =  new Intent( getApplicationContext() , activity_lista_contratos.class  );
+        startActivity(intent);
+        finish();
+    }
+
 }

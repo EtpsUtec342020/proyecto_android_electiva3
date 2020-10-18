@@ -74,12 +74,14 @@ public class activity_lista_contratos extends AppCompatActivity
 
                     for(DataSnapshot ds : snapshot.getChildren()) {
                         i +=1;
-                        String key = ds.child("key").getKey();
+                        String key = ds.getKey();
+
                         int numContrato = Integer.parseInt(ds.child("numeroContrato").getValue().toString());
                         String estado = ds.child("estado").getValue().toString();
                         double costo = Double.parseDouble(ds.child("costoTotal").getValue().toString());
                         for(DataSnapshot sp: ds.child("plan").getChildren()) {
                             String i = sp.getKey();
+
                             if(i.equals("1")) {
                                 String tipo = ds.child("plan").child(i).getValue().toString();
                                 contratoList.add(new Contrato(key, numContrato, tipo, costo,estado));
@@ -99,6 +101,7 @@ public class activity_lista_contratos extends AppCompatActivity
                         }
                     });
                     rvContrato.setAdapter(contratoAdapter);
+
                 }
             }
 

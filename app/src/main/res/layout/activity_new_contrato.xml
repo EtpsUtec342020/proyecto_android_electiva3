@@ -27,15 +27,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView16"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Nuevo Contrato"
-                        android:textAlignment="center"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -147,39 +138,41 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <TextView
-                        android:id="@+id/txtFechaA"
-                        android:layout_width="178dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="90dp"
-                        android:layout_marginTop="14dp"
-                        android:layout_marginRight="16dp"
-                        android:drawableLeft="@drawable/ic_calendar"
-                        android:text=" Fecha Activacion"
-                        android:textAlignment="textStart"
-                        android:textSize="18sp" />
-
-                    <CalendarView
-                        android:id="@+id/cvfechaActivacion"
-                        android:layout_width="288dp"
-                        android:layout_height="293dp"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="14dp"
-                        android:visibility="visible"
-                        tools:visibility="visible" />
-
-                    <TextView
-                        android:id="@+id/txtFechaVen"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="14dp"
                         android:layout_marginRight="16dp"
-                        android:layout_marginBottom="14dp"
-                        android:drawableLeft="@drawable/ic_calendar"
-                        android:text=" fecha vencimiento"
-                        android:textSize="18sp" />
+                        android:layout_marginBottom="14dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtFechaA"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_calendar"
+                            android:editable="false"
+                            android:hint="Fecha Activacion" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="14dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtFechaVen"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_calendar"
+                            android:editable="false"
+                            android:hint="Fecha Vencimiento" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <Button
                         android:id="@+id/btnCrear"
@@ -257,6 +250,30 @@
                     android:background="@drawable/ic_btn_gray"
                     android:text="cancelar"
                     android:textColor="@color/design_default_color_background" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/vt3"
+            android:layout_width="296dp"
+            android:layout_height="329dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="80dp"
+            android:background="@color/colorWhite"
+            android:visibility="invisible"
+            tools:visibility="invisible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <CalendarView
+                    android:id="@+id/cvfechaActivacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    tools:visibility="visible" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
