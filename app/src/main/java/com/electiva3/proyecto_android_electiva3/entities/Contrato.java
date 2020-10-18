@@ -18,6 +18,7 @@ public class Contrato
     private int numeroMantenimientos;
     private String estado;
     private double CostoTotal;
+    private String fechaCreacion;
     private HashMap<String, Object> ContratoMap = new HashMap<>();
 
     public Contrato() {
@@ -128,6 +129,14 @@ public class Contrato
 
     public void setCostoTotal(double costoTotal) {
         CostoTotal = costoTotal;
+    }
+
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
     public HashMap<String, Object> getContratoMap() {

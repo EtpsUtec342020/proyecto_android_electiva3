@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.adapters.EstadoAdapter;
@@ -34,10 +35,10 @@ public class activity_actualizar_contrato extends AppCompatActivity
     private String cliente;
     private String vehiculo;
 
-    private ArrayList<String> estadosList = new ArrayList<>();
-    private ArrayList<String> planContrato = new ArrayList<>();
     private ArrayList<String> clienteContrato = new ArrayList<>();
+    private ArrayList<String> planContrato = new ArrayList<>();
     private ArrayList<String> vehiculoContrato = new ArrayList<>();
+    private ArrayList<String> estadosList = new ArrayList<>();
 
     private Contrato contrato = new Contrato();
     private Conexion conexion = new Conexion();
@@ -81,6 +82,21 @@ public class activity_actualizar_contrato extends AppCompatActivity
         btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String estado = spnEstado.getSelectedItem().toString();
+
+                if(!estado.equals(contrato.getEstado())) {
+
+                    contrato.setEstado(estado);
+                    contrato.UpdateContrato();
+
+                    conexion.getDatabaseReference().child("Contratos").child(id).updateChildren(contrato.getContratoMap());
+                    Toast.makeText(getApplicationContext(), "Plan "+estado, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "No se realizaron Cambios", Toast.LENGTH_SHORT).show();
+                }
+
                 Intent i = new Intent( getApplicationContext() , activity_lista_contratos.class);
                 startActivity(i);
                 finish();
@@ -95,8 +111,10 @@ public class activity_actualizar_contrato extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ds = snapshot;
+
                 if(ds.exists())
                 {
+                    String key = null;
                     contrato.setCostoTotal(Double.parseDouble(ds.child("costoTotal").getValue().toString()));
                     contrato.setDuracion(ds.child("duracion").getValue().toString());
                     contrato.setEstado(ds.child("estado").getValue().toString());
@@ -105,15 +123,34 @@ public class activity_actualizar_contrato extends AppCompatActivity
                     contrato.setNumeroContrato(Integer.parseInt(ds.child("numeroContrato").getValue().toString()));
                     contrato.setNumeroMantenimientos(Integer.parseInt(ds.child("numeroMantenimientos").getValue().toString()));
 
-                    for (DataSnapshot sp: ds.child("plan").getChildren()) {
-                    String i = sp.getKey();
-                        if(i.equals("1")) {
-                         plan =    ds.child("plan").child(i).getValue().toString();
-                        }
-                        planContrato.add(i);
-                        planContrato.add(plan);
-                    }
+
+                    key = ds.child("plan").child("0").getValue().toString();
+                    plan = ds.child("plan").child("1").getValue().toString();
+                    planContrato.add(key);
+                    planContrato.add(plan);
+
+                    key = ds.child("cliente").child("0").getValue().toString();
+                    cliente = ds.child("cliente").child("1").getValue().toString();
+                    clienteContrato.add(key);
+                    clienteContrato.add(cliente);
+
+                    key = ds.child("vehiculo").child("0").getValue().toString();
+                    vehiculo = ds.child("vehiculo").child("1").getValue().toString();
+                    vehiculoContrato.add(key);
+                    vehiculoContrato.add(vehiculo);
+
+                    contrato.setCliente(clienteContrato);
+                    contrato.setVehiculo(vehiculoContrato);
                     contrato.setPlan(planContrato);
+
+                    txtNombre.setText(cliente);
+                    txtVehiculo.setText(vehiculo);
+                    txtPlan.setText(plan);
+                    txtNumManto.setText(String.valueOf(contrato.getNumeroMantenimientos())+" mantenimientos");
+                    txtCostoT.setText(String.valueOf(contrato.getCostoTotal()));
+                    txtDuracion.setText(contrato.getDuracion());
+                    txtFechaA.setText(contrato.getFechaActivacion());
+                    txtFechaV.setText(contrato.getFechaVencimiento());
 
                     mostrarEstados();
                 }
@@ -122,7 +159,6 @@ public class activity_actualizar_contrato extends AppCompatActivity
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
