@@ -75,7 +75,7 @@ public class activity_lista_vehiculos extends AppCompatActivity
                         String anio =  ds.child("anio").getValue().toString();
 
 
-                        vehiculos.add(  new Vehiculo(key  ,  placa , marca , anio )   );
+                        vehiculos.add(  new Vehiculo(key  ,  placa , marca , anio , modelo )   );
                     }
                     VehiculosAdapter vehiculosAdapter =  new VehiculosAdapter(getApplicationContext() ,   vehiculos );
                     lvlista.setAdapter(vehiculosAdapter);

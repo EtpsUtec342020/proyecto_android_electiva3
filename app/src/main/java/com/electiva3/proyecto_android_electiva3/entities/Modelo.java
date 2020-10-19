@@ -88,4 +88,8 @@ public class Modelo {
         modeloMap.put("estado" , estado);
         modeloMap.put("modelo" ,  modelo);
     }
+
+    public String toString(){
+        return modelo;
+    }
 }

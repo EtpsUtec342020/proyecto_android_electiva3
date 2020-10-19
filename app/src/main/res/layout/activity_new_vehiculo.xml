@@ -26,36 +26,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/imvImagen"
-                        android:layout_width="match_parent"
-                        android:layout_height="221dp"
-                        app:srcCompat="@drawable/ic_image" />
 
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Seleccionar Imagen"
-                        android:textAlignment="center"
-                        android:textSize="18sp" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtCliente"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="14dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginBottom="14dp"
-                            android:drawableLeft="@drawable/ic_person"
-                            android:editable="false"
-                            android:hint=" nombre del cliente" />
-                    </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -71,7 +42,7 @@
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_dui"
                             android:hint=" placas"
-                            android:inputType="number" />
+                            android:inputType="textPersonName" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -122,7 +93,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_color_car"
-                            android:hint=" color"
+                            android:hint="color"
                             android:inputType="textPersonName" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -135,7 +106,7 @@
                         android:layout_marginTop="14dp"
                         android:layout_marginRight="16dp"
                         android:drawableLeft="@drawable/ic_check"
-                        android:text=" marca:"
+                        android:text="marca:"
                         android:textSize="18sp" />
 
                     <Spinner
@@ -154,7 +125,7 @@
                         android:layout_marginTop="14dp"
                         android:layout_marginRight="16dp"
                         android:drawableLeft="@drawable/ic_check"
-                        android:text=" modelo:"
+                        android:text="modelo:"
                         android:textSize="18sp" />
 
                     <Spinner

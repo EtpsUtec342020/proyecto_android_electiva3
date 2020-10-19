@@ -71,7 +71,10 @@ public class Marca {
         marcaMap.put("estado" , estado);
         marcaMap.put("fechaCreacion" , fechaCreacion);
         marcaMap.put("descripcion" , descripcion);
-
     }
 
+    @Override
+    public String toString() {
+        return marca;
+    }
 }

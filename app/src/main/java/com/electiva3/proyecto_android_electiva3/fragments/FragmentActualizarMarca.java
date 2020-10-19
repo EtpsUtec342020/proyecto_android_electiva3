@@ -151,8 +151,6 @@ public class FragmentActualizarMarca extends Fragment {
                 if (ds.exists())
                 {
 
-
-
                     marca.setKey(ds.getKey());
                     marca.setMarca(   ds.child("marca").getValue().toString()  );
                     marca.setEstado(  ds.child("estado").getValue().toString()   );

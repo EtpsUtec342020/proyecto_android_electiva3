@@ -1,6 +1,7 @@
 package com.electiva3.proyecto_android_electiva3.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
+import com.electiva3.proyecto_android_electiva3.detalle_orden;
 import com.electiva3.proyecto_android_electiva3.entities.DetalleOrden;
 import com.electiva3.proyecto_android_electiva3.entities.Vehiculo;
+import com.electiva3.proyecto_android_electiva3.flujoVehiculo.activity_actualizar_vehiculo;
 
 import java.util.ArrayList;
 
@@ -37,11 +40,26 @@ public class VehiculosAdapter extends RecyclerView.Adapter<VehiculosAdapter.MyVi
 
 
     @Override
-    public void onBindViewHolder(VehiculosAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(VehiculosAdapter.MyViewHolder holder, final int position) {
         holder.imgIcon.setImageResource(R.drawable.ic_check);
         holder.tvTitulo.setText(  vehiculos.get(position).getMarca()+ "  - " +vehiculos.get(position).getModelo() );
         holder.tvDetalle.setText(  vehiculos.get(position).getPlaca() );
         holder.tvEstado.setText(  vehiculos.get(position).getAnio()  );
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+
+                String key  = vehiculos.get(position).getKey();
+                Intent detalleVehiculo  =  new Intent(context  , activity_actualizar_vehiculo.class );
+                detalleVehiculo.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                detalleVehiculo.putExtra("keyVehiculo" , key);
+                context.startActivity(detalleVehiculo);
+            }
+        });
     }
 
 

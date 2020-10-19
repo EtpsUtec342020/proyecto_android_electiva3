@@ -1,6 +1,10 @@
 package com.electiva3.proyecto_android_electiva3.entities;
 
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.gson.internal.bind.ObjectTypeAdapter;
+
+import java.util.HashMap;
+
 
 @IgnoreExtraProperties
 public class Vehiculo
@@ -14,7 +18,14 @@ public class Vehiculo
     private String numChasis;
     private String placa;
     private String estado;
+    private String keyModelo;
+    private String keyMarca;
+    private HashMap<String  , Object>  vehiculoMap = new HashMap<>();
 
+
+    public Vehiculo(){
+
+    }
 
     public Vehiculo( String key , String placa , String  marca ,String anio  ){
         this.key = key;
@@ -23,7 +34,23 @@ public class Vehiculo
         this.anio =  anio;
     }
 
-    public String getAnio() {
+    public Vehiculo( String key , String placa , String  marca ,String anio , String modelo ){
+        this.key = key;
+        this.marca =  marca ;
+        this.placa =   placa;
+        this.anio =  anio;
+        this.modelo =  modelo;
+    }
+
+    public void setKey(String key){
+        this.key =  key;
+    }
+
+    public String getKey(){
+        return key;
+    }
+
+    public String getAnio(){
         return anio;
     }
 
@@ -86,4 +113,32 @@ public class Vehiculo
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public void  setKeyMarca(String keyMarca){
+        this.keyMarca =  keyMarca;
+    }
+
+    public String getKeyMarca(){
+        return keyMarca;
+    }
+
+    public void setKeyModelo(String keyModelo){
+        this.keyModelo = keyModelo;
+    }
+
+    public String getKeyModelo(){
+        return keyModelo;
+    }
+
+    public void UpdateVehiculo(){
+        vehiculoMap.put("anio" , anio);
+        vehiculoMap.put("modelo", modelo);
+        vehiculoMap.put("keyModelo" , keyModelo);
+        vehiculoMap.put("color" , color);
+        vehiculoMap.put("fechaRegistro" , fechaRegistro);
+        vehiculoMap.put("marca" , marca);
+        vehiculoMap.put("placa" , placa);
+        vehiculoMap.put("numChasis", numChasis);
+    }
+
 }

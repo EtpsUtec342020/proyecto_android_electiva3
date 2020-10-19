@@ -42,23 +42,6 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtCliente"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="14dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="14dp"
-                        android:drawableLeft="@drawable/ic_person"
-                        android:editable="false"
-                        android:hint="cliente" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="14dp"
