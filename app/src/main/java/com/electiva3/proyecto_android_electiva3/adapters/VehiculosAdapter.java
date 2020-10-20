@@ -11,18 +11,17 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
-import com.electiva3.proyecto_android_electiva3.detalle_orden;
-import com.electiva3.proyecto_android_electiva3.entities.DetalleOrden;
 import com.electiva3.proyecto_android_electiva3.entities.Vehiculo;
 import com.electiva3.proyecto_android_electiva3.flujoVehiculo.activity_actualizar_vehiculo;
 
 import java.util.ArrayList;
 
-public class VehiculosAdapter extends RecyclerView.Adapter<VehiculosAdapter.MyViewHolder> {
+public class VehiculosAdapter extends RecyclerView.Adapter<VehiculosAdapter.MyViewHolder>  implements View.OnClickListener {
 
     private LayoutInflater inflater;
     private Context context;
     private ArrayList<Vehiculo> vehiculos;
+    private View.OnClickListener listener;
 
     public VehiculosAdapter(Context context , ArrayList<Vehiculo> vehiculos){
             inflater = LayoutInflater.from(context);
@@ -35,6 +34,7 @@ public class VehiculosAdapter extends RecyclerView.Adapter<VehiculosAdapter.MyVi
     public VehiculosAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_lista, parent, false);
         VehiculosAdapter.MyViewHolder holder = new MyViewHolder(view);
+        view.setOnClickListener(this);
         return holder;
     }
 
@@ -66,6 +66,20 @@ public class VehiculosAdapter extends RecyclerView.Adapter<VehiculosAdapter.MyVi
     @Override
     public int getItemCount() {
         return vehiculos.size();
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        if(listener!=null)
+        {
+            listener.onClick(v);
+        }
+    }
+
+    public void SetOnClickListener(View.OnClickListener Listener)
+    {
+        this.listener = Listener;
     }
 
 

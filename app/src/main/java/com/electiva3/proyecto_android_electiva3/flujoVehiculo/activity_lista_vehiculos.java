@@ -1,13 +1,8 @@
 package com.electiva3.proyecto_android_electiva3.flujoVehiculo;
 
-import android.app.admin.ConnectEvent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,11 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
-import com.electiva3.proyecto_android_electiva3.adapters.OrdenAdapter;
 import com.electiva3.proyecto_android_electiva3.adapters.VehiculosAdapter;
+import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Vehiculo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class activity_lista_vehiculos extends AppCompatActivity
 {
@@ -78,6 +71,18 @@ public class activity_lista_vehiculos extends AppCompatActivity
                         vehiculos.add(  new Vehiculo(key  ,  placa , marca , anio , modelo )   );
                     }
                     VehiculosAdapter vehiculosAdapter =  new VehiculosAdapter(getApplicationContext() ,   vehiculos );
+
+                    vehiculosAdapter.SetOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            String key  = vehiculos.get(lvlista.getChildAdapterPosition(v)).getKey();
+                            Intent detalleVehiculo  =  new Intent(getApplicationContext() , activity_actualizar_vehiculo.class );
+                            detalleVehiculo.putExtra("keyVehiculo" , key);
+                            finish();
+                        }
+                    });
+
                     lvlista.setAdapter(vehiculosAdapter);
                 }
 

@@ -11,104 +11,122 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="14dp"
-            android:hint="Nombre">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtNombre"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:enabled="false"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="14dp"
-            android:hint="Correo electrónico "
-            android:enabled="false"
-            >
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="14dp"
+                    android:hint="Nombre">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtCorreo"
-                android:layout_width="match_parent"
-                android:drawableLeft="@drawable/ic_email"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtNombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_person_black_24dp"
+                        android:enabled="false"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/design_default_color_on_secondary" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="14dp"
-            android:hint="Teléfono">
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtDui"
-                android:layout_width="match_parent"
-                android:drawableLeft="@drawable/ic_phone"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="14dp"
+                    android:enabled="false"
+                    android:hint="Correo electrónico ">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="14dp"
-            android:hint="Contraseña">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtCorreo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_email"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/design_default_color_on_secondary" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtPassword"
-                android:layout_width="match_parent"
-                android:drawableLeft="@drawable/ic_lock"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="14dp"
+                    android:hint="Teléfono">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="14dp"
-            android:hint="Confirmar contraseña">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtTelefono"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_phone"
+                        android:inputType="numberSigned"
+                        android:maxLength="9" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtConfirmPassword"
-                android:layout_width="match_parent"
-                android:drawableLeft="@drawable/ic_lock"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="14dp"
+                    android:hint="Contraseña">
 
-        <Button
-            android:id="@+id/btnActualizarPerfil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Actualizar perfil"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/colorWhite"
-            android:layout_margin="20dp"
-            />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_lock"
+                        android:inputType="textPassword"
+                        android:maxLength="12" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="14dp"
+                    android:hint="Confirmar contraseña">
+                    edtConfirmPassword
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_lock"
+                        android:inputType="textPassword"
+                        android:maxLength="12" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btnActualizarPerfil"
+                    android:layout_width="323dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ic_btn_launcher"
+                    android:text="Actualizar Perfil"
+                    android:textColor="@color/design_default_color_background" />
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 
 </FrameLayout>

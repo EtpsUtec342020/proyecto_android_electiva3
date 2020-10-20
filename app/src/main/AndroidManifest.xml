@@ -26,7 +26,7 @@
             android:parentActivityName=".activity_lista_reservas" />
         <activity
             android:name=".activity_lista_reservas"
-            android:parentActivityName=".activity_admin_home" />
+            android:parentActivityName=".activity_principal" />
         <activity
             android:name=".activity_agregar_servicio_orden"
             android:parentActivityName=".detalle_orden" />
@@ -35,30 +35,29 @@
             android:parentActivityName=".activity_ordenes" /> <!-- flujo planes -->
         <activity
             android:name=".flujoPlan.activity_lista_planes"
-            android:parentActivityName=".activity_admin_home" />
+            android:parentActivityName=".activity_principal" />
         <activity android:name=".flujoPlan.activity_actualizar_plan" /> <!-- flujo servicios -->
         <activity
             android:name=".flujoServicio.activity_lista_servicios"
-            android:parentActivityName=".activity_admin_home" /> <!-- flujo contrato -->
+            android:parentActivityName=".activity_principal" /> <!-- flujo contrato -->
         <activity
             android:name=".flujoContrato.activity_lista_contratos"
-            android:parentActivityName=".activity_admin_home" />
+            android:parentActivityName=".activity_principal" />
         <activity android:name=".flujoContrato.activity_new_contrato" />
         <activity android:name=".flujoContrato.activity_actualizar_contrato" /> <!-- flujo vehiculos -->
         <activity
             android:name=".flujoVehiculo.activity_lista_vehiculos"
-            android:parentActivityName=".activity_admin_home" />
+            android:parentActivityName=".activity_principal" />
         <activity android:name=".flujoVehiculo.activity_actualizar_vehiculo" />
         <activity android:name=".flujoVehiculo.activity_new_vehiculo" /> <!-- flujo usuarios -->
         <activity
             android:name=".flujoUsuario.activity_lista_usuarios"
-            android:parentActivityName=".activity_admin_home" />
+            android:parentActivityName=".activity_principal" />
         <activity android:name=".flujoUsuario.activity_actualizar_usuario" />
         <activity android:name=".flujoUsuario.activity_new_usuario" /> <!-- menu admin -->
-        <activity android:name=".activity_admin_home" />
         <activity
             android:name=".activity_ordenes"
-            android:parentActivityName=".activity_admin_home" />
+            android:parentActivityName=".activity_principal" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

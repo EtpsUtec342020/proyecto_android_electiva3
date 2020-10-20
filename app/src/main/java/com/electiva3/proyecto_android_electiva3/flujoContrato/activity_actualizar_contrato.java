@@ -1,8 +1,5 @@
 package com.electiva3.proyecto_android_electiva3.flujoContrato;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,11 +8,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.adapters.EstadoAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Contrato;
-import com.electiva3.proyecto_android_electiva3.flujoPlan.activity_lista_planes;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -91,7 +90,7 @@ public class activity_actualizar_contrato extends AppCompatActivity
                     contrato.UpdateContrato();
 
                     conexion.getDatabaseReference().child("Contratos").child(id).updateChildren(contrato.getContratoMap());
-                    Toast.makeText(getApplicationContext(), "Plan "+estado, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Contrato "+estado, Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "No se realizaron Cambios", Toast.LENGTH_SHORT).show();
@@ -169,11 +168,11 @@ public class activity_actualizar_contrato extends AppCompatActivity
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 if (snapshot.exists()) {
                     estadosList.clear();
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         String estado = Objects.requireNonNull(ds.child("estado").getValue()).toString();
+
                         if(estado.equals(contrato.getEstado())) {
                             estadosList.add(estado);
                         }

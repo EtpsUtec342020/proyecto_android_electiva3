@@ -1,23 +1,21 @@
 package com.electiva3.proyecto_android_electiva3.flujoUsuario;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.adapters.EstadoAdapter;
 import com.electiva3.proyecto_android_electiva3.adapters.RolUsuarioAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -107,19 +105,7 @@ public class activity_actualizar_usuario extends AppCompatActivity
                         {
                             UpdateCorreo(correo);
                         }
-                        else if(!estadonuevo.equals(usuario.getEstado()))
-                        {
-                            if(estadonuevo.equals("Inactivo"))
-                            {
-                                DarBajaUsuario();
-                            }
-                            else if(estadonuevo.equals("Activo") && usuario.getEstado().equals("Inactivo") )
-                            {
-                                ActivarUsuario(correo, password);
-                            }
-                        }
                         conexion.getDatabaseReference().child("usuarios").child(id).updateChildren(usuario.getUsuarioMap());
-                    //    Toast.makeText(getApplicationContext(), "Usuario Actualizado", Toast.LENGTH_LONG).show();
                     }
                     Intent usuarios = new Intent(getApplicationContext() ,   activity_lista_usuarios.class);
                     startActivity(usuarios);
@@ -179,12 +165,6 @@ public class activity_actualizar_usuario extends AppCompatActivity
                     Roles();
                     Estados();
 
-
-             /*        estadoObjeto.EstadoList(conexion);
-                     estadoslist = estadoObjeto.getEstadoslist();
-                    Toast.makeText(getApplicationContext(), "tiene el list"+estadoObjeto.getEstado(), Toast.LENGTH_LONG).show();
-                    EstadoAdapter estadoAdapter = new EstadoAdapter(getApplicationContext() , R.layout.custom_simple_spinner_item, estadoslist);
-                    spnEstado.setAdapter(estadoAdapter);*/
                 }
             }
 
@@ -204,8 +184,7 @@ public class activity_actualizar_usuario extends AppCompatActivity
                 if (snapshot.exists()) {
                     roleslist.clear();
 
-                    for (DataSnapshot ds : snapshot.getChildren())
-                    {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
                         String rol = Objects.requireNonNull(ds.child("rol").getValue()).toString();
                         if(rol.equals(usuario.getRol()))
                         {
@@ -359,45 +338,6 @@ public class activity_actualizar_usuario extends AppCompatActivity
                         }
                     }
                 });
-    }
-
-    public void DarBajaUsuario()
-    {
-        //primero logueamos el usuario
-        conexion.getAuth().signInWithEmailAndPassword(usuario.getCorreo() , usuario.getPassword()).addOnCompleteListener(
-                new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            if (user != null) {
-                                user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        Toast.makeText(getApplicationContext(), "Usuario Inactivo", Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                            } else {
-                                Toast.makeText(getApplicationContext(), "user is null", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "no se logueo", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-    }
-
-    public void ActivarUsuario(final String cor, final String pas)
-    {
-        conexion.getAuth().createUserWithEmailAndPassword(cor, pas)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                Toast.makeText(getApplicationContext(), "Usuario Activo", Toast.LENGTH_LONG).show();
-            }
-        });
-
     }
 
     @Override

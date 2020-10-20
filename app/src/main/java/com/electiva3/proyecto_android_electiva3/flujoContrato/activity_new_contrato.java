@@ -1,9 +1,5 @@
 package com.electiva3.proyecto_android_electiva3.flujoContrato;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +12,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.adapters.PlanListAdapter;
 import com.electiva3.proyecto_android_electiva3.adapters.UsuarioListAdapter;
@@ -25,7 +25,6 @@ import com.electiva3.proyecto_android_electiva3.entities.Contrato;
 import com.electiva3.proyecto_android_electiva3.entities.Plan;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
 import com.electiva3.proyecto_android_electiva3.entities.Vehiculo;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -55,6 +54,8 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
     private int i;
     private int conteo;
     private String fecha;
+    private String duracion;
+    private String title = "Crer Nuevo Contrato";
 
     Conexion conexion = new Conexion();
     Contrato contrato = new Contrato();
@@ -64,6 +65,8 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_contrato);
+
+        getSupportActionBar().setTitle(title);
 
         txtCliente = findViewById(R.id.txtCliente);
         txtPlan = findViewById(R.id.txtPlan);
@@ -94,6 +97,7 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
         txtFechaA.setOnClickListener(this);
         btnCancelar.setOnClickListener(this);
         btnCancelar2.setOnClickListener(this);
+
         tiemposSelecionar();
 
 
@@ -105,8 +109,7 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
                 String cliente = txtCliente.getText().toString();
                 String vehiculo = txtVehiculo.getText().toString();
                 String plan = txtPlan.getText().toString();
-                String duracion = spnDuracionC.getSelectedItem().toString();
-                String fechaV = txtFechaVen.getText().toString();
+                duracion = spnDuracionC.getSelectedItem().toString();
                 String numMantos = txtNumManto.getText().toString();
                 String dato = txtCosto.getText().toString();
 
@@ -132,7 +135,6 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
                 {
                     String key = (UUID.randomUUID().toString());
                     contrato.setNumeroContrato(conteo+1);
-                    contrato.setFechaVencimiento("");
                     contrato.setFechaCreacion(conexion.ObtenerHora());
                     contrato.setEstado("Activo");
                     conexion.getDatabaseReference().child("Contratos").child(key).setValue(contrato);
@@ -174,9 +176,10 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
                 lvlistar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                      
+
                         txtVehiculo.setText(vehiculoList.get(position).getPlaca());
 
+                        listVehiculos.add(vehiculoList.get(position).getKey());
                         listVehiculos.add(vehiculoList.get(position).getPlaca());
                         contrato.setVehiculo(listVehiculos);
                         vt2.setVisibility(View.INVISIBLE);
@@ -203,45 +206,58 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
                         txtCosto.setText(String.valueOf(costo));
                         numero = 4;
                         txtNumManto.setText(numero +" mantenimientos");
+
                         contrato.setNumeroMantenimientos(numero);
                         contrato.setCostoTotal(costo);
                     }
                 });
                 break;
             case R.id.txtFechaA:
-                    vt3.setVisibility(View.VISIBLE);
+                vt3.setVisibility(View.VISIBLE);
+                cvfechaActivacion.setVisibility(View.VISIBLE);
+                cvfechaActivacion.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+                    @Override
+                    public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                        Calendar calendar =  Calendar.getInstance();
+                        Calendar calendar1  = Calendar.getInstance();
 
-                    cvfechaActivacion.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-                        @Override
-                        public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                            Calendar calendar =  Calendar.getInstance();
-                            Calendar calendar1  = Calendar.getInstance();
+                        calendar.set(Calendar.YEAR ,  year);
+                        calendar.set(Calendar.MONTH , month);
+                        calendar.set(Calendar.DAY_OF_MONTH , dayOfMonth);
 
-                            calendar.set(Calendar.YEAR ,  year);
-                            calendar.set(Calendar.MONTH , month);
-                            calendar.set(Calendar.DAY_OF_MONTH , dayOfMonth);
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        fecha  = simpleDateFormat.format(calendar.getTime());  //Utilizara como fecha
 
-                            fecha  = simpleDateFormat.format(calendar.getTime());  //Utilizara como fecha
+                        long hoy = calendar1.getTimeInMillis();
+                        long seleccion  = calendar.getTimeInMillis();
 
-                            long hoy = calendar1.getTimeInMillis();
-                            long seleccion  = calendar.getTimeInMillis();
-
-                            if(seleccion< hoy){
-                                Toast.makeText(getApplicationContext(), "La fecha seleccionada no puede ser menor a la actual", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-                                txtFechaA.setText(fecha);
-                                vt3.setVisibility(View.INVISIBLE);
-                                contrato.setFechaActivacion(fecha);
-
-                                
-
-                            }
+                        if(seleccion< hoy){
+                            Toast.makeText(getApplicationContext(), "La fecha seleccionada no puede ser menor a la actual", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                        else
+                        {
+                            txtFechaA.setText(fecha);
+                            vt3.setVisibility(View.INVISIBLE);
+                            contrato.setFechaActivacion(fecha);
+
+                            duracion = spnDuracionC.getSelectedItem().toString();
+                            if(duracion.equals("24 meses")){
+                                calendar.set(Calendar.YEAR ,  year+2);
+                            }
+                            else if(duracion.equals("18 meses")){
+                                calendar.set(Calendar.MONTH , month+18);
+                            }
+                            else{
+                                calendar.set(Calendar.YEAR ,  year+1);
+                            }
+                            fecha  = simpleDateFormat.format(calendar.getTime());
+                            txtFechaVen.setText(fecha);
+                            contrato.setFechaVencimiento(fecha);
+                            contrato.setDuracion(duracion);
+                        }
+                    }
+                });
                 break;
             case R.id.btnCancelar:
 
@@ -297,9 +313,8 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
                         String key = ds.getKey();
                         String placa = ds.child("placa").getValue().toString();
                         String marca = ds.child("marca").getValue().toString()+" "+ds.child("modelo").getValue().toString();
-                        String anio = ds.child("anio").getValue().toString();
 
-                        vehiculoList.add(new Vehiculo(key, placa, marca , anio));
+                        vehiculoList.add(new Vehiculo(key, placa, marca));
                     }
                     VehiculoListAdapter vehiculoAdapter = new VehiculoListAdapter(getApplicationContext() ,R.layout.item_servicio, vehiculoList );
                     lvlistar.setAdapter(vehiculoAdapter);
@@ -361,34 +376,29 @@ public class activity_new_contrato extends AppCompatActivity implements View.OnC
                     spnDuracionC.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                           String i = parent.getItemAtPosition(position).toString();
+                            String i = parent.getItemAtPosition(position).toString();
 
-                           if(costoPlan == 0) {
-                               txtCosto.setText(String.valueOf(costo));
-                           }
-                           else {
-                               if(i.equals("24 meses")) {
-                                   costo = costoPlan * 24;
-                                   numero = 8;
-                                   txtNumManto.setText(numero+" mantenimientos");
-                                   txtCosto.setText(String.valueOf(costo));
-                               }
-                               else if(i.equals("18 meses")) {
-                                   costo = costoPlan * 18;
-                                   numero = 6;
-                                   txtNumManto.setText(numero+" mantenimientos");
-                                   txtCosto.setText(String.valueOf(costo));
-                               }
-                               else{
-                                   costo = costoPlan * 12;
-                                   numero = 4;
-                                   txtNumManto.setText(numero +" mantenimientos");
-                                   txtCosto.setText(String.valueOf(costo));
-                               }
-                               contrato.setCostoTotal(costo);
-                               contrato.setDuracion(i);
-                               contrato.setNumeroContrato(numero);
-                           }
+                            if(costoPlan == 0) {
+                                txtCosto.setText(String.valueOf(costo));
+                            }
+                            else {
+                                if(i.equals("24 meses")) {
+                                    costo = costoPlan * 24;
+                                    numero = 8;
+                                }
+                                else if(i.equals("18 meses")) {
+                                    costo = costoPlan * 18;
+                                    numero = 6;
+                                }
+                                else{
+                                    costo = costoPlan * 12;
+                                    numero = 4;
+                                }
+                                txtNumManto.setText(numero+" mantenimientos");
+                                txtCosto.setText(String.valueOf(costo));
+                                contrato.setCostoTotal(costo);
+                                contrato.setNumeroMantenimientos(numero);
+                            }
                         }
 
                         @Override

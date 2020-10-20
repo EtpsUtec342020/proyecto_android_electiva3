@@ -1,7 +1,6 @@
 package com.electiva3.proyecto_android_electiva3.entities;
 
 import com.google.firebase.database.IgnoreExtraProperties;
-import com.google.gson.internal.bind.ObjectTypeAdapter;
 
 import java.util.HashMap;
 
@@ -27,11 +26,10 @@ public class Vehiculo
 
     }
 
-    public Vehiculo( String key , String placa , String  marca ,String anio  ){
+    public Vehiculo( String key , String placa , String  marca ){
         this.key = key;
         this.marca =  marca ;
         this.placa =   placa;
-        this.anio =  anio;
     }
 
     public Vehiculo( String key , String placa , String  marca ,String anio , String modelo ){

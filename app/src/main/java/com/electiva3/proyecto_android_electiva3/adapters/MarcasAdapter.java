@@ -16,12 +16,13 @@ import com.electiva3.proyecto_android_electiva3.flujoMarcas.actualizar_marca;
 
 import java.util.ArrayList;
 
-public class MarcasAdapter  extends RecyclerView.Adapter< MarcasAdapter.MyViewHolder   >{
+public class MarcasAdapter  extends RecyclerView.Adapter< MarcasAdapter.MyViewHolder> implements View.OnClickListener {
 
 
     private LayoutInflater inflater;
     private Context context;
     private ArrayList<Marca> marcas;
+    private View.OnClickListener listener;
 
     public MarcasAdapter(Context context ,  ArrayList<Marca> marcas){
         inflater  =  LayoutInflater.from(context);
@@ -33,6 +34,7 @@ public class MarcasAdapter  extends RecyclerView.Adapter< MarcasAdapter.MyViewHo
     public MarcasAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_lista, parent, false);
         MarcasAdapter.MyViewHolder holder = new MyViewHolder(view);
+        view.setOnClickListener(this);
         return holder;
     }
 
@@ -61,6 +63,19 @@ public class MarcasAdapter  extends RecyclerView.Adapter< MarcasAdapter.MyViewHo
         return marcas.size();
     }
 
+    @Override
+    public void onClick(View v)
+    {
+        if(listener!=null)
+        {
+            listener.onClick(v);
+        }
+    }
+
+    public void SetOnClickListener(View.OnClickListener Listener)
+    {
+        this.listener = Listener;
+    }
 
 
     class MyViewHolder extends RecyclerView.ViewHolder
