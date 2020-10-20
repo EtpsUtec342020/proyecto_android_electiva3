@@ -27,6 +27,21 @@
                     android:orientation="vertical">
 
 
+                    <ImageView
+                        android:id="@+id/imvImagen"
+                        android:layout_width="match_parent"
+                        android:layout_height="221dp"
+                        app:srcCompat="@drawable/ic_image" />
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Seleccionar Imagen"
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
