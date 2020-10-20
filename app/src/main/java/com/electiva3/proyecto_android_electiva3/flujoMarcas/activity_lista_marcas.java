@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.electiva3.proyecto_android_electiva3.R;
+import com.electiva3.proyecto_android_electiva3.activity_principal;
 import com.electiva3.proyecto_android_electiva3.adapters.MarcasAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Marca;
@@ -41,6 +42,10 @@ public class activity_lista_marcas extends AppCompatActivity {
         marcas =  new ArrayList<>();
         databaseReference =  FirebaseDatabase.getInstance().getReference().child("marcas");
         fabAgregarMarca = findViewById(R.id.fabAgregarMarca);
+
+        getSupportActionBar().setTitle("Marcas");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
 
         LinearLayoutManager layoutManager =  new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -76,7 +81,15 @@ public class activity_lista_marcas extends AppCompatActivity {
             public void onClick(View v) {                 
                 Intent intent  =  new Intent(getApplicationContext() , crear_marca.class  );
                 startActivity(intent);
+                finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent= new Intent(getApplicationContext() , activity_principal.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
+import com.electiva3.proyecto_android_electiva3.activity_principal;
 import com.electiva3.proyecto_android_electiva3.adapters.OrdenAdapter;
 import com.electiva3.proyecto_android_electiva3.adapters.VehiculosAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Vehiculo;
@@ -49,6 +50,10 @@ public class activity_lista_vehiculos extends AppCompatActivity
         fabAgregarVehiculo =  findViewById(R.id.fabAgregarVehiculo);
         conexion =  new Conexion();
         vehiculos =  new ArrayList<>();
+
+        getSupportActionBar().setTitle("Vehiculos");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
 
         conexion.inicializarFirabase(this);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("vehiculos");
@@ -97,10 +102,17 @@ public class activity_lista_vehiculos extends AppCompatActivity
             public void onClick(View v) {
                 Intent agregarVehiculo  =  new Intent(  getApplicationContext() ,   activity_new_vehiculo.class   );
                 startActivity(agregarVehiculo);
+                finish();
             }
         });
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent= new Intent(getApplicationContext() , activity_principal.class);
+        startActivity(intent);
+        finish();
+    }
 
 }

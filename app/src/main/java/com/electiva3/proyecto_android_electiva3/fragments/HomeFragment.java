@@ -71,26 +71,32 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
             case R.id.imgMarca:
                 Intent marcaModelo  = new Intent( getActivity() , activity_lista_marcas.class);
                 startActivity(marcaModelo);
+                getActivity().finish();
                 break;
             case R.id.imgUsuario:
                 Intent usuarios = new Intent(getActivity() ,   activity_lista_usuarios.class);
                 startActivity(usuarios);
+                getActivity().finish();
                 break;
             case R.id.imgContrato:
                 Intent contratos = new Intent(getActivity() ,   activity_lista_contratos.class);
                 startActivity(contratos);
+                getActivity().finish();
                 break;
             case R.id.imgVehiculo:
                 Intent vehiculos = new Intent(getActivity() ,   activity_lista_vehiculos.class);
                 startActivity(vehiculos);
+                getActivity().finish();
                 break;
             case R.id.imgServicio:
                 Intent servicios = new Intent(getActivity() ,   activity_lista_servicios.class);
                 startActivity(servicios);
+                getActivity().finish();
                 break;
             case R.id.imgPlan:
                 Intent planes = new Intent(getActivity() ,   activity_lista_planes.class);
                 startActivity(planes);
+                getActivity().finish();
                 break;
 
             case R.id.imgReserva:

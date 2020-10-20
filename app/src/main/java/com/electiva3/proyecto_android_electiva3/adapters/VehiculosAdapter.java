@@ -1,5 +1,6 @@
 package com.electiva3.proyecto_android_electiva3.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -58,6 +59,8 @@ public class VehiculosAdapter extends RecyclerView.Adapter<VehiculosAdapter.MyVi
                 detalleVehiculo.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 detalleVehiculo.putExtra("keyVehiculo" , key);
                 context.startActivity(detalleVehiculo);
+                //((Activity)context).finish();
+
             }
         });
     }

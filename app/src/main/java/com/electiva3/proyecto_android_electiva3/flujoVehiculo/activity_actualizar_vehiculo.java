@@ -26,6 +26,8 @@ import com.electiva3.proyecto_android_electiva3.entities.Imagen;
 import com.electiva3.proyecto_android_electiva3.entities.Marca;
 import com.electiva3.proyecto_android_electiva3.entities.Modelo;
 import com.electiva3.proyecto_android_electiva3.entities.Vehiculo;
+import com.electiva3.proyecto_android_electiva3.flujoMarcas.activity_lista_marcas;
+import com.electiva3.proyecto_android_electiva3.flujoModelos.crear_modelo;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -415,6 +417,12 @@ public class activity_actualizar_vehiculo extends AppCompatActivity
 
             vehiculo.UpdateVehiculo();
             conexion.getDatabaseReference().child("vehiculos").child( vehiculo.getKey() ).updateChildren(vehiculo.getVehiculoMap()  );
+
+            Toast.makeText(activity_actualizar_vehiculo.this, "Datos actualizados exitosamente", Toast.LENGTH_SHORT).show();
+
+            Intent intent= new Intent(getApplicationContext() , activity_lista_marcas.class);
+            startActivity(intent);
+            finish();
         }
     }
 

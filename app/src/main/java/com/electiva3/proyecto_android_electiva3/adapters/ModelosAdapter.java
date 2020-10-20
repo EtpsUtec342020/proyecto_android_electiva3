@@ -1,5 +1,6 @@
 package com.electiva3.proyecto_android_electiva3.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -52,6 +53,8 @@ public class ModelosAdapter extends RecyclerView.Adapter< ModelosAdapter.MyViewH
             Intent intent = new Intent(   context ,  actualizar_modelo.class   );
             intent.putExtra("keyModelo" , key   );
             context.startActivity(intent);
+                //((Activity)context).finish();
+
             }
         });
     }

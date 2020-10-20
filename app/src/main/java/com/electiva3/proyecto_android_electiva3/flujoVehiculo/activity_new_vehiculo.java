@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.electiva3.proyecto_android_electiva3.R;
+import com.electiva3.proyecto_android_electiva3.activity_principal;
 import com.electiva3.proyecto_android_electiva3.adapters.MarcaSpinnerAdapter;
 import com.electiva3.proyecto_android_electiva3.adapters.ModelosSpinnerAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
@@ -31,6 +32,8 @@ import com.electiva3.proyecto_android_electiva3.entities.Imagen;
 import com.electiva3.proyecto_android_electiva3.entities.Marca;
 import com.electiva3.proyecto_android_electiva3.entities.Modelo;
 import com.electiva3.proyecto_android_electiva3.entities.Vehiculo;
+import com.electiva3.proyecto_android_electiva3.flujoMarcas.activity_lista_marcas;
+import com.electiva3.proyecto_android_electiva3.flujoModelos.crear_modelo;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -318,9 +321,21 @@ public class activity_new_vehiculo extends AppCompatActivity implements View.OnC
             conexion.getDatabaseReference().child("vehiculos").child(key).setValue(vehiculo);
             guardarFotoVehiculo(key);
 
+            Toast.makeText(activity_new_vehiculo.this, "Datos ingresados exitosamente", Toast.LENGTH_SHORT).show();
+
+            Intent intent= new Intent(getApplicationContext() , activity_lista_marcas.class);
+            startActivity(intent);
+            finish();
+
         }
 
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent= new Intent(getApplicationContext() , activity_lista_vehiculos.class);
+        startActivity(intent);
+        finish();
+    }
 }

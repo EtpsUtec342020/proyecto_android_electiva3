@@ -2,12 +2,15 @@ package com.electiva3.proyecto_android_electiva3.flujoMarcas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.electiva3.proyecto_android_electiva3.R;
+import com.electiva3.proyecto_android_electiva3.activity_principal;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Marca;
 
@@ -67,9 +70,23 @@ public class crear_marca extends AppCompatActivity {
 
                     conexion.getDatabaseReference().child("marcas").child(key).setValue(marca);
 
+
+                    Toast.makeText(crear_marca.this, "Datos Creados exitosamente", Toast.LENGTH_SHORT).show();
+
+                    Intent intent= new Intent(getApplicationContext() , activity_lista_marcas.class);
+                    startActivity(intent);
+                    finish();
+
                 }
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent= new Intent(getApplicationContext() , activity_lista_marcas.class);
+        startActivity(intent);
+        finish();
     }
 }

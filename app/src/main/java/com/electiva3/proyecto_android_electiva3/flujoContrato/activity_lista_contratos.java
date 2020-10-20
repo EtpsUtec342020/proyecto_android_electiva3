@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.electiva3.proyecto_android_electiva3.R;
+import com.electiva3.proyecto_android_electiva3.activity_principal;
 import com.electiva3.proyecto_android_electiva3.adapters.ContratoAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Contrato;
@@ -109,5 +110,12 @@ public class activity_lista_contratos extends AppCompatActivity
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent= new Intent(getApplicationContext() , activity_principal.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -1,5 +1,6 @@
 package com.electiva3.proyecto_android_electiva3.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -49,8 +50,10 @@ public class MarcasAdapter  extends RecyclerView.Adapter< MarcasAdapter.MyViewHo
             public void onClick(View v) {
                 String key =  marcas.get(position).getKey();
                 Intent actualizarMarca =  new Intent( context   , actualizar_marca.class     );
+                actualizarMarca.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 actualizarMarca.putExtra("keyMarca" , key   );
                 context.startActivity(actualizarMarca);
+                //((Activity)context).finish();
             }
         });
     }

@@ -3,16 +3,19 @@ package com.electiva3.proyecto_android_electiva3.flujoModelos;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Modelo;
+import com.electiva3.proyecto_android_electiva3.flujoMarcas.activity_lista_marcas;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -84,6 +87,12 @@ public class actualizar_modelo extends AppCompatActivity {
             modelo.setEstado(estado);
             modelo.updateModelo();
             conexion.getDatabaseReference().child("modelos").child(modelo.getKey()).updateChildren(modelo.getModeloMap());
+
+            Toast.makeText(actualizar_modelo.this, "Datos actualizados exitosamente", Toast.LENGTH_SHORT).show();
+
+            Intent intent= new Intent(getApplicationContext() , activity_lista_marcas.class);
+            startActivity(intent);
+            finish();
         }
     }
 

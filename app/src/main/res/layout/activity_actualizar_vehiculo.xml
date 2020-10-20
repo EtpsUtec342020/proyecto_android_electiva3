@@ -168,7 +168,7 @@
 
                 <Button
                     android:id="@+id/btnActualizar"
-                    android:layout_width="323dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
@@ -177,7 +177,7 @@
                     android:layout_marginRight="30dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/ic_btn_launcher"
-                    android:text="Aztualizar"
+                    android:text="Actualizar"
                     android:textColor="@color/design_default_color_background" />
 
                 <Button

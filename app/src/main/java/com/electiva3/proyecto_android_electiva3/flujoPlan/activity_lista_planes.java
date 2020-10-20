@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.electiva3.proyecto_android_electiva3.R;
+import com.electiva3.proyecto_android_electiva3.activity_principal;
 import com.electiva3.proyecto_android_electiva3.adapters.PlanAdapter;
 import com.electiva3.proyecto_android_electiva3.adapters.ServicioListAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
@@ -329,6 +330,15 @@ public class activity_lista_planes extends AppCompatActivity implements View.OnC
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent= new Intent(getApplicationContext() , activity_principal.class);
+        startActivity(intent);
+        finish();
     }
 
 

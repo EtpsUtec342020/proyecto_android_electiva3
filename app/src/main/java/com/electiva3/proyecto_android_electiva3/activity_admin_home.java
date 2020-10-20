@@ -60,6 +60,7 @@ public class activity_admin_home extends AppCompatActivity implements View.OnCli
             case R.id.imgVehiculo:
                 Intent vehiculos = new Intent(getApplicationContext() ,   activity_lista_vehiculos.class);
                 startActivity(vehiculos);
+                finish();
                 break;
             case R.id.imgServicio:
                 Intent servicios = new Intent(getApplicationContext() ,   activity_lista_servicios.class);
