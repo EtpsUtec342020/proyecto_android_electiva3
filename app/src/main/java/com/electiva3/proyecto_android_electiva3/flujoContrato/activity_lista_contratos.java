@@ -1,23 +1,20 @@
 package com.electiva3.proyecto_android_electiva3.flujoContrato;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.activity_principal;
 import com.electiva3.proyecto_android_electiva3.adapters.ContratoAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Contrato;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -30,9 +27,9 @@ public class activity_lista_contratos extends AppCompatActivity
     private RecyclerView rvContrato;
     private FloatingActionButton fabAgregarConcontrato;
     private ArrayList<Contrato> contratoList = new ArrayList<>();
+    private String title = "Lista Contratos";
     int i = 0;
     Conexion conexion = new Conexion();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,6 +39,8 @@ public class activity_lista_contratos extends AppCompatActivity
 
         rvContrato = findViewById(R.id.rvContrato);
         fabAgregarConcontrato = findViewById(R.id.fabAgregarContrato);
+
+        getSupportActionBar().setTitle(title);
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager( getApplicationContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

@@ -1,8 +1,6 @@
 package com.electiva3.proyecto_android_electiva3.entities;
 
 
-import android.widget.ListAdapter;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -176,5 +174,18 @@ public class Usuario
     }
 
 
+    public void UpdateDatos()
+    {
+            usuarioMap.put("nombre", nombre);
+            usuarioMap.put("dui", dui);
+            usuarioMap.put("nit", nit);
+            usuarioMap.put("licencia", licencia);
+            usuarioMap.put("correo", correo);
+            usuarioMap.put("password", password);
+            usuarioMap.put("direccion", direccion);
+            usuarioMap.put("telefono", telefono);
+            usuarioMap.put("rol" , rol);
+            usuarioMap.put("estado", estado);
+    }
 }
 

@@ -1,13 +1,13 @@
 package com.electiva3.proyecto_android_electiva3.flujoMarcas;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.activity_principal;
@@ -64,6 +64,16 @@ public class activity_lista_marcas extends AppCompatActivity {
                     }
 
                     MarcasAdapter  marcasAdapter =  new MarcasAdapter(  getApplicationContext() , marcas );
+                    marcasAdapter.SetOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            String key =  marcas.get(rvMarcas.getChildAdapterPosition(v)).getKey();
+                            Intent actualizarMarca =  new Intent( getApplicationContext() , actualizar_marca.class     );
+                            actualizarMarca.putExtra("keyMarca" , key   );
+                            finish();
+                        }
+                    });
                     rvMarcas.setAdapter(marcasAdapter);
 
                 }

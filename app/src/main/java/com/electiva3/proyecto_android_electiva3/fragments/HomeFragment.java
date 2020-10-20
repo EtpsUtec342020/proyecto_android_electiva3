@@ -2,24 +2,22 @@ package com.electiva3.proyecto_android_electiva3.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.fragment.app.Fragment;
+
 import com.electiva3.proyecto_android_electiva3.R;
-import com.electiva3.proyecto_android_electiva3.activity_lista_marca_modelo;
+import com.electiva3.proyecto_android_electiva3.activity_lista_reservas;
+import com.electiva3.proyecto_android_electiva3.activity_ordenes;
 import com.electiva3.proyecto_android_electiva3.flujoContrato.activity_lista_contratos;
 import com.electiva3.proyecto_android_electiva3.flujoMarcas.activity_lista_marcas;
 import com.electiva3.proyecto_android_electiva3.flujoPlan.activity_lista_planes;
-import com.electiva3.proyecto_android_electiva3.activity_lista_reservas;
 import com.electiva3.proyecto_android_electiva3.flujoServicio.activity_lista_servicios;
 import com.electiva3.proyecto_android_electiva3.flujoUsuario.activity_lista_usuarios;
 import com.electiva3.proyecto_android_electiva3.flujoVehiculo.activity_lista_vehiculos;
-import com.electiva3.proyecto_android_electiva3.activity_ordenes;
 
 public class HomeFragment extends Fragment  implements View.OnClickListener  {
 
@@ -56,8 +54,6 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
         imgPlan.setOnClickListener(this);
         imgOrdenServicio.setOnClickListener(this);
         imgReserva.setOnClickListener(this);
-
-
 
         return view;
     }
