@@ -57,6 +57,8 @@ public class activity_actualizar_vehiculo extends AppCompatActivity
     private ArrayList<Modelo> modelos;
     private StorageReference storageReference;
     private static final int GALLERY_INTENT = 1;
+    private boolean setModelo =  false;
+    private ArrayAdapter<String> estadosAdapter;
 
     private String[] estados  =  { "activo" , "inactivo" };
 
@@ -124,6 +126,13 @@ public class activity_actualizar_vehiculo extends AppCompatActivity
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        btnActualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpdateVehiculo();
             }
         });
 
@@ -204,6 +213,12 @@ public class activity_actualizar_vehiculo extends AppCompatActivity
 
                     ModelosSpinnerAdapter modelosSpinnerAdapter =  new ModelosSpinnerAdapter( getApplicationContext() , R.layout.custom_simple_spinner_item ,  modelos );
                     spnModelo.setAdapter( modelosSpinnerAdapter );
+
+                    if(!setModelo){
+                        seleccionarModelo( vehiculo.getKeyModelo()  );
+                        setModelo =  true;
+                    }
+
                 }
 
             }
@@ -248,7 +263,7 @@ public class activity_actualizar_vehiculo extends AppCompatActivity
 
 
     public void cargarEstados(){
-        ArrayAdapter<String> estadosAdapter  = new ArrayAdapter<String>(getApplicationContext() , R.layout.support_simple_spinner_dropdown_item , estados  );
+        estadosAdapter  = new ArrayAdapter<String>(getApplicationContext() , R.layout.support_simple_spinner_dropdown_item , estados  );
         spnEstado.setAdapter(estadosAdapter);
     }
 
@@ -306,17 +321,16 @@ public class activity_actualizar_vehiculo extends AppCompatActivity
                     vehiculo.setMarca(ds.child("marca").getValue().toString());
                     vehiculo.setModelo(ds.child("modelo").getValue().toString());
                     vehiculo.setAnio( ds.child("anio").getValue().toString()  );
-
+                    vehiculo.setEstado( ds.child("estado").getValue().toString());
+                    vehiculo.setFechaRegistro(   ds.child("fechaRegistro").toString() );
 
                     edtColor.setText(vehiculo.getColor());
                     edtPlaca.setText(vehiculo.getPlaca());
                     edtChasis.setText(vehiculo.getNumChasis());
                     edtAnio.setText(vehiculo.getAnio());
-
-
+                    seleccionarMarca( vehiculo.getKeyMarca() );
+                    seleccionarEstado(vehiculo.getEstado());
                 }
-
-
 
             }
 
@@ -326,7 +340,83 @@ public class activity_actualizar_vehiculo extends AppCompatActivity
             }
         });
 
-
     }
+
+    public int findIndexMarca(String keyMarca){
+        int indexMarca = -1;
+        for(  int i=0  ;  i  < marcas.size() ; i++ ){
+            if(marcas.get(i).getKey().equals( keyMarca )){
+                indexMarca = i;
+                break;
+            }
+        }
+        return indexMarca;
+    }
+
+    public int findIndexModelo(String keyModelo){
+        int indexModelo = -1;
+        for(int i=0; i < modelos.size(); i++){
+            if(modelos.get(i).getKey().equals(keyModelo)){
+                indexModelo = i;
+                break;
+            }
+        }
+        return indexModelo;
+    }
+
+
+    public void seleccionarMarca(String keyMarca ){
+        int indexMarca  =  findIndexMarca(keyMarca);
+        spnMarca.setSelection(indexMarca);
+    }
+
+    public void seleccionarModelo(String keyModelo){
+        int indexModelo = findIndexModelo(keyModelo);
+        spnModelo.setSelection(indexModelo);
+    }
+
+    public void seleccionarEstado(String estado){
+        int spinnerPosition = estadosAdapter.getPosition(estado);
+        spnEstado.setSelection(spinnerPosition);
+    }
+
+    public void UpdateVehiculo(){
+
+        String placa = edtPlaca.getText().toString();
+        String numChasis = edtChasis.getText().toString();
+        String anio =  edtAnio.getText().toString();
+        String color  =  edtColor.getText().toString();
+
+        if(placa.isEmpty()){
+            edtPlaca.setError("El campo placa es requerido!");
+        }else if(numChasis.isEmpty()){
+            edtChasis.setError("El campo número chasis es requerido!");
+        }else if(anio.isEmpty()){
+            edtAnio.setError("El campo año es requerido!");
+        }else if(color.isEmpty()){
+            edtColor.setError("El campo color es requerido!");
+        }else{
+
+            String estado = estados[spnEstado.getSelectedItemPosition()];;
+            String marca  = marcas.get(spnMarca.getSelectedItemPosition()).getMarca();
+            String keyMarca  = marcas.get(spnMarca.getSelectedItemPosition()).getKey();
+            String modelo = modelos.get(  spnModelo.getSelectedItemPosition() ).getModelo();
+            String keyModelo =  modelos.get(  spnModelo.getSelectedItemPosition()  ).getKey();
+
+            vehiculo.setPlaca(placa);
+            vehiculo.setNumChasis(numChasis);
+            vehiculo.setAnio(anio);
+            vehiculo.setColor(color);
+            vehiculo.setKeyMarca(keyMarca);
+            vehiculo.setKeyModelo(keyModelo);
+            vehiculo.setMarca( marca );
+            vehiculo.setEstado(estado);
+            vehiculo.setModelo(modelo);
+
+            vehiculo.UpdateVehiculo();
+            conexion.getDatabaseReference().child("vehiculos").child( vehiculo.getKey() ).updateChildren(vehiculo.getVehiculoMap()  );
+        }
+    }
+
 
 }

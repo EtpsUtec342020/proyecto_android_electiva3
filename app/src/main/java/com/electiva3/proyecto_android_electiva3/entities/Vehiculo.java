@@ -130,15 +130,26 @@ public class Vehiculo
         return keyModelo;
     }
 
+    public HashMap<String, Object> getVehiculoMap() {
+        return vehiculoMap;
+    }
+
+    public void setVehiculoMap(HashMap<String, Object> vehiculoMap) {
+        this.vehiculoMap = vehiculoMap;
+    }
+
     public void UpdateVehiculo(){
         vehiculoMap.put("anio" , anio);
         vehiculoMap.put("modelo", modelo);
         vehiculoMap.put("keyModelo" , keyModelo);
+        vehiculoMap.put("keyMarca" , keyMarca);
         vehiculoMap.put("color" , color);
         vehiculoMap.put("fechaRegistro" , fechaRegistro);
         vehiculoMap.put("marca" , marca);
         vehiculoMap.put("placa" , placa);
         vehiculoMap.put("numChasis", numChasis);
+        vehiculoMap.put("estado" , estado);
+        vehiculoMap.put("fechaRegistro" , fechaRegistro);
     }
 
 }
