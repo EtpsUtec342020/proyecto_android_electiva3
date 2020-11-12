@@ -3,8 +3,8 @@
     package="com.electiva3.proyecto_android_electiva3">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_snauto_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".flujoModelos.actualizar_modelo"></activity>
+        <activity android:name=".SeleccionarHorarioReserva"></activity>
+        <activity android:name=".activity_search_cliente" />
+        <activity android:name=".activity_agregar_reserva" />
+        <activity android:name=".flujoModelos.actualizar_modelo" />
         <activity android:name=".flujoModelos.crear_modelo" />
         <activity android:name=".flujoMarcas.crear_marca" />
         <activity android:name=".flujoMarcas.actualizar_marca" />

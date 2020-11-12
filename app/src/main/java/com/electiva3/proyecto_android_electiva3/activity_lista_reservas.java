@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.electiva3.proyecto_android_electiva3.adapters.ReservasAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Reserva;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ public class activity_lista_reservas extends AppCompatActivity {
 
 
 
+    private FloatingActionButton fabAgregarReserva;
     String title="Reservas";
     RecyclerView rvReservas;
 
@@ -25,6 +28,7 @@ public class activity_lista_reservas extends AppCompatActivity {
         setContentView(R.layout.activity_lista_reservas);
 
 
+        fabAgregarReserva =  findViewById(R.id.fabAgregarReserva);
         rvReservas =  findViewById(R.id.rvReservas);
 
         getSupportActionBar().setTitle(title);
@@ -38,6 +42,16 @@ public class activity_lista_reservas extends AppCompatActivity {
 
         ReservasAdapter reservasAdapter =  new ReservasAdapter( getApplicationContext() ,  buildReservas()  );
         rvReservas.setAdapter( reservasAdapter  );
+
+        fabAgregarReserva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent =  new Intent( getApplicationContext()  , activity_search_cliente.class  );
+                startActivity(  intent );
+
+            }
+        });
 
 
     }

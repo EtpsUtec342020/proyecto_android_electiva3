@@ -97,6 +97,7 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
 
             case R.id.imgReserva:
                 Intent reservas =  new Intent(getActivity() , activity_lista_reservas.class);
+
                 startActivity(reservas);
                 getActivity().finish();
                 break;

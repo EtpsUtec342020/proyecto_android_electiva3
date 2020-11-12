@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,19 +15,22 @@ import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 
-public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyViewHolder> implements View.OnClickListener
+public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyViewHolder> implements View.OnClickListener , Filterable
 {
     private LayoutInflater inflater;
     private Context context;
     private ArrayList<Usuario> usuarios;
+    private ArrayList<Usuario> usuariosAll;
     private View.OnClickListener listener;
 
     public UsuariosAdapter(Context context , ArrayList<Usuario> usuarios ){
         inflater =  LayoutInflater.from(context);
         this.context= context;
         this.usuarios = usuarios;
+        this.usuariosAll = new ArrayList<>(usuarios);
     }
 
     @Override
@@ -65,6 +70,46 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.MyView
     {
         this.listener = Listener;
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter =  new Filter() {
+
+        //Run on background thread
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            ArrayList<Usuario> usuariosFiltered =  new ArrayList<>();
+
+            if(constraint.toString().isEmpty()){
+                usuariosFiltered.addAll(  usuariosAll  );
+            }else{
+
+                for ( int i = 0 ; i <  usuariosAll.size() ; i++   ){
+                    if( usuariosAll.get(i).getNombre().toLowerCase().contains(  constraint.toString().toLowerCase()   )  ){
+                        usuariosFiltered.add(  usuariosAll.get(i)  );
+                    }
+                }
+            }
+
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = usuariosFiltered;
+
+            return filterResults;
+        }
+
+        //Run on UI thread
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            usuarios.clear();
+            usuarios.addAll((Collection<? extends Usuario>) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
 
     class MyViewHolder extends RecyclerView.ViewHolder

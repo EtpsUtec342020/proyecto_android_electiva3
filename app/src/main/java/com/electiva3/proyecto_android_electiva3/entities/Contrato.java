@@ -159,4 +159,10 @@ public class Contrato
         ContratoMap.put("plan", plan);
         ContratoMap.put("vehiculo", vehiculo);
     }
+
+
+    @Override
+    public String toString() {
+        return plan.get(1)+"-"+vehiculo.get(1);
+    }
 }
