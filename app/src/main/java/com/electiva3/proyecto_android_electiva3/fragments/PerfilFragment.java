@@ -16,10 +16,8 @@ import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.activity_principal;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -122,7 +120,7 @@ public class PerfilFragment extends Fragment {
             edtPassword.setError("El campo de contraseña es requerido");
         }
         else if(confirmar.isEmpty()){
-            edtConfirmPassword.setError("Debees confirmar tu contraseña");
+            edtConfirmPassword.setError("Debes confirmar tu contraseña");
         }
         else if(!confirmar.equals(pass)){
             Toast.makeText(getActivity(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();

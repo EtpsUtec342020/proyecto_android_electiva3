@@ -42,7 +42,7 @@ public class ServiciosAdapter extends RecyclerView.Adapter<ServiciosAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        holder.imgIcon.setImageResource(R.drawable.ic_person);
+        holder.imgIcon.setImageResource(R.drawable.ic_settings_black_24dp);
         holder.tvTitulo.setText(  servicios.get(position).getTitulo());
         holder.tvDetalle.setText( servicios.get(position).getDescripcion());
         holder.tvEstado.setText(  servicios.get(position).getEstado());

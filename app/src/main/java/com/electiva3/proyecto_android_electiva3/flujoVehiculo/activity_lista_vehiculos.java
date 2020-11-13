@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.activity_principal;
-import com.electiva3.proyecto_android_electiva3.adapters.OrdenAdapter;
 import com.electiva3.proyecto_android_electiva3.adapters.VehiculosAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Vehiculo;

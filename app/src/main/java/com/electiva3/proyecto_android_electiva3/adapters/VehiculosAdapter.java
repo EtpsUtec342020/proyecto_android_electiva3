@@ -1,6 +1,5 @@
 package com.electiva3.proyecto_android_electiva3.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -42,7 +41,7 @@ public class VehiculosAdapter extends RecyclerView.Adapter<VehiculosAdapter.MyVi
 
     @Override
     public void onBindViewHolder(VehiculosAdapter.MyViewHolder holder, final int position) {
-        holder.imgIcon.setImageResource(R.drawable.ic_check);
+        holder.imgIcon.setImageResource(R.drawable.ic_car);
         holder.tvTitulo.setText(  vehiculos.get(position).getMarca()+ "  - " +vehiculos.get(position).getModelo() );
         holder.tvDetalle.setText(  vehiculos.get(position).getPlaca() );
         holder.tvEstado.setText(  vehiculos.get(position).getAnio()  );
