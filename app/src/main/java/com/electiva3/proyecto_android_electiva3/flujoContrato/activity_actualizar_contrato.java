@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.electiva3.proyecto_android_electiva3.R;
+import com.electiva3.proyecto_android_electiva3.activity_principal;
 import com.electiva3.proyecto_android_electiva3.adapters.EstadoAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Contrato;
@@ -213,5 +214,12 @@ public class activity_actualizar_contrato extends AppCompatActivity
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent= new Intent(getApplicationContext() , activity_lista_contratos.class);
+        startActivity(intent);
+        finish();
     }
 }

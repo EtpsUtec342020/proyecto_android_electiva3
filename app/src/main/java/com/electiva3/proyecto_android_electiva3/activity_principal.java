@@ -51,14 +51,14 @@ public class activity_principal extends AppCompatActivity {
 
 
 
-        imageMenu.setOnClickListener(new View.OnClickListener() {
+       imageMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
 
-        navigationView.setItemIconTintList(null);
+      navigationView.setItemIconTintList(null);
 
 
         final NavController navController = Navigation.findNavController( this , R.id.navHost);
@@ -89,7 +89,6 @@ public class activity_principal extends AppCompatActivity {
 
                 }
                 return false;
-
             }
         });
 
@@ -98,7 +97,9 @@ public class activity_principal extends AppCompatActivity {
     public void UserLogin()
     {
         View header = navigationView.getHeaderView(0);
+
         navUsername = (TextView) header.findViewById(R.id.tvUserName);
+
         navUsermail = (TextView) header.findViewById(R.id.tvUserMail);
 
         user = FirebaseAuth.getInstance().getCurrentUser();

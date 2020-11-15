@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
+import com.electiva3.proyecto_android_electiva3.entities.UserLogin;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -36,6 +37,7 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
     private FirebaseUser user;
 
     Conexion conexion = new Conexion();
+    UserLogin userLogin = new UserLogin();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -71,11 +73,11 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
 
             case R.id.btnIngresar:
                 login();
-           /*      //borrar el intent y habilitar login()
-               Intent i = new Intent(getApplicationContext(), activity_principal.class);
+                 //borrar el intent y habilitar login()
+          /*     Intent i = new Intent(getApplicationContext(), activity_principal.class);
                 startActivity(i);
-                finish(); */
-                break;
+                finish();
+          */      break;
 
             case R.id.btnRecuperar:
                 email = edtCorreo2.getText().toString();
@@ -136,11 +138,23 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
     public void ValidarEstado()
     {
         user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+        userLogin.getClass();
+        userLogin.Login(conexion, user);
+
+
+     //   Usuario usuario = new Usuario();
+
+
+     //  String estado = userLogin.estado;
+       // Toast.makeText(getApplicationContext(), estado, Toast.LENGTH_SHORT).show();
+
+
         conexion.getDatabaseReference().child("usuarios").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists())
-                {
+                if(snapshot.exists()) {
                     String estado = snapshot.child("estado").getValue().toString();
                     if(!estado.equals("Inactivo")) {
                         Intent i = new Intent(getApplicationContext(), activity_principal.class);
@@ -158,6 +172,9 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+
+
     }
 
     public void RecuperarPassword()
@@ -201,7 +218,10 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 
 
 }
