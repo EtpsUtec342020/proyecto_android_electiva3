@@ -13,13 +13,18 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.electiva3.proyecto_android_electiva3.adapters.HorariosAdapter;
+import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Horario;
+import com.electiva3.proyecto_android_electiva3.entities.Reserva;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.UUID;
 
 public class SeleccionarHorarioReserva extends AppCompatActivity {
 
@@ -29,40 +34,66 @@ public class SeleccionarHorarioReserva extends AppCompatActivity {
     private String fechaSeleccionada;
     private HorariosAdapter horariosAdapter;
     private AlertDialog.Builder builder;
+    private Reserva reserva;
+    private Conexion conexion = new Conexion();
 
+    private String keyCliente;
+    private String keyContrato;
+    private String nombreCliente;
+    private String numeroContrato;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccionar_horario_reserva);
 
+        conexion.inicializarFirabase(this);
+
+
+        Intent previousActivity = getIntent();
+        keyCliente  =   previousActivity.getStringExtra("cliente");
+        keyContrato  =  previousActivity.getStringExtra("contrato");
+        nombreCliente  =  previousActivity.getStringExtra("nombreCliente");
+        numeroContrato  =  previousActivity.getStringExtra( "numeroContrato");
+        fechaSeleccionada = previousActivity.getStringExtra("fecha");
+
+        reserva  =  new Reserva();
         horarios  =  new ArrayList<>();
         rvHorarios  = findViewById(R.id.rvHorarios);
-
-        fechaSeleccionada = getIntent().getStringExtra("fecha");
 
         //Evaluar rol y establecer el usuario al cual se le realizara la reserva
         builder= new AlertDialog.Builder(this);
         builder.setTitle("Realizar reserva");
-        builder.setCancelable(false);
+        builder.setCancelable(true);
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+
+                //Obteniendo la fecha actual en formato yyyy-MM-dd HH:mm:ss
+                Calendar calendar  =  Calendar.getInstance();
+                SimpleDateFormat simpleDateFormat  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String fechaHoraCreacion = simpleDateFormat.format(calendar.getTime());
+
+                reserva.setCliente(keyCliente);
+                reserva.setContrato(keyContrato);
+                reserva.setFechaSolicitada(fechaSeleccionada);
+                reserva.setFechaHoraCreacion( fechaHoraCreacion );
+                reserva.setEstado("Pendiente");
+                reserva.setNombreCliente(  nombreCliente  );
+                reserva.setNumeroContrato(  numeroContrato  );
+                String key = (UUID.randomUUID().toString());
+                conexion.getDatabaseReference().child("reservacion").child(key).setValue(reserva);
+
+
+                Toast.makeText(SeleccionarHorarioReserva.this, "Reserva realizada con exito", Toast.LENGTH_SHORT).show();
+                Intent intent  =  new Intent(  getApplicationContext() , activity_lista_reservas.class   );
+                startActivity( intent );
+                finish();
+
             }
         });
 
-
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Deseas realizar la reserva");
-        builder.setCancelable(false);
-        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //Toast.makeText(getApplicationContext(), "Reserva realizada satisfactoriamente", Toast.LENGTH_SHORT).show();
-                realizarReserva();
-            }
-        });
 
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
@@ -93,12 +124,26 @@ public class SeleccionarHorarioReserva extends AppCompatActivity {
             horariosDisponibles.add(horario);
         }
 
+        horariosAdapter =  new HorariosAdapter(getApplicationContext(), horariosDisponibles );
+        rvHorarios.setAdapter(horariosAdapter);
+        horariosAdapter.SetOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String hora =  horariosDisponibles.get(rvHorarios.getChildAdapterPosition(v)).getHora();
+                reserva.setHora(hora);
+                builder.setMessage("Tu reserva sera realizada para el dia "+fechaSeleccionada+" a las "+hora+" horas"  );
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
+            }
+        });
         consultarDisponibilidadHoras(fechaSeleccionada);
     }
 
     private void consultarDisponibilidadHoras(String fecha){
 
-        FirebaseDatabase.getInstance().getReference().child("reservacion")
+        FirebaseDatabase.getInstance().getReference().child("reservacion").orderByChild("fechaSolicitada").equalTo(fecha)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -106,7 +151,9 @@ public class SeleccionarHorarioReserva extends AppCompatActivity {
                         if(snapshot.exists()){
                             for(DataSnapshot ds: snapshot.getChildren()){
                                 int searchIndex = search( ds.child("hora").getValue().toString() );
-                                horariosDisponibles.remove(searchIndex);
+                                if(searchIndex!=-1){
+                                    horariosDisponibles.remove(searchIndex);
+                                }
                             }
 
                             horariosAdapter =  new HorariosAdapter(getApplicationContext(), horariosDisponibles );
@@ -115,7 +162,7 @@ public class SeleccionarHorarioReserva extends AppCompatActivity {
                                 public void onClick(View v) {
 
                                     String hora =  horariosDisponibles.get(rvHorarios.getChildAdapterPosition(v)).getHora();
-
+                                    reserva.setHora(hora);
                                     builder.setMessage("Tu reserva sera realizada para el dia "+fechaSeleccionada+" a las "+hora+" horas"  );
                                     AlertDialog alertDialog = builder.create();
                                     alertDialog.show();

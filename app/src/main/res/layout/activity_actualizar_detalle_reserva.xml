@@ -78,7 +78,7 @@
                     android:layout_marginBottom="14dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtFechaA"
+                        android:id="@+id/txtFecha"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_calendar"
@@ -96,7 +96,7 @@
                     android:layout_marginBottom="14dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtFechaV"
+                        android:id="@+id/txtHora"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_access_time_black_24dp"
@@ -125,39 +125,74 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="14dp" />
 
+
                 <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginRight="16dp"
-                    android:drawableLeft="@drawable/ic_person_black_24dp"
-                    android:text="@string/label_supervisor"
-                    android:textSize="18sp" />
-
-                <Spinner
-                    android:id="@+id/spnSupervisor"
+                    android:id="@+id/tvEstadoReserva"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="14dp" />
+                    >
+                </TextView>
 
 
-                <Button
-                    android:id="@+id/btnActualizar"
+                <LinearLayout
+                        android:id="@+id/containerSupervisor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+
+                    >
+
+
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="16dp"
+                        android:drawableLeft="@drawable/ic_person_black_24dp"
+                        android:text="@string/label_supervisor"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/spnSupervisor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="14dp" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/containerButton"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginBottom="125dp"
-                    android:background="@drawable/ic_btn_launcher"
-                    android:text="Aceptar y crear orden"
-                    android:textColor="@color/design_default_color_background" />
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/btnActualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginBottom="125dp"
+                        android:background="@drawable/ic_btn_launcher"
+                        android:text="Aceptar y crear orden"
+                        android:textColor="@color/design_default_color_background" />
+
+
+                </LinearLayout>
+
+
+
+
 
             </LinearLayout>
         </ScrollView>

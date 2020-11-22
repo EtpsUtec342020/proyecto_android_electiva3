@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -16,6 +17,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class detalle_orden extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    private String key;
+    private String cliente;
+    private String contrato;
+    private String supervisor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +30,25 @@ public class detalle_orden extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
+        Intent intent =  getIntent();
+        key = intent.getStringExtra("key");
+        cliente =  intent.getStringExtra("cliente");
+        contrato =  intent.getStringExtra("contrato");
+        supervisor =  intent.getStringExtra("supervisor");
+
+
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
+        Fragment selectedFragment =  new FragmentClienteOrden();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container , ( new FragmentClienteOrden()   ))
+
+        selectedFragment.setArguments( getBundle() );
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container , ( selectedFragment   ))
                 .commit();
 
     }
@@ -57,10 +75,23 @@ public class detalle_orden extends AppCompatActivity {
                     }
 
 
+
+                    selectedFragment.setArguments(getBundle());
+
+
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container , selectedFragment)
                     .commit();
 
                     return true;
                 }
             };
+
+    private  Bundle getBundle(){
+        Bundle  bundle =  new Bundle();
+        bundle.putString( "key" ,  key    );  //Key de la orden
+        bundle.putString("cliente" , cliente);
+        bundle.putString("supervisor" , supervisor );
+        bundle.putString("contrato" ,  contrato);
+        return bundle;
+    }
 }

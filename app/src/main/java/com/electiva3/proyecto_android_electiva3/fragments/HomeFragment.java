@@ -127,7 +127,7 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
         switch (v.getId())
         {
             case R.id.layoutUsuario:
-                Intent usuarios = new Intent(getActivity() ,   activity_lista_usuarios.class);
+                Intent usuarios = new Intent(getActivity() , activity_lista_reservas.class);
                 startActivity(usuarios);
                 getActivity().finish();
                 break;

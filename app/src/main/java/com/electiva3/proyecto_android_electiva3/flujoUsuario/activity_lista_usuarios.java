@@ -46,8 +46,8 @@ public class activity_lista_usuarios extends AppCompatActivity
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager( getApplicationContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvUsuarios.setLayoutManager(linearLayoutManager);
-       conexion.inicializarFirabase(this);
-       ListarUsuarios();
+        conexion.inicializarFirabase(this);
+        ListarUsuarios();
 
         fabAgregarUsuario.setOnClickListener(new View.OnClickListener()
         {
@@ -83,7 +83,7 @@ public class activity_lista_usuarios extends AppCompatActivity
                         @Override
                         public void onClick(View v) {
 
-                          String idUsuario =  usuList.get(rvUsuarios.getChildAdapterPosition(v)).getKey();
+                          String idUsuario =  usuList.get(rvUsuarios.getChildAdapterPosition(v) ).getKey();
                             Intent intent  =  new Intent(getApplicationContext(),   activity_actualizar_usuario.class  );
                             intent.putExtra("id", idUsuario);
                             startActivity(intent);

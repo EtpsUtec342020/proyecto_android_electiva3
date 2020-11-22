@@ -9,9 +9,9 @@
     >
 
     <ImageView
+        android:id="@+id/imgVehiculo"
         android:layout_width="match_parent"
-        android:layout_height="308dp"
-        android:src="@drawable/nissan"></ImageView>
+        android:layout_height="308dp"></ImageView>
 
 
     <ScrollView
@@ -41,7 +41,7 @@
                 android:layout_marginBottom="14dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtNombre"
+                    android:id="@+id/edtPlaca"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/label_placa"
@@ -60,7 +60,7 @@
                 android:layout_marginBottom="14dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtDui"
+                    android:id="@+id/edtModelo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_check"
@@ -80,7 +80,7 @@
                 android:layout_marginBottom="14dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtNit"
+                    android:id="@+id/edtColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_format_color_fill_black_24dp"
@@ -101,7 +101,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
 
-                    android:id="@+id/edtLicencia"
+                    android:id="@+id/edtAnio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_date_range_black_24dp"

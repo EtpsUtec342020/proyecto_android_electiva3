@@ -38,17 +38,19 @@ public class ReservasAdapter  extends RecyclerView.Adapter<ReservasAdapter.MyVie
 
 
     @Override
-    public void onBindViewHolder(ReservasAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(ReservasAdapter.MyViewHolder holder, final int position) {
         holder.imgIcon.setImageResource(R.drawable.ic_check);
-        holder.tvTitulo.setText(  reservas.get(position).getCliente()   );
-        holder.tvDetalle.setText(  "Contrato: "+reservas.get(position).getContrato() );
-        holder.tvEstado.setText(  reservas.get(position).getFecha()+"\n"+reservas.get(position).getEstado());
+        holder.tvTitulo.setText(  reservas.get(position).getNombreCliente()   );
+        holder.tvDetalle.setText(  "Contrato: #"+reservas.get(position).getNumeroContrato() );
+        holder.tvEstado.setText(  reservas.get(position).getFechaSolicitada()+" - "+reservas.get(position).getHora()+
+                        "\n"+reservas.get(position).getEstado());
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent  =  new Intent( context ,   actualizar_detalle_reserva.class   );
+                intent.putExtra(  "key" , reservas.get(position).getKey()   );
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

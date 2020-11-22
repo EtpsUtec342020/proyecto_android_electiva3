@@ -40,10 +40,10 @@ public class OrdenAdapter extends RecyclerView.Adapter<OrdenAdapter.MyViewHolder
 
 
     @Override
-    public void onBindViewHolder(OrdenAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(OrdenAdapter.MyViewHolder holder, final int position) {
         holder.imgIcon.setImageResource(R.drawable.order);
-        holder.tvTitulo.setText(  ordenes.get(position).getNumeroOrden()   );
-        holder.tvDetalle.setText(  ordenes.get(position).getCliente()  );
+        holder.tvTitulo.setText(  "#"+ordenes.get(position).getNumeroOrden()   );
+        holder.tvDetalle.setText(  ordenes.get(position).getNombreCliente()  );
         holder.tvEstado.setText(  ordenes.get(position).getFecha()+"\n"+ordenes.get(position).getEstado() );
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +51,10 @@ public class OrdenAdapter extends RecyclerView.Adapter<OrdenAdapter.MyViewHolder
             public void onClick(View v) {
                 Intent detalleOrden  =  new Intent(context  , detalle_orden.class );
                 detalleOrden.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                detalleOrden.putExtra("key" ,  ordenes.get(position).getKey()    );
+                detalleOrden.putExtra("cliente" ,  ordenes.get(position).getCliente()    );
+                detalleOrden.putExtra("contrato" ,  ordenes.get(position).getContrato()    );
+                detalleOrden.putExtra("supervisor" ,  ordenes.get(position).getSupervisor()   );
                 context.startActivity(detalleOrden);
             }
         });
