@@ -37,6 +37,9 @@ public class activity_actualizar_usuario extends AppCompatActivity
     private ArrayList<String> roleslist = new ArrayList<>();
     private ArrayList<String> estadoUsuariosList = new ArrayList<>();
     private String id;
+    private String emailLogin;
+    private String passLogin;
+    private FirebaseUser user;
     Conexion conexion = new Conexion();
     Usuario usuario = new Usuario();
 
@@ -64,6 +67,8 @@ public class activity_actualizar_usuario extends AppCompatActivity
         conexion.inicializarFirabase(this);
         //recuperar el id del objeto
         id = getIntent().getStringExtra("id");
+        emailLogin = getIntent().getStringExtra("email");
+        passLogin = getIntent().getStringExtra("pass");
 
         //realizar consulta y mostrar los datos a partir del id recibido
         MostrarDatos();
@@ -99,12 +104,13 @@ public class activity_actualizar_usuario extends AppCompatActivity
                     {
                         if(!password.equals(usuario.getPassword()))
                         {
-                           UpdatePassword(password);
+                            UpdatePassword(password);
                         }
                         else if(!correo.equals(usuario.getCorreo()))
                         {
                             UpdateCorreo(correo);
                         }
+
                         conexion.getDatabaseReference().child("usuarios").child(id).updateChildren(usuario.getUsuarioMap());
                     }
                     Intent usuarios = new Intent(getApplicationContext() ,   activity_lista_usuarios.class);
@@ -118,7 +124,7 @@ public class activity_actualizar_usuario extends AppCompatActivity
             }
         });
 
-                btnCancelar.setOnClickListener(new View.OnClickListener() {
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent usuarios = new Intent(getApplicationContext() ,   activity_lista_usuarios.class);
@@ -293,7 +299,7 @@ public class activity_actualizar_usuario extends AppCompatActivity
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             //despues obtenemos el user logueado para hacer el update
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                             user = FirebaseAuth.getInstance().getCurrentUser();
                             if (user != null) {
                                 //pasamos el parametro nuevopass por el metodo update
                                 user.updatePassword(nuevopass).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -305,10 +311,14 @@ public class activity_actualizar_usuario extends AppCompatActivity
                             } else {
                                 Toast.makeText(getApplicationContext(), "user is null", Toast.LENGTH_LONG).show();
                             }
+
                         }
                         else {
                             Toast.makeText(getApplicationContext(), "no se logueo", Toast.LENGTH_LONG).show();
                         }
+
+                        conexion.getAuth().signOut();
+                        Reautenticar();
                     }
                 });
     }
@@ -321,12 +331,17 @@ public class activity_actualizar_usuario extends AppCompatActivity
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                           user = FirebaseAuth.getInstance().getCurrentUser();
                             if (user != null) {
                                 user.updateEmail(nuevocorreo).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        Toast.makeText(getApplicationContext(), "Correo Actualizado", Toast.LENGTH_LONG).show();
+                                        if(task.isComplete()){
+                                            Toast.makeText(getApplicationContext(), "Correo Actualizado", Toast.LENGTH_LONG).show();
+                                        }
+                                       else{
+                                            Toast.makeText(getApplicationContext(), "Error al actualizar correo", Toast.LENGTH_LONG).show();
+                                        }
                                     }
                                 });
                             } else {
@@ -336,8 +351,18 @@ public class activity_actualizar_usuario extends AppCompatActivity
                         else {
                             Toast.makeText(getApplicationContext(), "no se logueo", Toast.LENGTH_LONG).show();
                         }
+                        conexion.getAuth().signOut();
+                        Reautenticar();
                     }
                 });
+    }
+
+    public void Reautenticar() {
+        conexion.getAuth().signInWithEmailAndPassword(emailLogin, passLogin).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+            }
+        });
     }
 
     @Override
@@ -347,3 +372,4 @@ public class activity_actualizar_usuario extends AppCompatActivity
         finish();
     }
 }
+

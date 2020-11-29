@@ -176,16 +176,16 @@ public class Usuario
 
     public void UpdateDatos()
     {
-            usuarioMap.put("nombre", nombre);
-            usuarioMap.put("dui", dui);
-            usuarioMap.put("nit", nit);
-            usuarioMap.put("licencia", licencia);
-            usuarioMap.put("correo", correo);
-            usuarioMap.put("password", password);
-            usuarioMap.put("direccion", direccion);
-            usuarioMap.put("telefono", telefono);
-            usuarioMap.put("rol" , rol);
-            usuarioMap.put("estado", estado);
+        usuarioMap.put("nombre", nombre);
+        usuarioMap.put("dui", dui);
+        usuarioMap.put("nit", nit);
+        usuarioMap.put("licencia", licencia);
+        usuarioMap.put("correo", correo);
+        usuarioMap.put("password", password);
+        usuarioMap.put("direccion", direccion);
+        usuarioMap.put("telefono", telefono);
+        usuarioMap.put("rol" , rol);
+        usuarioMap.put("estado", estado);
     }
 }
 

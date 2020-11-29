@@ -45,11 +45,8 @@ public class activity_principal extends AppCompatActivity {
         imageMenu =  findViewById(R.id.imageMenu);
         navigationView  =  findViewById(R.id.navigationView);
 
-
         //establecer la conexion con firebase
         conexion.inicializarFirabase(this);
-
-
 
        imageMenu.setOnClickListener(new View.OnClickListener() {
             @Override

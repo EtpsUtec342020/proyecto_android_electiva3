@@ -128,8 +128,8 @@ public class PerfilFragment extends Fragment {
         else{
             if(!pass.equals(usuario.getPassword())) {
 
-                usuario.setPassword(pass);
                 UpdatePassword(pass);
+                usuario.setPassword(pass);
             }
             else if(!telefono.equals(usuario.getTelefono()))
             {
@@ -142,15 +142,14 @@ public class PerfilFragment extends Fragment {
             Intent intent = new Intent(getActivity(), activity_principal.class);
             startActivity(intent);
         }
-
     }
 
-    public void UpdatePassword(String p)
+    public void UpdatePassword(final String nuevopass)
     {
-
+        user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             //pasamos el parametro nuevopass por el metodo update
-            user.updatePassword(p).addOnCompleteListener(new OnCompleteListener<Void>() {
+            user.updatePassword(nuevopass).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     Toast.makeText(getActivity(), "Password Actualizado", Toast.LENGTH_LONG).show();
@@ -160,4 +159,5 @@ public class PerfilFragment extends Fragment {
             Toast.makeText(getActivity(), "user is null", Toast.LENGTH_LONG).show();
         }
     }
+
 }

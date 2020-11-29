@@ -2,64 +2,58 @@ package com.electiva3.proyecto_android_electiva3.entities;
 
 import androidx.annotation.NonNull;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.NotNull;
-
 public class UserLogin {
+    private Conexion conexion;
+    private Query query;
 
-    public String estado1 = "1";
-    private String rol;
-    private String nombre;
-    private String correo;
 
-    public  UserLogin() {
+    public UserLogin() {
     }
 
-    public void Login (@NotNull Conexion conexion, @NotNull FirebaseUser user)
-    {
-        Query q = conexion.getDatabaseReference().child("usuarios").child(user.getUid());
+    public void ConexionFirebase(@NonNull Conexion conexion) {
+        this.conexion = conexion;
+    }
 
-        q.addListenerForSingleValueEvent(new ValueEventListener() {
+    public void QueryFirebase(@NonNull Query q) {
+        this.query = q;
+    }
+
+    public void UpdateUsuario(final String password) {
+
+        final Usuario usuario = new Usuario();
+
+        query.addValueEventListener(new ValueEventListener() {
+            DataSnapshot ds;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DataSnapshot ds;
                 ds = snapshot;
+                if(ds.exists()){
+                    usuario.setNombre(ds.child("nombre").getValue().toString());
+                    usuario.setDui(ds.child("dui").getValue().toString());
+                    usuario.setNit(ds.child("nit").getValue().toString());
+                    usuario.setLicencia(ds.child("licencia").getValue().toString());
+                    usuario.setCorreo(ds.child("correo").getValue().toString());
+                    usuario.setDireccion(ds.child("direccion").getValue().toString());
+                    usuario.setPassword(password);
+                    usuario.setTelefono(ds.child("telefono").getValue().toString());
+                    usuario.setEstado(ds.child("estado").getValue().toString());
+                    usuario.setRol(ds.child("rol").getValue().toString());
 
-                if (ds.exists()) {
+                    //actualizar el password del usuario si lo ha modificado por correo
+                    usuario.UpdateDatos();
+                    conexion.getDatabaseReference().child("usuarios").child(ds.getKey()).updateChildren(usuario.getUsuarioMap());
 
-                    Usuario usuario = ds.getValue(Usuario.class);
-
-                    //  estado3 = usuario.getEstado();
-                    //llenando el objeto
-                    //  estado3 = ds.child("estado").getValue().toString();
-                    nombre = ds.child("nombre").getValue().toString();
-                    correo = ds.child("correo").getValue().toString();
-                    rol = ds.child("rol").getValue().toString();
                 }
-
-
-                System.out.println();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
-
-
-
-
-    public void prueba()
-    {
-        System.out.println(estado1);
-    }
-
-
 }

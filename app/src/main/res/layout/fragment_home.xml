@@ -28,7 +28,7 @@
                 android:orientation="vertical"
                 android:padding="15dp"
                 app:layout_constraintDimensionRatio="H,1:1"
-                app:layout_constraintStart_toEndOf="@id/layoutContrato"
+                app:layout_constraintStart_toEndOf="@id/LayoutContrato"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -50,7 +50,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layoutContrato"
+                android:id="@+id/LayoutContrato"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
@@ -89,7 +89,7 @@
                 android:orientation="vertical"
                 android:padding="15dp"
                 app:layout_constraintDimensionRatio="H,1:1"
-                app:layout_constraintEnd_toStartOf="@id/layoutContrato"
+                app:layout_constraintEnd_toStartOf="@id/LayoutContrato"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layoutUsuario">
 
@@ -123,7 +123,7 @@
                 app:layout_constraintDimensionRatio="H,1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/layoutUsuario"
-                app:layout_constraintTop_toBottomOf="@id/layoutContrato">
+                app:layout_constraintTop_toBottomOf="@id/LayoutContrato">
 
                 <ImageView
                     android:id="@+id/imgVehiculo"

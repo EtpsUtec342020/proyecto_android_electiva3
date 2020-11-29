@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity<CollectionReference> extends AppCompatActivity implements View.OnClickListener
@@ -59,6 +60,8 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
         dialog = new ProgressDialog(this);
 
         conexion.inicializarFirabase(this);
+
+        userLogin.ConexionFirebase(conexion);
 
        btnIngresar.setOnClickListener(this);
        btnRecuperar.setOnClickListener(this);
@@ -112,8 +115,8 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
 
     private void login(){
 
-         email =  edtCorreo.getText().toString();
-         password =  edtContrasena.getText().toString();
+        email =  edtCorreo.getText().toString();
+        password =  edtContrasena.getText().toString();
 
         if(email.isEmpty()){
             edtCorreo.setError("Campo requerido");
@@ -138,25 +141,19 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
     public void ValidarEstado()
     {
         user = FirebaseAuth.getInstance().getCurrentUser();
-
-
-        userLogin.getClass();
-        userLogin.Login(conexion, user);
-
-
-     //   Usuario usuario = new Usuario();
-
-
-     //  String estado = userLogin.estado;
-       // Toast.makeText(getApplicationContext(), estado, Toast.LENGTH_SHORT).show();
-
-
-        conexion.getDatabaseReference().child("usuarios").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+        final Query q =  conexion.getDatabaseReference().child("usuarios").child(user.getUid());
+                q.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
                     String estado = snapshot.child("estado").getValue().toString();
                     if(!estado.equals("Inactivo")) {
+
+                        String passDB = snapshot.child("password").getValue().toString();
+                        if(!passDB.equals(password)) {
+                            userLogin.QueryFirebase(q);
+                            userLogin.UpdateUsuario(password);
+                        }
                         Intent i = new Intent(getApplicationContext(), activity_principal.class);
                         startActivity(i);
                         finish();
@@ -172,8 +169,6 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
 
     }
 
@@ -191,7 +186,6 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
                     Toast.makeText(getApplicationContext(), "Verifica el correo ingresado!", Toast.LENGTH_SHORT).show();
                 }
                 dialog.dismiss();
-
             }
         });
     }
@@ -218,10 +212,10 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
         }
     }
 
+
     @Override
     public void onBackPressed() {
         finish();
     }
-
 
 }

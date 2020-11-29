@@ -151,6 +151,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_email"
+                        android:editable="false"
                         android:hint="Correo electrónico"
                         android:inputType="textEmailAddress" />
 

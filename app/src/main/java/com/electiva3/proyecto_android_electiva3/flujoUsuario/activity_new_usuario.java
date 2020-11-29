@@ -1,32 +1,29 @@
 package com.electiva3.proyecto_android_electiva3.flujoUsuario;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.adapters.RolUsuarioAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.GeneradorPassword;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.auth.AuthResult;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -39,6 +36,8 @@ public class activity_new_usuario extends AppCompatActivity
     private Button btnAgregar, btnCancelar;
     private Spinner spnRol;
     private AlertDialog.Builder builder;
+    private String emailLogin;
+    private String passLogin;
 
     private String title="Agregar Nuevo Usuario";
 
@@ -47,6 +46,7 @@ public class activity_new_usuario extends AppCompatActivity
     Conexion conexion = new Conexion();
     Usuario usuario = new Usuario();
     GeneradorPassword pass = new GeneradorPassword();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,6 +59,7 @@ public class activity_new_usuario extends AppCompatActivity
         //inicializando conexion con firebase
         conexion.inicializarFirabase(this);
 
+
         edtNombre = findViewById(R.id.edtNombre);
         edtDui  = findViewById(R.id.edtDui);
         edtNit = findViewById(R.id.edtNit);
@@ -69,6 +70,10 @@ public class activity_new_usuario extends AppCompatActivity
         spnRol =  findViewById(R.id.spnRol);
         btnAgregar = findViewById(R.id.btnAgregar);
         btnCancelar = findViewById(R.id.btnCancelar);
+
+        //obteniendo datos de admin
+        emailLogin = getIntent().getStringExtra("email");
+        passLogin = getIntent().getStringExtra("pass");
 
         //llenando Spinner
         Roles();
@@ -90,7 +95,7 @@ public class activity_new_usuario extends AppCompatActivity
                 String dui = edtDui.getText().toString();
                 String nit = edtNit.getText().toString();
                 String licencia = edtLicencia.getText().toString();
-                final String correo = edtCorreo.getText().toString();
+                String correo = edtCorreo.getText().toString();
                 String telefono = edtTelefono.getText().toString();
                 String direccion = edtDireccion.getText().toString();
                 String rol = spnRol.getSelectedItem().toString();
@@ -134,9 +139,13 @@ public class activity_new_usuario extends AppCompatActivity
                                 //obteniendo el ID del usuario registrado
                                 String key = conexion.getAuth().getCurrentUser().getUid();
 
+                                // cerrando sesion
+                                conexion.getAuth().signOut();
+
                                 //obteniendo la hora y fecha del mobile
                                 usuario.setFechaRegistro(conexion.ObtenerHora());
 
+                                //registrando Usuario
                                 conexion.getDatabaseReference().child("usuarios").child(key).setValue(usuario);
 
                                 builder.setMessage("Usuario: "+usuario.getCorreo()+"\nPassword: "+usuario.getPassword()+"\nFecha Creacion: "+usuario.getFechaRegistro());
@@ -153,16 +162,13 @@ public class activity_new_usuario extends AppCompatActivity
             }
         });
 
-
         builder= new AlertDialog.Builder(this);
         builder.setTitle("Usuario creado exitosamente!!");
         builder.setCancelable(false);
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent i=  new Intent( getApplicationContext() , activity_lista_usuarios.class);
-                startActivity(i);
-                finish();
+                Reautenticar();
             }
         });
 
@@ -192,6 +198,18 @@ public class activity_new_usuario extends AppCompatActivity
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    public void Reautenticar()
+    {
+        conexion.getAuth().signInWithEmailAndPassword(emailLogin, passLogin).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Intent intent= new Intent(getApplicationContext() , activity_lista_usuarios.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

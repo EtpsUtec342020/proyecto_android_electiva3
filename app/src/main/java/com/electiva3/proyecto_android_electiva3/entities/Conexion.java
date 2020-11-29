@@ -59,7 +59,4 @@ public class Conexion
         dt = dfDate_day.format(c.getTime());
         return dt;
     }
-
-
-
 }

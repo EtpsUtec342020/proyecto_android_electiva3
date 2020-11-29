@@ -24,7 +24,6 @@ import com.electiva3.proyecto_android_electiva3.flujoServicio.activity_lista_ser
 import com.electiva3.proyecto_android_electiva3.flujoUsuario.activity_lista_usuarios;
 import com.electiva3.proyecto_android_electiva3.flujoVehiculo.activity_lista_vehiculos;
 import com.electiva3.proyecto_android_electiva3.flujoVehiculo.activity_mostrar_vehiculo;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 public class HomeFragment extends Fragment  implements View.OnClickListener  {
 
     LinearLayout layoutUsuario, layoutContrato, layoutMarca, layoutVehiculo, layoutServicio, layoutPlan, layoutOrdenServicio, layoutReserva;
-    ImageView imgUsuario, imgMarca;
+    ImageView imgUsuario, imgMarca, imgContrato;
     TextView tvLayout1, tvLayout2, tvVehiculo, tvMarca;
 
     Conexion conexion = new Conexion();
@@ -55,7 +54,8 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         layoutUsuario = view.findViewById(R.id.layoutUsuario);
-        layoutContrato = view.findViewById(R.id.layoutContrato);
+        
+        layoutContrato = view.findViewById(R.id.LayoutContrato);
         layoutMarca = view.findViewById(R.id.layoutMarca);
         layoutVehiculo = view.findViewById(R.id.LayoutVehiculo);
         layoutServicio = view.findViewById(R.id.LayoutServicio);
@@ -63,12 +63,13 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
         layoutOrdenServicio = view.findViewById(R.id.LayoutOrden);
         layoutReserva = view.findViewById(R.id.LayoutReserva);
 
-        imgUsuario = view.findViewById(R.id.imgUsuario);
-        imgMarca = view.findViewById(R.id.imgMarca);
-
         tvLayout1 = view.findViewById(R.id.tvLayout1);
+        imgUsuario = view.findViewById(R.id.imgUsuario);
+
         tvLayout2 = view.findViewById(R.id.tvLayout2);
+        imgContrato = view.findViewById(R.id.imgContrato);
         tvVehiculo = view.findViewById(R.id.tvVehiculo);
+        imgMarca = view.findViewById(R.id.imgMarca);
         tvMarca = view.findViewById(R.id.tvMarca);
 
         layoutUsuario.setOnClickListener(this);
@@ -90,24 +91,41 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
 
                     if(rol.equals("Cliente")) {
 
-                     imgUsuario.setImageResource(R.drawable.reserva);
-                     tvLayout1.setText("Reservaciones");
+                         imgUsuario.setImageResource(R.drawable.reserva);
+                         tvLayout1.setText("Reservaciones");
 
-                     tvLayout2.setText("Contrato");
-                     tvVehiculo.setText("Vehiculo");
+                         tvLayout2.setText("Contrato");
+                         tvVehiculo.setText("Vehiculo");
 
-                     imgMarca.setImageResource(R.drawable.orden_servicio);
-                     tvMarca.setText("Ordenes");
+                         imgMarca.setImageResource(R.drawable.orden_servicio);
+                         tvMarca.setText("Ordenes");
 
-                     NivelCliente();
+                         NivelCliente();
 
-                     layoutPlan.setVisibility(LinearLayout.INVISIBLE);
-                     layoutServicio.setVisibility(LinearLayout.INVISIBLE);
-                     layoutReserva.setVisibility(LinearLayout.INVISIBLE);
-                     layoutOrdenServicio.setVisibility(LinearLayout.INVISIBLE);
+                         layoutPlan.setVisibility(LinearLayout.INVISIBLE);
+                         layoutServicio.setVisibility(LinearLayout.INVISIBLE);
+                         layoutReserva.setVisibility(LinearLayout.INVISIBLE);
+                         layoutOrdenServicio.setVisibility(LinearLayout.INVISIBLE);
+                    }
+                    else if (rol.equals("Recepcionista")) {
+
+                        imgUsuario.setImageResource(R.drawable.reserva);
+                        tvLayout1.setText("Reservaciones");
+
+                        imgContrato.setImageResource(R.drawable.orden_servicio);
+                        tvLayout2.setText("Ordenes de Servicio");
+
+                        NivelRecepcion();
+
+                        layoutVehiculo.setVisibility(LinearLayout.INVISIBLE);
+                        layoutMarca.setVisibility(LinearLayout.INVISIBLE);
+                        layoutPlan.setVisibility(LinearLayout.INVISIBLE);
+                        layoutServicio.setVisibility(LinearLayout.INVISIBLE);
+                        layoutReserva.setVisibility(LinearLayout.INVISIBLE);
+                        layoutOrdenServicio.setVisibility(LinearLayout.INVISIBLE);
+
                     }
                     else {
-
                     }
                 }
             }
@@ -126,8 +144,9 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
     public void onClick(View v) {
         switch (v.getId())
         {
+
             case R.id.layoutUsuario:
-                Intent usuarios = new Intent(getActivity() ,   activity_lista_usuarios.class);
+                final Intent usuarios = new Intent(getActivity() ,   activity_lista_usuarios.class);
                 startActivity(usuarios);
                 getActivity().finish();
                 break;
@@ -136,7 +155,7 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
                 startActivity(marcaModelo);
                 getActivity().finish();
                 break;
-            case R.id.layoutContrato:
+            case R.id.LayoutContrato:
                 Intent contratos = new Intent(getActivity() ,   activity_lista_contratos.class);
                 startActivity(contratos);
                 getActivity().finish();
@@ -231,8 +250,27 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+    }
 
+    public void NivelRecepcion()
+    {
+        layoutUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reservas =  new Intent(getActivity() , activity_lista_reservas.class);
+                startActivity(reservas);
+                getActivity().finish();
+            }
+        });
 
+        layoutContrato.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent contratos = new Intent(getActivity() , activity_ordenes.class);
+                startActivity(contratos);
+                getActivity().finish();
+            }
+        });
     }
 
 }
