@@ -71,7 +71,7 @@
 
     </TextView>
     <CalendarView
-        android:id="@+id/calendarView"
+        android:id="@+id/calendarReserva"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

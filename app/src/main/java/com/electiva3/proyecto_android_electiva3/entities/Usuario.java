@@ -187,5 +187,10 @@ public class Usuario
         usuarioMap.put("rol" , rol);
         usuarioMap.put("estado", estado);
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
 

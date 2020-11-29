@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.renderscript.Sampler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.electiva3.proyecto_android_electiva3.adapters.SpinnerContratosAdapter;
+import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Contrato;
 import com.electiva3.proyecto_android_electiva3.entities.Horario;
 import com.google.firebase.database.DataSnapshot;
@@ -20,8 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Calendar;
 
 public class activity_agregar_reserva extends AppCompatActivity {
 
@@ -29,11 +33,15 @@ public class activity_agregar_reserva extends AppCompatActivity {
     private EditText txtCliente;
     private Spinner spnContrato;
     private Button btnSiguiente;
-    private ArrayList<String> horariosOcupados;
-    private ArrayList<String> horariosDisponibles;
+    private ArrayList<Contrato> contratosCliente;
     private String plan;
     private String cliente;
     private String vehiculo;
+    private CalendarView calendarReserva;
+    private String fechaSeleccionada;
+    private String nombreCliente;
+    private long numericCurrentDate;
+    private long numericSelectedDate;
 
 
     private ArrayList<String> clienteContrato = new ArrayList<>();
@@ -43,33 +51,101 @@ public class activity_agregar_reserva extends AppCompatActivity {
 
     private Contrato contrato = new Contrato();
 
+    private Conexion conexion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_reserva);
 
+        conexion  =  new Conexion();
+
         txtCliente =  findViewById(R.id.txtCliente);
         spnContrato =  findViewById(R.id.spnContrato);
         btnSiguiente   = findViewById(R.id.btnSiguiente);
         Intent prevIntent = getIntent();
         keyCliente =  prevIntent.getExtras().getString("keyCliente");
+        nombreCliente  =  prevIntent.getExtras().getString("nombreCliente");
+        calendarReserva  =  findViewById(R.id.calendarReserva);
 
+        establecerFechaActual(); //Establecer la fecha solicitada a la fecha actual
         obtenerDatosCliente(  keyCliente   );  //Obtiene el nombre del cliente para visualizacion
         obtenerContratosCliente();  //Obtiene los contratos del cliente y los lista
         //Obtendra los horarios de la fecha designada
         //generarHorario("2020-11-10");
 
+        //Eventos del calendario
+        calendarReserva.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+
+                Calendar calendar  =  Calendar.getInstance();
+                Calendar calendar1  =  Calendar.getInstance();
+
+                calendar.set(Calendar.YEAR  , year);
+                calendar.set(Calendar.MONTH , month);
+                calendar.set(Calendar.DAY_OF_MONTH ,dayOfMonth  );
+
+                SimpleDateFormat  simpleDateFormat  = new SimpleDateFormat("yyyy-MM-dd");
+
+                fechaSeleccionada  = simpleDateFormat.format(calendar.getTime());
+
+                numericCurrentDate  = calendar1.getTimeInMillis();
+                numericSelectedDate  =  calendar.getTimeInMillis();
+
+                //Restriccion por seleccion de fecha
+                if( numericSelectedDate  <  numericCurrentDate   ){
+                    Toast.makeText(activity_agregar_reserva.this, "La fecha seleccionada no puede ser menor a la fecha actual", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String fecha  = "2020-11-11";
-                Intent seleccionarHorario  =  new Intent( getApplicationContext() ,  SeleccionarHorarioReserva.class );
-                seleccionarHorario.putExtra("fecha" , fecha);
-                startActivity(seleccionarHorario);
+
+                if( numericSelectedDate  <  numericCurrentDate   ){
+                    Toast.makeText(activity_agregar_reserva.this, "La fecha seleccionada no puede ser menor a la fecha actual", Toast.LENGTH_SHORT).show();
+                }else{
+                    String keyContrato  = contratosCliente.get(spnContrato.getSelectedItemPosition()).getKey();
+                    String numeroContrato  =  String.valueOf(  contratosCliente.get(spnContrato.getSelectedItemPosition()).getNumeroContrato()  )    ;
+                    Intent seleccionarHorario  =  new Intent( getApplicationContext() ,  SeleccionarHorarioReserva.class );
+
+                    //Fecha seleccionada
+                    seleccionarHorario.putExtra("fecha" , fechaSeleccionada);
+                    //Pasar UIDD del cliente
+                    seleccionarHorario.putExtra("cliente" ,  keyCliente  );
+                    //Contrato seleccionado
+                    seleccionarHorario.putExtra("contrato" , keyContrato);
+
+                    //Nombre del cliente Seleccionado
+                    seleccionarHorario.putExtra(  "nombreCliente" , nombreCliente );
+
+                    //Numero de contrato
+                    seleccionarHorario.putExtra(   "numeroContrato" ,   numeroContrato  );
+
+
+                    startActivity(seleccionarHorario);
+                    finish();
+                }
+
+
             }
         });
+    }
+
+
+    private void establecerFechaActual(){
+
+        Calendar calendar  =  Calendar.getInstance();
+
+        SimpleDateFormat  simpleDateFormat  = new SimpleDateFormat("yyyy-MM-dd");
+
+        fechaSeleccionada  = simpleDateFormat.format(calendar.getTime());
 
     }
 
@@ -77,7 +153,7 @@ public class activity_agregar_reserva extends AppCompatActivity {
 
     private void obtenerContratosCliente(){
 
-            final ArrayList<Contrato> contratosCliente  =  new ArrayList<>();
+            contratosCliente  =  new ArrayList<>();
 
             FirebaseDatabase.getInstance().getReference().child("Contratos").addValueEventListener(new ValueEventListener() {
 
@@ -117,10 +193,12 @@ public class activity_agregar_reserva extends AppCompatActivity {
                                 vehiculoContrato.add(key);
                                 vehiculoContrato.add(vehiculo);
 
+                                String keyContrato    = ds.getKey();
+
                                 contrato.setCliente(clienteContrato);
                                 contrato.setVehiculo(vehiculoContrato);
                                 contrato.setPlan(planContrato);
-
+                                contrato.setKey(keyContrato);
                                 contratosCliente.add(contrato);
 
 
@@ -166,42 +244,5 @@ public class activity_agregar_reserva extends AppCompatActivity {
             }
         });
     }
-
-    private void generarHorario(String fecha){
-
-        ArrayList<Horario>  horariosDisponibles = new ArrayList<>();
-
-        int horariosFin =20; //Horario de finalizacion hasta las 8pm
-
-        for( int horariosInicio = 8 ; horariosInicio < horariosFin ; horariosInicio++  ){
-            String hora  = ( horariosInicio < 10 ) ? "0"+horariosInicio+":00:00"  :  horariosInicio+":00:00";
-            Horario  horario  =  new Horario();
-            horario.setHora(hora);
-            horariosDisponibles.add(horario);
-        }
-        System.out.println(   horariosDisponibles   );
-
-    }
-
-
-    public void obtenerHorariosDia(String fecha){
-
-        FirebaseDatabase.getInstance().getReference().child("reservacion")
-                .orderByChild("fechaSolicitada").equalTo(fecha)
-                .orderByChild("estado").equalTo("En Proceso")
-                .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-
 
 }

@@ -15,12 +15,13 @@ import com.electiva3.proyecto_android_electiva3.entities.DetalleOrden;
 
 import java.util.ArrayList;
 
-public class DetalleOrdenAdapter extends RecyclerView.Adapter<DetalleOrdenAdapter.MyViewHolder> {
+public class DetalleOrdenAdapter extends RecyclerView.Adapter<DetalleOrdenAdapter.MyViewHolder>  implements  View.OnClickListener   {
 
 
     private LayoutInflater inflater;
     private Context context;
     private ArrayList<DetalleOrden>  detallesOrden;
+    private View.OnClickListener listener;
 
     public DetalleOrdenAdapter(Context context,ArrayList<DetalleOrden> detallesOrden) {
         inflater = LayoutInflater.from(context);
@@ -32,6 +33,7 @@ public class DetalleOrdenAdapter extends RecyclerView.Adapter<DetalleOrdenAdapte
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_lista, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
+        view.setOnClickListener(this);
         return holder;
     }
 
@@ -40,12 +42,25 @@ public class DetalleOrdenAdapter extends RecyclerView.Adapter<DetalleOrdenAdapte
         holder.imgIcon.setImageResource(R.drawable.ic_check);
         holder.tvTitulo.setText(  detallesOrden.get(position).getNombreServicio()   );
         holder.tvDetalle.setText(  detallesOrden.get(position).getEstado() );
-        holder.tvEstado.setText(  detallesOrden.get(position).getPrecio());
+        holder.tvEstado.setText(  "$"+detallesOrden.get(position).getPrecio());
     }
 
     @Override
     public int getItemCount() {
         return detallesOrden.size();
+    }
+
+    public void SetOnClickListener(View.OnClickListener Listener)
+    {
+        this.listener = Listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(listener!=null)
+        {
+            listener.onClick(v);
+        }
     }
 
 

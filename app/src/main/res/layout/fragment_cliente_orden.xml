@@ -30,7 +30,7 @@
                 android:layout_marginBottom="14dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtNombre"
+                    android:id="@+id/edtCliente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/label_cliente"
@@ -50,7 +50,7 @@
                 android:layout_marginBottom="14dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtDui"
+                    android:id="@+id/edtCorreo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_email"
@@ -71,7 +71,7 @@
                 android:layout_marginBottom="14dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtNit"
+                    android:id="@+id/edtPlan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_dui"
@@ -93,7 +93,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
 
-                    android:id="@+id/edtLicencia"
+                    android:id="@+id/edtTelefono"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_phone"
@@ -114,7 +114,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
 
-                    android:id="@+id/edActivacion"
+                    android:id="@+id/edtActivacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_date_range_black_24dp"
@@ -135,7 +135,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
 
-                    android:id="@+id/edVencimiento"
+                    android:id="@+id/edtVencimiento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_date_range_black_24dp"

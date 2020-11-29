@@ -81,10 +81,12 @@ public class activity_search_cliente extends AppCompatActivity {
                        public void onClick(View v) {
 
                             String keyCliente  = usuarios.get(rvClientes.getChildAdapterPosition(v)).getKey();
+                            String nombreCliente  =   usuarios.get(rvClientes.getChildAdapterPosition(v)).getNombre();
 
 
                            Intent realizarReserva = new Intent(  getApplicationContext() , activity_agregar_reserva.class  );
                            realizarReserva.putExtra("keyCliente" ,  keyCliente  );
+                           realizarReserva.putExtra(  "nombreCliente" , nombreCliente  );
                            startActivity(realizarReserva);
                        }
                    });
