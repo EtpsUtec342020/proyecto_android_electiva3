@@ -127,15 +127,13 @@ public class PerfilFragment extends Fragment {
         }
         else{
             if(!pass.equals(usuario.getPassword())) {
-
-                UpdatePassword(pass);
-                usuario.setPassword(pass);
+                UpdatePassword2(pass);
             }
             else if(!telefono.equals(usuario.getTelefono()))
             {
                 usuario.setTelefono(telefono);
             }
-            usuario.UpdateDatos();
+            usuario.UpdateDatos(pass);
             conexion.getDatabaseReference().child("usuarios").child(id).updateChildren(usuario.getUsuarioMap());
             Toast.makeText(getActivity(), "Datos Actualizados", Toast.LENGTH_SHORT).show();
 
@@ -144,7 +142,7 @@ public class PerfilFragment extends Fragment {
         }
     }
 
-    public void UpdatePassword(final String nuevopass)
+    public void UpdatePassword2(final String nuevopass)
     {
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -152,12 +150,15 @@ public class PerfilFragment extends Fragment {
             user.updatePassword(nuevopass).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    Toast.makeText(getActivity(), "Password Actualizado", Toast.LENGTH_LONG).show();
                 }
             });
-        } else {
-            Toast.makeText(getActivity(), "user is null", Toast.LENGTH_LONG).show();
         }
+        else {
+                Toast.makeText(getActivity(), "user is null", Toast.LENGTH_LONG).show();
+        }
+
     }
+
+
 
 }

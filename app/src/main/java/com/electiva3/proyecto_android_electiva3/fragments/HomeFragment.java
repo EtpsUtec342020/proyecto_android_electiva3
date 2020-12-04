@@ -125,6 +125,28 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
                         layoutOrdenServicio.setVisibility(LinearLayout.INVISIBLE);
 
                     }
+                    else if(rol.equals("Supervisor")){
+                        imgUsuario.setImageResource(R.drawable.orden_servicio);
+                        tvLayout1.setText("Ordenes de Servicio");
+
+                        layoutUsuario.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent ordenes = new Intent(getActivity() , activity_ordenes.class);
+                                startActivity(ordenes);
+                                getActivity().finish();
+                            }
+                        });
+
+
+                        layoutContrato.setVisibility(LinearLayout.INVISIBLE);
+                        layoutVehiculo.setVisibility(LinearLayout.INVISIBLE);
+                        layoutMarca.setVisibility(LinearLayout.INVISIBLE);
+                        layoutPlan.setVisibility(LinearLayout.INVISIBLE);
+                        layoutServicio.setVisibility(LinearLayout.INVISIBLE);
+                        layoutReserva.setVisibility(LinearLayout.INVISIBLE);
+                        layoutOrdenServicio.setVisibility(LinearLayout.INVISIBLE);
+                    }
                     else {
                     }
                 }
@@ -272,5 +294,4 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
             }
         });
     }
-
 }

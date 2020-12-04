@@ -1,17 +1,18 @@
 package com.electiva3.proyecto_android_electiva3;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.adapters.ReservasAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
@@ -20,7 +21,6 @@ import com.electiva3.proyecto_android_electiva3.entities.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class activity_lista_reservas extends AppCompatActivity {
 
 
-
+    private TextView tvNotificacion;
     private FloatingActionButton fabAgregarReserva;
     private Conexion conexion =  new Conexion()  ;
     private Usuario usuario  =  new Usuario();
@@ -50,7 +50,7 @@ public class activity_lista_reservas extends AppCompatActivity {
 
         conexion.inicializarFirabase(getApplicationContext());
 
-
+        tvNotificacion = findViewById(R.id.tvNotificacion);
         fabAgregarReserva =  findViewById(R.id.fabAgregarReserva);
         rvReservas =  findViewById(R.id.rvReservas);
 
@@ -70,8 +70,9 @@ public class activity_lista_reservas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 //Validacion del rol del usuario para asignacion de usuario
-                if(usuario.getRol().equals("administrador")){
+                if(usuario.getRol().equals("Administrador")){
                     //Intent que redirigira a un listado de usuario
                     Intent intent =  new Intent( getApplicationContext()  , activity_search_cliente.class  );
                     startActivity(  intent );
@@ -82,8 +83,6 @@ public class activity_lista_reservas extends AppCompatActivity {
                     intent.putExtra("keyCliente" ,   usuario.getKey() );
                     intent.putExtra( "nombreCliente" ,   usuario.getNombre()     );
                     startActivity(  intent );
-
-
                 }
 
 
@@ -149,6 +148,10 @@ public class activity_lista_reservas extends AppCompatActivity {
 
                     reservasAdapter =  new ReservasAdapter( getApplicationContext() ,  reservas  );
                     rvReservas.setAdapter( reservasAdapter  );
+                }
+                else {
+                    tvNotificacion.setText("No Posees ninguna reservacion");
+                    tvNotificacion.setGravity(Gravity.CENTER);
                 }
 
             }

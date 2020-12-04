@@ -1,29 +1,24 @@
 package com.electiva3.proyecto_android_electiva3;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
-
-
-import java.util.Calendar;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.electiva3.proyecto_android_electiva3.adapters.DetalleOrdenAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.electiva3.proyecto_android_electiva3.adapters.OrdenAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
-import com.electiva3.proyecto_android_electiva3.entities.DetalleOrden;
 import com.electiva3.proyecto_android_electiva3.entities.Orden;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class activity_ordenes extends AppCompatActivity  implements DatePickerDialog.OnDateSetListener{
 
@@ -46,7 +42,7 @@ public class activity_ordenes extends AppCompatActivity  implements DatePickerDi
     private Usuario usuario;
     private int contador;
 
-
+    private TextView tvNotificacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +57,7 @@ public class activity_ordenes extends AppCompatActivity  implements DatePickerDi
         conexion.inicializarFirabase(  getApplicationContext()  );
         usuario  =  new Usuario();
 
+        tvNotificacion = findViewById(R.id.tvNotificacion);
 
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -134,6 +131,10 @@ public class activity_ordenes extends AppCompatActivity  implements DatePickerDi
                     OrdenAdapter ordenAdapter =  new OrdenAdapter(getApplicationContext() ,   ordenes );
                     rvOrdenes.setAdapter(ordenAdapter);
 
+                }
+                else {
+                    tvNotificacion.setText("No Tienes Ordenes");
+                    tvNotificacion.setGravity(Gravity.CENTER);
                 }
 
 

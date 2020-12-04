@@ -174,6 +174,20 @@ public class Usuario
     }
 
 
+    public void UpdateDatos(String pass)
+    {
+        usuarioMap.put("nombre", nombre);
+        usuarioMap.put("dui", dui);
+        usuarioMap.put("nit", nit);
+        usuarioMap.put("licencia", licencia);
+        usuarioMap.put("correo", correo);
+        usuarioMap.put("password", pass);
+        usuarioMap.put("direccion", direccion);
+        usuarioMap.put("telefono", telefono);
+        usuarioMap.put("rol" , rol);
+        usuarioMap.put("estado", estado);
+    }
+
     public void UpdateDatos()
     {
         usuarioMap.put("nombre", nombre);
