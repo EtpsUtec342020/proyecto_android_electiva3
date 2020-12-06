@@ -1,10 +1,6 @@
 package com.electiva3.proyecto_android_electiva3;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,24 +12,33 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.electiva3.proyecto_android_electiva3.adapters.ContratoAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.electiva3.proyecto_android_electiva3.adapters.SpinnerUsuariosAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
-import com.electiva3.proyecto_android_electiva3.entities.Contrato;
 import com.electiva3.proyecto_android_electiva3.entities.DetalleOrden;
 import com.electiva3.proyecto_android_electiva3.entities.Orden;
 import com.electiva3.proyecto_android_electiva3.entities.Reserva;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
-import com.electiva3.proyecto_android_electiva3.flujoContrato.activity_actualizar_contrato;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class actualizar_detalle_reserva extends AppCompatActivity {
@@ -146,7 +151,7 @@ public class actualizar_detalle_reserva extends AppCompatActivity {
                     reserva.UpdateReserva();
 
                     conexion.getDatabaseReference().child("reservacion").child(key).updateChildren(reserva.getReservaMap() );
-
+                    MensajeSegunTokenCliente(estadoSeleccionar);
                     generarDetalleOrden();
                 }
 
@@ -169,6 +174,7 @@ public class actualizar_detalle_reserva extends AppCompatActivity {
                 if(ds.exists()){
 
                     String keyPlan =  ds.child("plan").child("0").getValue().toString();
+                    String keyCliente = ds.child("cliente").child("0").getValue().toString();
                     copiarServiciosPlan( keyPlan );
 
 
@@ -419,6 +425,39 @@ public class actualizar_detalle_reserva extends AppCompatActivity {
 
     }
 
+
+    public void MensajeSegunTokenCliente(String estado){
+        RequestQueue myrequest = Volley.newRequestQueue(getApplicationContext());
+        JSONObject json = new JSONObject();
+
+        try{
+            String token = "fdXqXqmgR4qtGE36QYzQqn:APA91bE0W1uWyRmnB8Jpv9JpAThLUH-zJs0EvJ-LJeUFniuiqCyBMX5aj_eD_JTklZRQTcXkdLxfec9yPVtU--_85ZCkj8U2rKGQmwgdmAZScASuI8vP12B_mwiuLzlQtBNBcJx4deIC";
+            json.put("to", token);
+            JSONObject notificacion = new JSONObject();
+            notificacion.put("titulo", "Estado de su Reservacion");
+            notificacion.put("detalle", "Su reservacion a sido :"+estado);
+
+            json.put("data", notificacion);
+
+            String URL = "https://fcm.googleapis.com/fcm/send";
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL,json, null, null){
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+
+                    header.put("content-type", "application/json");
+                    header.put("authorization", "key=AAAAlPemOMg:APA91bGezbeU-8afpaIHRTZ9vqgAEy-1lYEkqf8ko6UyYS51D1vKMv4uceaYaJ6KltXsvKidPiOwlm8JLNB1WOEXUOb8cbSFfe8CvoXNKlB69zA_R_rVqNGjh6Za9vwvT45lLwZHF0wk");
+                    return header;
+                }
+            };
+
+            myrequest.add(request);
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
 
 
 

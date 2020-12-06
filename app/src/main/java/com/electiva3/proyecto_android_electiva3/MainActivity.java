@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
+import com.electiva3.proyecto_android_electiva3.entities.MyServiceMessagingService;
 import com.electiva3.proyecto_android_electiva3.entities.UserLogin;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,6 +40,7 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
 
     Conexion conexion = new Conexion();
     UserLogin userLogin = new UserLogin();
+    MyServiceMessagingService mso = new MyServiceMessagingService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,6 +64,7 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
         conexion.inicializarFirabase(this);
 
         userLogin.ConexionFirebase(conexion);
+        mso.setConexion(conexion);
 
        btnIngresar.setOnClickListener(this);
        btnRecuperar.setOnClickListener(this);
@@ -76,11 +79,7 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
 
             case R.id.btnIngresar:
                 login();
-                 //borrar el intent y habilitar login()
-          /*     Intent i = new Intent(getApplicationContext(), activity_principal.class);
-                startActivity(i);
-                finish();
-          */      break;
+             break;
 
             case R.id.btnRecuperar:
                 email = edtCorreo2.getText().toString();
@@ -141,7 +140,8 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
     public void ValidarEstado()
     {
         user = FirebaseAuth.getInstance().getCurrentUser();
-        final Query q =  conexion.getDatabaseReference().child("usuarios").child(user.getUid());
+        final String usuario= user.getUid();
+        final Query q =  conexion.getDatabaseReference().child("usuarios").child(usuario);
                 q.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -154,6 +154,9 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
                             userLogin.QueryFirebase(q);
                             userLogin.UpdateUsuario(password);
                         }
+                        //metodo para obtener el token del usuario que se esta logueando
+                        mso.getToken(usuario);
+
                         Intent i = new Intent(getApplicationContext(), activity_principal.class);
                         startActivity(i);
                         finish();
@@ -211,7 +214,6 @@ public class MainActivity<CollectionReference> extends AppCompatActivity impleme
             finish();
         }
     }
-
 
     @Override
     public void onBackPressed() {

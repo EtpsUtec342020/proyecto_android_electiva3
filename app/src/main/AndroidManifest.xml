@@ -3,10 +3,9 @@
     package="com.electiva3.proyecto_android_electiva3">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +14,16 @@
         android:roundIcon="@mipmap/ic_snauto_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".flujoModelos.actualizar_modelo"></activity>
+        <service
+            android:name=".entities.MyServiceMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".flujoModelos.actualizar_modelo" />
         <activity android:name=".flujoModelos.crear_modelo" />
         <activity android:name=".flujoMarcas.crear_marca" />
         <activity android:name=".flujoMarcas.actualizar_marca" />
@@ -62,7 +70,7 @@
             android:parentActivityName=".activity_principal" />
         <activity android:name=".flujoVehiculo.activity_actualizar_vehiculo" />
         <activity android:name=".flujoVehiculo.activity_new_vehiculo" />
-        <activity android:name=".flujoVehiculo.activity_mostrar_vehiculo" /><!-- flujo usuarios -->
+        <activity android:name=".flujoVehiculo.activity_mostrar_vehiculo" /> <!-- flujo usuarios -->
         <activity
             android:name=".flujoUsuario.activity_lista_usuarios"
             android:parentActivityName=".activity_principal" />
@@ -78,9 +86,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
-
-
-
 
 </manifest>
