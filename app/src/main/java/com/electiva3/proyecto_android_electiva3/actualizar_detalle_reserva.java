@@ -15,13 +15,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.electiva3.proyecto_android_electiva3.adapters.SpinnerUsuariosAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.DetalleOrden;
+import com.electiva3.proyecto_android_electiva3.entities.Notificaciones;
 import com.electiva3.proyecto_android_electiva3.entities.Orden;
 import com.electiva3.proyecto_android_electiva3.entities.Reserva;
 import com.electiva3.proyecto_android_electiva3.entities.Usuario;
@@ -30,22 +27,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 public class actualizar_detalle_reserva extends AppCompatActivity {
 
 
     private EditText txtNombre ,  txtPlan , txtFecha , txtHora;
-    private TextView tvEstadoReserva;
+    private TextView tvEstadoReserva, tvNumOrden;
     private Spinner spnEstado , spnSupervisor;
     private String key;
     private String keyOrden;
@@ -57,6 +49,10 @@ public class actualizar_detalle_reserva extends AppCompatActivity {
     private ArrayList<String> estadosReservas;
     private ArrayList<Usuario> usuarios;
     private Usuario usuario;
+    public int i = 0;
+
+    //clase notificaciones para enviar mensajes
+    Notificaciones notificaciones = new Notificaciones();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +64,8 @@ public class actualizar_detalle_reserva extends AppCompatActivity {
         usuarios  =  new ArrayList<>();
         usuario  =  new Usuario();
 
+        //recursos para enviar notificaciones
+        notificaciones.setContext(getApplicationContext());
 
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -87,7 +85,8 @@ public class actualizar_detalle_reserva extends AppCompatActivity {
         containerSupervisor =  findViewById(R.id.containerSupervisor);
         containerButton =  findViewById(R.id.containerButton);
         tvEstadoReserva  =  findViewById(R.id.tvEstadoReserva);
-
+        tvNumOrden = findViewById(R.id.tvNumOrden);
+        tvNumOrden.setVisibility(View.INVISIBLE);
 
         tvEstadoReserva.setVisibility( View.GONE );
 
@@ -97,7 +96,7 @@ public class actualizar_detalle_reserva extends AppCompatActivity {
         obtenerDatosReserva();
         obtenerUsuariosSupervisores();
         obtenerInformacionUsuarioActual();
-
+        numerodenesActuales();
 
         spnEstado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -119,45 +118,47 @@ public class actualizar_detalle_reserva extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String estadoSeleccionar =  estadosReservas.get(spnEstado.getSelectedItemPosition());
-                String supervisor = usuarios.get( spnSupervisor.getSelectedItemPosition()   ).getKey();
+                String estadoSeleccionar = estadosReservas.get(spnEstado.getSelectedItemPosition());
+                String supervisor = usuarios.get(spnSupervisor.getSelectedItemPosition()).getKey();
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date();
-                String fecha =  dateFormat.format(date);
-
+                String fecha = dateFormat.format(date);
 
                 //Si el estado actual de la reserva es Pendiente entonces crear nuevo registro de orden junto con la aceptacion de la orden
-                if(estadoSeleccionar.equals("Aceptada") && reserva.getEstado().equals("Pendiente")){
-
+                if (estadoSeleccionar.equals("Aceptada") && reserva.getEstado().equals("Pendiente")) {
 
                     //Creacion de la orden
                     keyOrden = (UUID.randomUUID().toString());
-                    Orden orden =  new Orden();
+                    Orden orden = new Orden();
 
                     orden.setCliente(reserva.getCliente());
-                    orden.setContrato( reserva.getContrato()  );
-                    orden.setNombreCliente(  reserva.getNombreCliente()  );
+                    orden.setContrato(reserva.getContrato());
+                    orden.setNombreCliente(reserva.getNombreCliente());
                     orden.setEstado("Pendiente");
+                    orden.setNumeroOrden(tvNumOrden.getText().toString());
                     orden.setFecha(fecha);
-                    orden.setNumeroOrden("4");
-                    orden.setReserva( reserva.getKey()  );
-                    orden.setSupervisor(  supervisor );
+                    orden.setReserva(reserva.getKey());
+                    orden.setSupervisor(supervisor);
                     conexion.getDatabaseReference().child("ordenes").child(keyOrden).setValue(orden);
 
 
-
                     //Actualizacion del estado de la reserva
-                    reserva.setEstado(  estadoSeleccionar );
+                    reserva.setEstado(estadoSeleccionar);
                     reserva.UpdateReserva();
 
-                    conexion.getDatabaseReference().child("reservacion").child(key).updateChildren(reserva.getReservaMap() );
-                    MensajeSegunTokenCliente(estadoSeleccionar);
+                    conexion.getDatabaseReference().child("reservacion").child(key).updateChildren(reserva.getReservaMap());
+
                     generarDetalleOrden();
+
+                    //envia un mensaje al supervisor seleccionado que la orden le a sido asignado
+                    NotificacionSupervisor(supervisor, orden.getNumeroOrden(), fecha);
+
                 }
 
                 //Si la reserva sera rechazada esta tendra que rechazar la orden tambien
 
-
+                // envia un mensaje al cliente del estado de su reservacion segun la seleccion
+                NotificacionCliente(reserva.getCliente(), estadoSeleccionar);
             }
         });
 
@@ -174,10 +175,7 @@ public class actualizar_detalle_reserva extends AppCompatActivity {
                 if(ds.exists()){
 
                     String keyPlan =  ds.child("plan").child("0").getValue().toString();
-                    String keyCliente = ds.child("cliente").child("0").getValue().toString();
                     copiarServiciosPlan( keyPlan );
-
-
                 }
             }
 
@@ -425,40 +423,37 @@ public class actualizar_detalle_reserva extends AppCompatActivity {
 
     }
 
-
-    public void MensajeSegunTokenCliente(String estado){
-        RequestQueue myrequest = Volley.newRequestQueue(getApplicationContext());
-        JSONObject json = new JSONObject();
-
-        try{
-            String token = "fdXqXqmgR4qtGE36QYzQqn:APA91bE0W1uWyRmnB8Jpv9JpAThLUH-zJs0EvJ-LJeUFniuiqCyBMX5aj_eD_JTklZRQTcXkdLxfec9yPVtU--_85ZCkj8U2rKGQmwgdmAZScASuI8vP12B_mwiuLzlQtBNBcJx4deIC";
-            json.put("to", token);
-            JSONObject notificacion = new JSONObject();
-            notificacion.put("titulo", "Estado de su Reservacion");
-            notificacion.put("detalle", "Su reservacion a sido :"+estado);
-
-            json.put("data", notificacion);
-
-            String URL = "https://fcm.googleapis.com/fcm/send";
-
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL,json, null, null){
-                @Override
-                public Map<String, String> getHeaders() {
-                    Map<String, String> header = new HashMap<>();
-
-                    header.put("content-type", "application/json");
-                    header.put("authorization", "key=AAAAlPemOMg:APA91bGezbeU-8afpaIHRTZ9vqgAEy-1lYEkqf8ko6UyYS51D1vKMv4uceaYaJ6KltXsvKidPiOwlm8JLNB1WOEXUOb8cbSFfe8CvoXNKlB69zA_R_rVqNGjh6Za9vwvT45lLwZHF0wk");
-                    return header;
-                }
-            };
-
-            myrequest.add(request);
-
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
+    public void NotificacionSupervisor(String idSupervisor, String numeroOrden, String fecha)
+    {
+        String titulo = "La orden #"+numeroOrden;
+        String detalle = "le a sido asignado con fecha "+fecha;
+        notificaciones.MensajeSegunToken(idSupervisor, titulo, detalle);
     }
 
+    public void NotificacionCliente(String idCliente, String estado){
+        String titulo = "Estado de su Reservacion";
+        String detalle = "Su reservacion a sido :"+estado;
 
+        notificaciones.MensajeSegunToken(idCliente, titulo, detalle);
+    }
 
+    public void numerodenesActuales(){
+
+        conexion.getDatabaseReference().child("ordenes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.exists()){
+                    for(DataSnapshot ds : snapshot.getChildren()) {
+                        i += 1;
+                    }
+                    tvNumOrden.setText(String.valueOf(i+=1));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 }

@@ -83,6 +83,7 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
 
 
 
+
         conexion.getDatabaseReference().child("usuarios").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -294,4 +295,6 @@ public class HomeFragment extends Fragment  implements View.OnClickListener  {
             }
         });
     }
+
+
 }

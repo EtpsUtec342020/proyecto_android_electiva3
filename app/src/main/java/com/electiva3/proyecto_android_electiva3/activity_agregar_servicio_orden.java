@@ -1,11 +1,5 @@
 package com.electiva3.proyecto_android_electiva3;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,8 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.electiva3.proyecto_android_electiva3.adapters.ArticulosAdapter;
-import com.electiva3.proyecto_android_electiva3.entities.Articulo;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.DetalleOrden;
 import com.electiva3.proyecto_android_electiva3.entities.Servicio;
@@ -64,7 +63,7 @@ public class activity_agregar_servicio_orden extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvArticulosServicios.setLayoutManager(linearLayoutManager);
 
-
+        Toast.makeText(getApplicationContext(), "estas aqui", Toast.LENGTH_SHORT).show();
 
         listarArticulosServicios();
     }
@@ -220,6 +219,8 @@ public class activity_agregar_servicio_orden extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    public void ObtenerTokenCLiente(){
 
+    }
 
 }

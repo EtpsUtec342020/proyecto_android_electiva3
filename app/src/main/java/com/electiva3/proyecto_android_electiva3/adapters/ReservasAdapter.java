@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.actualizar_detalle_reserva;
+import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Reserva;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class ReservasAdapter  extends RecyclerView.Adapter<ReservasAdapter.MyVie
     private LayoutInflater inflater;
     private Context context;
     private ArrayList<Reserva> reservas;
+    private Conexion conexion;
 
     public ReservasAdapter(Context context , ArrayList<Reserva> reservas ){
         inflater =  LayoutInflater.from(context);
@@ -38,7 +40,7 @@ public class ReservasAdapter  extends RecyclerView.Adapter<ReservasAdapter.MyVie
 
 
     @Override
-    public void onBindViewHolder(ReservasAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final ReservasAdapter.MyViewHolder holder, final int position) {
         holder.imgIcon.setImageResource(R.drawable.ic_check);
         holder.tvTitulo.setText(  reservas.get(position).getNombreCliente()   );
         holder.tvDetalle.setText(  "Contrato: #"+reservas.get(position).getNumeroContrato() );
@@ -49,6 +51,7 @@ public class ReservasAdapter  extends RecyclerView.Adapter<ReservasAdapter.MyVie
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent  =  new Intent( context ,   actualizar_detalle_reserva.class   );
                 intent.putExtra(  "key" , reservas.get(position).getKey()   );
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

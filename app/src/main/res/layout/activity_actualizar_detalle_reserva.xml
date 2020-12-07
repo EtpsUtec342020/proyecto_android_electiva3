@@ -14,6 +14,12 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:id="@+id/tvNumOrden"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">

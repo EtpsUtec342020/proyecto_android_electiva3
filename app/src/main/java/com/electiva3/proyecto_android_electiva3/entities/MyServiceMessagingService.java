@@ -30,7 +30,7 @@ public class MyServiceMessagingService extends FirebaseMessagingService {
         this.conexion = conexion;
     }
 
-    //obteniendo el token y registrandolo en db el token solo dura 1 hora
+    //obteniendo el token y registrandolo en db el token
     public void getToken(final String usuario)
     {
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
