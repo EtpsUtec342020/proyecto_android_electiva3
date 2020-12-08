@@ -18,11 +18,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Notificaciones {
 
     Context context;
     Conexion conexion = new Conexion();
+    Mensajes mensajes = new Mensajes();
 
     public void setContext(Context context) {
         this.context = context;
@@ -32,6 +34,7 @@ public class Notificaciones {
 
         final RequestQueue myrequest = Volley.newRequestQueue(context);
         final JSONObject json = new JSONObject();
+        final String key = (UUID.randomUUID().toString());
 
         conexion.inicializarFirabase(context);
         conexion.getDatabaseReference().child("token").addValueEventListener(new ValueEventListener() {
@@ -67,6 +70,12 @@ public class Notificaciones {
                                 };
 
                                 myrequest.add(request);
+
+                                //agregando mensajes a database
+                                mensajes.setKeyUsuario(idUsuario);
+                                mensajes.setTitulo(titulo);
+                                mensajes.setDetalle(detalle);
+                                conexion.getDatabaseReference().child("notificaciones").child(key).setValue(mensajes);
 
                             }catch (JSONException e){
                                 e.printStackTrace();

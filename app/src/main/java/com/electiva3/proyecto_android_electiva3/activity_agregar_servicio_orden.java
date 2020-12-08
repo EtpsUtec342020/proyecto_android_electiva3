@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.electiva3.proyecto_android_electiva3.adapters.ArticulosAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.DetalleOrden;
+import com.electiva3.proyecto_android_electiva3.entities.Notificaciones;
 import com.electiva3.proyecto_android_electiva3.entities.Servicio;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,6 +39,10 @@ public class activity_agregar_servicio_orden extends AppCompatActivity {
     private Conexion conexion;
     private ArticulosAdapter articulosAdapter;
     private String keyOrden;
+    TextView tvCliente;
+
+    //clase notificaciones para enviar mensajes
+    Notificaciones notificaciones = new Notificaciones();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,10 @@ public class activity_agregar_servicio_orden extends AppCompatActivity {
         servicios   = new ArrayList<>();
         conexion.inicializarFirabase( getApplicationContext()   );
 
+        //recursos para enviar notificaciones
+        notificaciones.setContext(getApplicationContext());
+        tvCliente = findViewById(R.id.tvCliente);
+        tvCliente.setVisibility(View.INVISIBLE);
 
         Intent intent  =  getIntent();
 
@@ -63,9 +72,8 @@ public class activity_agregar_servicio_orden extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvArticulosServicios.setLayoutManager(linearLayoutManager);
 
-        Toast.makeText(getApplicationContext(), "estas aqui", Toast.LENGTH_SHORT).show();
-
         listarArticulosServicios();
+        ObtenerTokenCliente(keyOrden);
     }
 
     private void listarArticulosServicios(){
@@ -114,6 +122,7 @@ public class activity_agregar_servicio_orden extends AppCompatActivity {
                             tvDescripcion.setText( servicio.getDescripcion()   );
                             tvCosto.setText( "$"+String.valueOf( servicio.getCosto()   ) );
 
+                            final String tokenCliente = tvCliente.getText().toString();
 
                             btnAgregar.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -129,8 +138,9 @@ public class activity_agregar_servicio_orden extends AppCompatActivity {
                                     detalleOrden.setEstado("Pendiente");
                                     String key = (UUID.randomUUID().toString());
 
-
                                     conexion.getDatabaseReference().child("detalleOrdenServicios").child(key).setValue(detalleOrden);
+
+                                    notificacionCliente(tokenCliente, detalleOrden.getEstado());
 
                                     Toast.makeText(activity_agregar_servicio_orden.this, "Servicio agregado correctamento", Toast.LENGTH_SHORT).show();
                                     finish();
@@ -138,7 +148,7 @@ public class activity_agregar_servicio_orden extends AppCompatActivity {
                                 }
                             });
 
-
+                            //supervisor o admin envian notificacion al cliente que se ha agregado un servicio y debe de ser aprobado o rechazado
                             btnAgregarNotificar.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -154,6 +164,9 @@ public class activity_agregar_servicio_orden extends AppCompatActivity {
                                     detalleOrden.setEstado("Pendiente de aprobacion");
 
                                     conexion.getDatabaseReference().child("detalleOrdenServicios").child(key).setValue(detalleOrden);
+
+                                    notificacionCliente(tokenCliente, detalleOrden.getEstado());
+
                                     Toast.makeText(activity_agregar_servicio_orden.this, "Servicio agregado correctamento", Toast.LENGTH_SHORT).show();
                                     finish();
 
@@ -171,7 +184,7 @@ public class activity_agregar_servicio_orden extends AppCompatActivity {
                                 }
                             });
                             // create and show the alert dialog
-                            AlertDialog dialog = builder.create();
+                           AlertDialog dialog = builder.create();
                             dialog.show();
                         }
                     });
@@ -219,8 +232,44 @@ public class activity_agregar_servicio_orden extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void ObtenerTokenCLiente(){
+    public void ObtenerTokenCliente(final String idOrden){
 
+        conexion.getDatabaseReference().child("ordenes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds : snapshot.getChildren()) {
+                        String id = ds.getKey();
+                        if (id.equals(idOrden)){
+                            String cliente = ds.child("cliente").getValue().toString();
+                            tvCliente.setText(cliente);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
+
+    public void notificacionCliente(String token, String estado)
+    {
+        String titulo = "Nuevo Servicio Agregado";
+        String detalle;
+
+        if(!estado.equals("Pendiente")) {
+            detalle = "Se a agregado un servicio a su orden que no esta en su contrato, desea aceptar o rechazar el servicio, " +
+                    "cualquier consulta comunicarse al tel.25056667";
+        }
+        else{
+            detalle = "Se a agregado un nuevo servicio durante el mantenimiento a su orden de servicio, con su consentimiento";
+        }
+
+        notificaciones.MensajeSegunToken(token, titulo, detalle);
+    }
+
+
 
 }

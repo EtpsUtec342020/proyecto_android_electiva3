@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Sampler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,19 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.electiva3.proyecto_android_electiva3.R;
 import com.electiva3.proyecto_android_electiva3.activity_agregar_servicio_orden;
-import com.electiva3.proyecto_android_electiva3.entities.Conexion;
-import com.electiva3.proyecto_android_electiva3.entities.Orden;
-import com.electiva3.proyecto_android_electiva3.entities.Servicio;
-import com.electiva3.proyecto_android_electiva3.entities.Usuario;
-import com.electiva3.proyecto_android_electiva3.flujoContrato.activity_lista_contratos;
-import com.electiva3.proyecto_android_electiva3.flujoPlan.activity_lista_planes;
-import com.electiva3.proyecto_android_electiva3.activity_lista_reservas;
-import com.electiva3.proyecto_android_electiva3.flujoServicio.activity_lista_servicios;
-import com.electiva3.proyecto_android_electiva3.flujoUsuario.activity_lista_usuarios;
-import com.electiva3.proyecto_android_electiva3.flujoVehiculo.activity_lista_vehiculos;
-import com.electiva3.proyecto_android_electiva3.activity_ordenes;
 import com.electiva3.proyecto_android_electiva3.adapters.DetalleOrdenAdapter;
+import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.DetalleOrden;
+import com.electiva3.proyecto_android_electiva3.entities.Notificaciones;
+import com.electiva3.proyecto_android_electiva3.entities.Orden;
+import com.electiva3.proyecto_android_electiva3.entities.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,6 +36,7 @@ public class FragmentOrdenOrden extends Fragment   {
 
     RecyclerView rvDetalleOrdenes;
     FloatingActionButton fabAgregarDetalleOrden;
+    TextView tvCliente, tvSupervisor, tvNumOrden;
     private Conexion conexion;
     private Orden orden;
     private String keyOrden;
@@ -52,6 +45,8 @@ public class FragmentOrdenOrden extends Fragment   {
     private DetalleOrdenAdapter detalleOrdenAdapter;
     private int contador;
     private Usuario usuario;
+
+    Notificaciones notificaciones = new Notificaciones();
 
     @Nullable
     @Override
@@ -68,6 +63,14 @@ public class FragmentOrdenOrden extends Fragment   {
         keyOrden = getArguments().getString("key");
         usuario  = new Usuario();
 
+        //datos necesarios para enviar notitificaciones
+        notificaciones.setContext(getContext());
+        tvCliente = view.findViewById(R.id.tvCliente);
+        tvCliente.setVisibility(View.INVISIBLE);
+        tvSupervisor = view.findViewById(R.id.tvSupervisor);
+        tvSupervisor.setVisibility(View.INVISIBLE);
+        tvNumOrden = view.findViewById(R.id.tvNumOrden);
+        tvNumOrden.setVisibility(View.INVISIBLE);
 
         rvDetalleOrdenes =  view.findViewById(R.id.rvDetalleOrdenes);
         fabAgregarDetalleOrden =  view.findViewById(R.id.fabAgregarDetalleOrden);
@@ -77,11 +80,6 @@ public class FragmentOrdenOrden extends Fragment   {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvDetalleOrdenes.setLayoutManager(linearLayoutManager);
 
-
-        //Establecer el adaptador de los detalles
-        detalleOrdenAdapter =  new DetalleOrdenAdapter(getActivity() , detallesOrdenes   );
-
-        rvDetalleOrdenes.setAdapter(detalleOrdenAdapter);
 
         obtenerInformacionUsuarioActual();
         obtenerDatosOrden( keyOrden  );
@@ -133,6 +131,10 @@ public class FragmentOrdenOrden extends Fragment   {
                         }
 
                         detallesOrdenes.add( detalleOrden );
+                        //Establecer el adaptador de los detalles
+                        detalleOrdenAdapter =  new DetalleOrdenAdapter(getActivity() , detallesOrdenes   );
+
+                        rvDetalleOrdenes.setAdapter(detalleOrdenAdapter);
                     }
 
 
@@ -177,8 +179,9 @@ public class FragmentOrdenOrden extends Fragment   {
                     orden.setReserva( ds.child("reserva").getValue().toString()  );
                     orden.setSupervisor(  ds.child("supervisor").getValue().toString() );
                     orden.setFecha( ds.child("fecha").getValue().toString()  );
-
-
+                    tvCliente.setText(orden.getCliente());
+                    tvSupervisor.setText(orden.getSupervisor());
+                    tvNumOrden.setText(orden.getNumeroOrden());
                     if( ds.child("estado").getValue().toString().equals("Procesada")  ){
                         fabAgregarDetalleOrden.setVisibility(View.GONE);
                     }
@@ -190,9 +193,6 @@ public class FragmentOrdenOrden extends Fragment   {
 
             }
         });
-
-
-
 
     }
 
@@ -277,40 +277,44 @@ public class FragmentOrdenOrden extends Fragment   {
                                 dialog.show();
                             }
 
-
+                            final String tokenSupervisor = tvSupervisor.getText().toString();
+                            final String numOrden = tvNumOrden.getText().toString();
+                            final String tokenCliente = tvCliente.getText().toString();
 
                             if(!usuario.getRol().equals("Cliente")){
+
                                 btnRealizado.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
 
-                                        //Revisar que el servicio este aprovado por el clieete
+                                        //enviar notificacion si el supervisor a terminado un servicio
                                         if(servicio.isAprovacion()){
                                             servicio.setEstado("Realizado");
                                             conexion.getDatabaseReference().child("detalleOrdenServicios").child(servicio.getKey()).setValue(servicio);
+                                            notificacionCliente(tokenCliente, numOrden, servicio.getNombreServicio(), servicio.getEstado());
                                             Toast.makeText(  getActivity()  , "Servicio actualizado de forma correcta", Toast.LENGTH_SHORT).show();
                                             dialog.cancel();
                                         }else{
-                                            Toast.makeText(  getActivity()  , "El servicio no ha sido aprovado por el usuario", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(  getActivity()  , "El servicio no ha sido aprobado por el usuario", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
 
-
                                 btnEliminar.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        eliminarDetalleOrden( servicio.getKey()  );
+                                        eliminarDetalleOrden( servicio.getKey(), tokenSupervisor, numOrden );
+                                        notificacionCliente(tokenCliente, numOrden, servicio.getNombreServicio(), "Rechazado con su autorizacion");
                                         dialog.cancel();
                                     }
                                 });
-
+                                //tendria que ser opciones de usuario
                             }else{
 
                                 btnEliminar.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        eliminarDetalleOrden( servicio.getKey()  );
+                                        eliminarDetalleOrden( servicio.getKey(), tokenSupervisor, numOrden  );
                                         dialog.cancel();
                                     }
                                 });
@@ -319,6 +323,8 @@ public class FragmentOrdenOrden extends Fragment   {
                                     @Override
                                     public void onClick(View v) {
                                         aceptarDetalleOrden(servicio);
+                                        Toast.makeText(getActivity(), orden.getNumeroOrden(), Toast.LENGTH_SHORT).show();
+                                        notificacionSupervisor(tokenSupervisor, numOrden , "APROBADO");
                                     }
                                 });
                             }
@@ -334,18 +340,18 @@ public class FragmentOrdenOrden extends Fragment   {
         });
     }
 
+
     private void aceptarDetalleOrden( DetalleOrden servicio ){
         servicio.setEstado("Aprobado");
+        Toast.makeText(getActivity(), "APROBADO", Toast.LENGTH_SHORT).show();
         conexion.getDatabaseReference().child("detalleOrdenServicios").child(servicio.getKey()).setValue(servicio);
     }
 
-    private void eliminarDetalleOrden(String keyDetalleOrden){
-
+    private void eliminarDetalleOrden(String keyDetalleOrden, String token, String numOrden){
 
         conexion.getDatabaseReference().child("detalleOrdenServicios").child( keyDetalleOrden ).removeValue();
-        Toast.makeText(  getActivity()  , "Servicio eliminado correctamente ", Toast.LENGTH_SHORT).show();
-
-
+        notificacionSupervisor(token, numOrden , "RECHAZADO");
+        Toast.makeText(  getActivity()  , "Servicio eliminado correctamente", Toast.LENGTH_SHORT).show();
     }
 
     private void buscarAsignarServicio(String keyServicio , String nombreServicio , String costo){
@@ -402,6 +408,20 @@ public class FragmentOrdenOrden extends Fragment   {
 
     }
 
+    public void notificacionSupervisor(String token, String orden, String estado)
+    {
+        String titulo = "Status de la Orden #"+orden;
+        String detalle = "El Cliente a "+estado+" el servicio notificado";
 
+        notificaciones.MensajeSegunToken(token, titulo, detalle);
+    }
+
+    public void notificacionCliente(String token, String orden, String servicio, String estado)
+    {
+        String titulo = "Status de la Orden #"+orden;
+        String detalle = "El Serivicio "+servicio+" a sido "+estado;
+
+        notificaciones.MensajeSegunToken(token, titulo, detalle);
+    }
 
 }

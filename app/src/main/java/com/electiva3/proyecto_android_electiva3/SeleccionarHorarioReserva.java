@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.electiva3.proyecto_android_electiva3.adapters.HorariosAdapter;
 import com.electiva3.proyecto_android_electiva3.entities.Conexion;
 import com.electiva3.proyecto_android_electiva3.entities.Horario;
+import com.electiva3.proyecto_android_electiva3.entities.Notificaciones;
 import com.electiva3.proyecto_android_electiva3.entities.Reserva;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +43,8 @@ public class SeleccionarHorarioReserva extends AppCompatActivity {
     private String nombreCliente;
     private String numeroContrato;
 
+    Notificaciones notificaciones = new Notificaciones();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,7 @@ public class SeleccionarHorarioReserva extends AppCompatActivity {
 
         conexion.inicializarFirabase(this);
 
+        notificaciones.setContext(getApplicationContext());
 
         Intent previousActivity = getIntent();
         keyCliente  =   previousActivity.getStringExtra("cliente");
@@ -85,6 +89,8 @@ public class SeleccionarHorarioReserva extends AppCompatActivity {
                 String key = (UUID.randomUUID().toString());
                 conexion.getDatabaseReference().child("reservacion").child(key).setValue(reserva);
 
+                //envia notificacion de la creacion a cliente, admin y recepcionista
+                notificacionReservacion(keyCliente, reserva.getFechaSolicitada());
 
                 Toast.makeText(SeleccionarHorarioReserva.this, "Reserva realizada con exito", Toast.LENGTH_SHORT).show();
                 Intent intent  =  new Intent(  getApplicationContext() , activity_lista_reservas.class   );
@@ -202,4 +208,43 @@ public class SeleccionarHorarioReserva extends AppCompatActivity {
         }
         return -1;
     }
+
+
+    public void notificacionReservacion(final String keyCliente, final String fecha){
+
+        notificar(keyCliente, fecha);
+
+        conexion.getDatabaseReference().child("usuarios").getRef().orderByChild("rol").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds: snapshot.getChildren()){
+                        String rol = ds.child("rol").getValue().toString();
+                        String estado = ds.child("estado").getValue().toString();
+
+                        if(!rol.equals("Cliente") && !rol.equals("Supervisor") && estado.equals("Activo")){
+
+                            String key = ds.getKey();
+                            notificar(key, fecha);
+                        }
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void notificar(String key, String fecha){
+        String titulo = "Reservacion creada";
+        String detalle = "En espera de aprobacion para la fecha "+fecha;
+
+        notificaciones.MensajeSegunToken(key, titulo, detalle);
+    }
+
+
 }
