@@ -124,8 +124,12 @@ public class actualizar_detalle_reserva extends AppCompatActivity {
                 Date date = new Date();
                 String fecha = dateFormat.format(date);
 
+                if(reserva.getEstado().equals("Rechazado")){
+                    Toast.makeText(actualizar_detalle_reserva.this, "Esta reserva ya fue rechazada, ya no puedes actualizarla", Toast.LENGTH_SHORT).show();
+                }
+
                 //Si el estado actual de la reserva es Pendiente entonces crear nuevo registro de orden junto con la aceptacion de la orden
-                if (estadoSeleccionar.equals("Aceptada") && reserva.getEstado().equals("Pendiente")) {
+                else if (estadoSeleccionar.equals("Aceptada") && reserva.getEstado().equals("Pendiente")) {
 
                     //Creacion de la orden
                     keyOrden = (UUID.randomUUID().toString());
@@ -152,6 +156,12 @@ public class actualizar_detalle_reserva extends AppCompatActivity {
 
                     //envia un mensaje al supervisor seleccionado que la orden le a sido asignado
                     NotificacionSupervisor(supervisor, orden.getNumeroOrden(), fecha);
+
+                }else{
+                    //Actualizacion del estado de la reserva
+                    reserva.setEstado(estadoSeleccionar);
+                    reserva.UpdateReserva();
+                    conexion.getDatabaseReference().child("reservacion").child(key).updateChildren(reserva.getReservaMap());
 
                 }
 
